@@ -1,0 +1,4 @@
+.bmp-backdrop {
+  /* Minimal base rules; specific layout and visuals come from inline props */
+  z-index: 0;
+}

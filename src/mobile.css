@@ -1,33 +1,36 @@
 /* Mobile-specific optimizations */
 @media (max-width: 640px) {
   /* Prevent zoom on input focus */
-  input, select, textarea {
+  input,
+  select,
+  textarea {
     font-size: 16px !important;
   }
-  
+
   /* Optimize touch targets */
-  button, a {
+  button,
+  a {
     min-height: 44px;
     min-width: 44px;
   }
-  
+
   /* Prevent horizontal scroll */
   body {
     overflow-x: hidden;
   }
-  
+
   /* Optimize carousel for mobile */
   .home-bg {
     touch-action: pan-y pinch-zoom;
   }
-  
+
   /* Improve video performance on mobile */
   video {
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
   }
-  
+
   /* Reduce motion for better performance */
   @media (prefers-reduced-motion: reduce) {
     * {

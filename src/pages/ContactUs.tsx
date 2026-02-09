@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 export function Contact() {
   return (
-    <div className='global-bg'>
+    <div className="global-bg">
       <header className="bg-primary/20 backdrop-blur-24 px-6 py-4">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           {/* Logo */}
@@ -12,13 +12,22 @@ export function Contact() {
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link to="/" className="text-white hover:text-primary transition-colors">
+            <Link
+              to="/"
+              className="text-white hover:text-primary transition-colors"
+            >
               Home
             </Link>
-            <Link to="/about" className="text-white hover:text-primary transition-colors">
+            <Link
+              to="/about"
+              className="text-white hover:text-primary transition-colors"
+            >
               About Us
             </Link>
-            <Link to="/contact" className="text-white hover:text-primary transition-colors">
+            <Link
+              to="/contact"
+              className="text-white hover:text-primary transition-colors"
+            >
               Contact
             </Link>
           </nav>
@@ -34,11 +43,11 @@ export function Contact() {
           </div>
         </div>
       </header>
-      
+
       <div className="container mx-auto px-6 py-12">
         <h1 className="text-4xl font-bold text-white mb-8">Contact</h1>
         <p className="text-foreground text-lg">Get in touch with us.</p>
       </div>
     </div>
-  )
+  );
 }
