@@ -139,9 +139,10 @@
 
 @layer components {
   .bg-card {
-    @apply text-white border border-white/[0.06] shadow-[0_10px_30px_rgba(0, 0, 0, 0.45)];
+    @apply text-white border border-white/[0.06];
     background: rgba(22, 27, 45, 0.6);
     backdrop-filter: blur(24px) saturate(180%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   }
 
   .luxury-card {

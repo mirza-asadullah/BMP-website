@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 const M = motion as any;
 const bgFallback = "/src/assets/bgwelcome.png";
 const msgFallback = "/src/assets/msgicon.png";
 const animationFallback = "/src/assets/anim/animation1.webm";
 const logoFallback = "/src/assets/logowelcome.png";
 export default function WelcomePage() {
+  const navigate = useNavigate();
   return (
     <section
       className="w-full min-h-screen flex items-center justify-center overflow-hidden relative"
@@ -101,7 +103,10 @@ export default function WelcomePage() {
               transition={{ delay: 0.4 }}
               className="pt-4"
             >
-              <button className="bg-black/80 hover:bg-black text-white font-semibold px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-2xl hover:scale-105">
+              <button
+                onClick={() => navigate("/home")}
+                className="bg-black/80 hover:bg-black text-white font-semibold px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-2xl hover:scale-105"
+              >
                 Descubre Vaihok
               </button>
             </M.div>
