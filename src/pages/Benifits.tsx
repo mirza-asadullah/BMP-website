@@ -79,7 +79,7 @@ export default function Benifits() {
                             </M.p>
 
                             <M.div
-                                className="space-y-4 text-base sm:text-lg lg:text-2xl"
+                                className="space-y-2 text-base sm:text-lg lg:text-2xl"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.3 }}
