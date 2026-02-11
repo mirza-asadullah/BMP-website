@@ -6,10 +6,10 @@ const M = motion as any;
 
 const navLinks = [
     { label: "Inicio", to: "/home" },
-    { label: "Servicios", to: "/home#servicios" },
-    { label: "Beneficios", to: "/home#beneficios" },
-    { label: "Sobre nosotros", to: "/home#sobre-nosotros" },
-    { label: "Contáctanos", to: "/home#contactanos" },
+    { label: "Servicios", to: "/services" },
+    { label: "Beneficios", to: "/benefits" },
+    { label: "Sobre nosotros", to: "/about" },
+    { label: "Contáctanos", to: "/contact" },
 ];
 
 export default function Header() {
@@ -45,12 +45,7 @@ export default function Header() {
                     {/* Desktop Nav */}
                     <div className="hidden md:flex items-center gap-3 lg:gap-20">
                         {navLinks.map((link) => {
-                            const isActive =
-                                link.to === "/home"
-                                    ? location.pathname === "/home"
-                                    : location.hash === link.to.split("#")[1]
-                                        ? true
-                                        : false;
+                            const isActive = location.pathname === link.to;
                             return (
                                 <Link
                                     key={link.label}

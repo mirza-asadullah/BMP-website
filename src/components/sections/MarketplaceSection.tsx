@@ -1,9 +1,15 @@
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import MarketplaceSubsection from "../sunSections/MarketplaceSubsection";
 const bgImage = "/src/assets/bg1.png";
 const heroVideo = "/src/assets/anim/animation4.webm";
 const M = motion as any;
 export default function MertekplaceSection() {
+  const [showSubsection, setShowSubsection] = useState(false);
+  if (showSubsection) {
+    return <MarketplaceSubsection onBack={() => setShowSubsection(false)} />;
+  }
   return (
     <section
       className="relative w-full h-screen flex items-center overflow-hidden snap-start shrink-0"
@@ -32,7 +38,19 @@ export default function MertekplaceSection() {
             "linear-gradient(to left, rgba(5,0,10,1) 0%, rgba(5,0,10,0.85) 35%, rgba(5,0,10,0.4) 65%, transparent 100%)",
         }}
       />
+      <M.button
+        className="absolute ml-10"
+      >
+        <img src="/src/assets/animicon/button.png" alt="" />
+      </M.button>
 
+      {/* Right navigation arrow button */}
+      <M.button
+        className="absolute mr-10 right-6 top-1/2 -translate-y-1/2 z-[15]   flex items-center justify-center text-white  transition-all duration-300 cursor-pointer"
+
+      >
+        <img src="/src/assets/animicon/arrow-rigth.png" alt="" />
+      </M.button>
       {/* Content — aligned to header width */}
       <div className="relative z-10 w-[90%] max-w-[1400px] mx-auto pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
@@ -76,12 +94,15 @@ export default function MertekplaceSection() {
               className="pt-4"
             >
               <button
-                className="text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="relative z-30 text-white font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                 style={{
-                  background: "rgba(0,0,0,0.75)",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+                  width: "250px",
+                  height: "60px",
+                  borderRadius: "918.42px",
+                  background: "#191919",
+                  boxShadow: "5px 5px 20px 0px #4C1868, -5px -5px 20px 0px #C94BF8",
                 }}
+                onClick={() => setShowSubsection(true)}
               >
                 Descubre Vaihok
               </button>

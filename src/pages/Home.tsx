@@ -4,34 +4,35 @@ import {
   FinanceSection,
   MessageSection,
   MarketplaceSection,
- AppsSection,
-  // CommunitySection,
-  // AIFinanceSection,
-  // MentalHealthSection,
-  // MusicSection,
+  AppsSection,
+  CommunitySection,
+  NuricionSection,
+  AIFinanceSection,
+  MentalHealthSection,
+  MusicSection,
 } from "../components/sections";
+import MessageSubsection from "../components/sunSections/MessageSubsection";
 
-const M = motion as any;
-
-const bgImage = "/src/assets/bg1.png";
-const heroVideo = "/src/assets/anim/animation2.webm";
 
 export default function Home() {
   return (
     <main className="bg-black text-white h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth">
       <Header />
       {/* <MessageSection /> */}
-      {/* <FinanceSection /> */}
-{/*     
+      <FinanceSection />
+      {/*     
       <MarketplaceSection /> */}
-      
-      <AppsSection />
-        {/* 
-      <CommunitySection />
-      <AIFinanceSection />
-      <MentalHealthSection />
-      <MusicSection /> 
-      */}
+      {/* <MessageSubsection/> */}
+      {/* <AppsSection /> */}
+
+      {/* <CommunitySection /> */}
+
+      {/* <AIFinanceSection /> */}
+      {/* <NuricionSection /> */}
+      {/* <MentalHealthSection /> */}
+
+      {/* <MusicSection />  */}
+
     </main>
   );
 }

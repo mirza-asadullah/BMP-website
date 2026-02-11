@@ -1,9 +1,15 @@
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import AppsSubsection from "../sunSections/AppsSubsection";
 const bgImage = "/src/assets/bg1.png";
 const heroVideo = "/src/assets/anim/animation5.webm";
 const M = motion as any;
 export default function AppsSection() {
+  const [showSubsection, setShowSubsection] = useState(false);
+  if (showSubsection) {
+    return <AppsSubsection onBack={() => setShowSubsection(false)} />;
+  }
   return (
     <section
       className="relative w-full h-screen flex items-center overflow-hidden snap-start shrink-0"
@@ -32,7 +38,19 @@ export default function AppsSection() {
             "linear-gradient(to left, rgba(5,0,10,1) 0%, rgba(5,0,10,0.85) 35%, rgba(5,0,10,0.4) 65%, transparent 100%)",
         }}
       />
+      <M.button
+        className="absolute ml-10"
+      >
+        <img src="/src/assets/animicon/button.png" alt="" />
+      </M.button>
 
+      {/* Right navigation arrow button */}
+      <M.button
+        className="absolute mr-10 right-6 top-1/2 -translate-y-1/2 z-[15]   flex items-center justify-center text-white  transition-all duration-300 cursor-pointer"
+
+      >
+        <img src="/src/assets/animicon/arrow-rigth.png" alt="" />
+      </M.button>
       {/* Content — aligned to header width */}
       <div className="relative z-10 w-[90%] max-w-[1400px] mx-auto pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
@@ -44,7 +62,7 @@ export default function AppsSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              Envía y  <br />recibe dinero
+              Una sola  <br />app
 
 
             </M.h1>
@@ -55,7 +73,7 @@ export default function AppsSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.85, delay: 0.1 }}
             >
-              en segundos
+              Cientos de soluciones
             </M.p>
 
             <M.p
@@ -64,7 +82,7 @@ export default function AppsSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.2 }}
             >
-              Paga servicios, divide cuentas y accede a tu  <br /> Wallet digital integrada
+              Todo lo que necesitas, en un solo lugar. <br /> Como si fuera magia.
 
 
             </M.p>
@@ -76,12 +94,15 @@ export default function AppsSection() {
               className="pt-4"
             >
               <button
-                className="text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="relative z-30 text-white font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                 style={{
-                  background: "rgba(0,0,0,0.75)",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+                  width: "250px",
+                  height: "60px",
+                  borderRadius: "918.42px",
+                  background: "#191919",
+                  boxShadow: "5px 5px 20px 0px #4C1868, -5px -5px 20px 0px #C94BF8",
                 }}
+                onClick={() => setShowSubsection(true)}
               >
                 Descubre Vaihok
               </button>
@@ -95,7 +116,7 @@ export default function AppsSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            <div className="relative w-[500px] h-[500px] xl:w-[260px] xl:h-[260px] mb-40">
+            <div className="relative w-[500px] h-[500px] xl:w-[300px] xl:h-[300px] mb-20">
               <M.img
                 src="/src/assets/animicon/anim5app.png"
                 alt="Phone"
@@ -107,7 +128,7 @@ export default function AppsSection() {
               <M.img
                 src="/src/assets/animicon/anim5car.png"
                 alt="Car"
-                className="absolute bottom-[-100%] left-[-100%] w-[500px] h-[200px]
+                className="absolute bottom-[-80%] left-[-80%] w-[500px] h-[200px]
     lg:w-[280px] lg:h-[280px] drop-shadow-xl z-50"
                 animate={{ y: [0, 10, 0], rotate: [0, -6, 0, 6, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
@@ -115,8 +136,8 @@ export default function AppsSection() {
               <M.img
                 src="/src/assets/animicon/anim5cld.png"
                 alt="Cloud"
-                className="absolute bottom-[-130%] left-[-5%] w-[500px] h-[200px]
-    lg:w-[2000px] lg:h-[600px] drop-shadow-xl z-50"
+                className="absolute bottom-[-80%] left-[80%] w-[500px] h-[200px]
+    lg:w-[150px] lg:h-[150px] drop-shadow-xl z-50"
                 animate={{ y: [0, 10, 0], rotate: [0, -6, 0, 6, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
               />
