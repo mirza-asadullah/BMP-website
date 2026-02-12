@@ -7,4 +7,3 @@ export { default as AIFinanceSection } from "./AIFinanceSection";
 export { default as NuricionSection } from "./NuricionSection";
 export { default as MentalHealthSection } from "./MentalHealthSection";
 export { default as MusicSection } from "./MusicSection";
-

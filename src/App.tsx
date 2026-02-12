@@ -6,7 +6,6 @@ import Services from "./pages/Services";
 import Benifits from "./pages/Benifits";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
-
 function App() {
   return (
     <Routes>
@@ -20,5 +19,4 @@ function App() {
     </Routes>
   );
 }
-
 export default App;

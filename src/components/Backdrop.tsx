@@ -1,6 +1,5 @@
 import React from "react";
 import "./Backdrop.css";
-
 export type BackdropProps = React.HTMLAttributes<HTMLDivElement> & {
   width?: string;
   height?: string;
@@ -10,7 +9,6 @@ export type BackdropProps = React.HTMLAttributes<HTMLDivElement> & {
   background?: string;
   mixBlendMode?: React.CSSProperties["mixBlendMode"];
 };
-
 const Backdrop: React.FC<BackdropProps> = ({
   width = "1921.1107px",
   height = "1715.1042px",
@@ -38,7 +36,6 @@ const Backdrop: React.FC<BackdropProps> = ({
     pointerEvents: "none",
     ...style,
   };
-
   return (
     <div
       className={`bmp-backdrop ${className ?? ""}`}
@@ -47,5 +44,4 @@ const Backdrop: React.FC<BackdropProps> = ({
     />
   );
 };
-
 export default Backdrop;

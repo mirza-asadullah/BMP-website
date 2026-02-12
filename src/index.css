@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "./mobile.css";
-
 @layer base {
   :root {
     --background: 222 84% 4%;
@@ -26,30 +25,28 @@
       0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
       0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   }
-
   * {
     @apply m-0 p-0;
-    font-family: 'Nunito', sans-serif !important;
+    font-family: "Nunito", sans-serif !important;
   }
-
   html,
   body,
   #root {
-    font-family: 'Nunito', sans-serif !important;
+    font-family: "Nunito", sans-serif !important;
     @apply text-white;
     height: 100vh;
   }
-
   .home-bg {
     background:
-      radial-gradient(950px 600px at 50% 45%,
+      radial-gradient(
+        950px 600px at 50% 45%,
         hsla(295, 95%, 25%, 0.95) 0%,
         #d40afc8c 15%,
-        rgba(4, 14, 41, 0) 70%),
+        rgba(4, 14, 41, 0) 70%
+      ),
       linear-gradient(180deg, #0a0a0a 0%, #080518 65%, #000000 100%);
     position: relative;
   }
-
   .home-bg::before {
     content: "";
     position: absolute;
@@ -61,37 +58,34 @@
     opacity: 0.2;
     pointer-events: none;
   }
-
   @media (max-width: 1024px) {
     .home-bg::before {
       background-size: 70%;
     }
   }
-
   @media (max-width: 768px) {
     .home-bg::before {
       background-size: 80%;
     }
   }
-
   @media (max-width: 640px) {
     .home-bg::before {
       background-size: 100%;
       margin-bottom: 200px;
     }
   }
-
   .global-bg {
     background:
-      radial-gradient(950px 600px at 40% 45%,
+      radial-gradient(
+        950px 600px at 40% 45%,
         hsla(295, 95%, 25%, 0.95) 0%,
         #d40afc8c 15%,
-        rgba(4, 14, 41, 0) 70%),
+        rgba(4, 14, 41, 0) 70%
+      ),
       linear-gradient(180deg, #0a0a0a 0%, #080518 65%, #000000 100%);
     height: 100vh;
     position: relative;
   }
-
   .global-bg::before {
     content: "";
     position: absolute;
@@ -103,40 +97,33 @@
     opacity: 0.2;
     pointer-events: none;
   }
-
   @media (max-width: 1024px) {
     .global-bg::before {
       background-size: 70%;
     }
   }
-
   @media (max-width: 768px) {
     .global-bg::before {
       background-size: 80%;
     }
   }
-
   @media (max-width: 640px) {
     .global-bg::before {
       background-size: 100%;
       margin-bottom: 0px;
     }
   }
-
   ::-webkit-scrollbar {
     @apply w-2;
   }
-
   ::-webkit-scrollbar-thumb {
     background: #1929ff;
     @apply rounded;
   }
-
   ::-webkit-scrollbar-track {
     background: rgba(5, 5, 9, 0.5);
   }
 }
-
 @layer components {
   .bg-card {
     @apply text-white border border-white/[0.06];
@@ -144,7 +131,6 @@
     backdrop-filter: blur(24px) saturate(180%);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   }
-
   .luxury-card {
     border: 1px solid rgba(25, 41, 255, 0.4);
     background: rgba(25, 41, 255, 0.15);
@@ -154,7 +140,6 @@
       0 8px 16px rgba(25, 41, 255, 0.3),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
-
   .luxury-button {
     border: 1px solid rgba(25, 41, 255, 0.3);
     background: linear-gradient(135deg, #a01d95 10%, #6a067e 50%);
@@ -163,50 +148,43 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
     @apply transition-all duration-300 ease-out hover:-translate-y-0.5;
   }
-
   .luxury-button:hover {
     box-shadow:
       0 12px 24px rgba(173, 25, 129, 0.4),
       0 8px 16px rgba(87, 5, 59, 0.2),
       inset 0 1px 0 rgba(86, 1, 88, 0.3);
   }
-
   .sidebar-icon {
     color: #1929ff;
   }
-
   .sidebar-nav-item-active {
     border-left: 3px solid #1929ff;
     background-color: rgba(25, 41, 255, 0.1);
   }
-
   .sidebar-nav-item:hover {
     @apply text-white;
     background-color: rgba(22, 27, 45, 0.6);
   }
-
   .scrollbar-x {
     scrollbar-width: thin;
     scrollbar-color: #3b82f6 rgba(255, 255, 255, 0.06);
   }
-
   .scrollbar-x::-webkit-scrollbar {
     @apply h-2.5;
   }
-
   .scrollbar-x::-webkit-scrollbar-thumb {
     @apply rounded-lg;
-    background: linear-gradient(90deg,
-        rgba(25, 41, 255, 0.9),
-        rgba(74, 87, 255, 0.9));
+    background: linear-gradient(
+      90deg,
+      rgba(25, 41, 255, 0.9),
+      rgba(74, 87, 255, 0.9)
+    );
   }
-
   .scrollbar-x::-webkit-scrollbar-track {
     @apply rounded-lg;
     background: rgba(255, 255, 255, 0.06);
   }
 }
-
 @layer utilities {
   .react-admin-card {
     background: rgba(22, 27, 45, 0.6);
@@ -216,8 +194,6 @@
     @apply rounded-2xl text-white p-2.5 overflow-x-auto;
   }
 }
-
-/* React Admin Overrides */
 .MuiCard-root,
 .RaList-main,
 .RaShow-main,
@@ -232,80 +208,64 @@
   padding: 10px !important;
   overflow-x: auto !important;
 }
-
 .MuiTableHead-root {
   background: rgba(22, 27, 45, 0.95) !important;
 }
-
 .MuiTableCell-root {
   @apply text-white;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
-
 .RaLayout-root,
 .RaLayout-appFrame,
 .RaLayout-content,
 .RaLayout-contentWithSidebar {
   @apply bg-transparent min-h-auto;
 }
-
 .RaAppBar-root,
 .MuiAppBar-root {
   @apply hidden;
 }
-
 .MuiBox-root,
 .MuiContainer-root,
 div[class*="Layout"],
 div[class*="Main"] {
   @apply bg-transparent;
 }
-
 @media (max-width: 768px) {
   .RaList-filters {
     @apply flex-col gap-3;
   }
-
   .RaList-filters .MuiFormControl-root {
     @apply min-w-full;
   }
-
   .MuiTablePagination-root {
     @apply flex-col gap-2 items-center;
   }
-
   .MuiTablePagination-toolbar {
     @apply flex-wrap justify-center;
   }
 }
-
 @media (max-width: 640px) {
   .MuiTableCell-root {
     @apply px-1 py-1.5 text-xs;
   }
-
   .MuiTableCell-head {
     @apply px-1 py-2 text-xs;
   }
-
   .MuiButton-root {
     @apply text-xs px-2.5 py-1.5;
   }
-
   .MuiTab-root {
     @apply min-w-0 px-2 py-1.5 text-xs;
   }
 }
-
 @media (max-width: 480px) {
   .MuiTableCell-root {
     @apply px-0.5 py-1 text-xs;
   }
-
   .MuiTableCell-head {
     @apply px-0.5 py-1.5 text-xs;
   }
-
   .MuiButton-root {
     @apply text-xs px-2 py-1;
   }

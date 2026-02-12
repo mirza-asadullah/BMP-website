@@ -1,145 +1,136 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
-import AIFinanceSubsection from "../sunSections/AIFinanceSubsection";
-const bgImage = "/src/assets/bg1.png";
+import AIFinanceSubsection from "../subSections/AIFinanceSubsection";
 const heroVideo = "/src/assets/anim/animation7.webm";
+const anim7coin = "/src/assets/animicon/anim7coin.png";
+const anim7card = "/src/assets/animicon/anim7card.png";
+const anim7qr = "/src/assets/animicon/anim7qr.png";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const M = motion as any;
-export default function AiFinanceSection() {
+export default function AiFinanceSection({
+  onToggleSubsection,
+}: {
+  onToggleSubsection?: (isOpen: boolean) => void;
+}) {
   const [showSubsection, setShowSubsection] = useState(false);
   if (showSubsection) {
-    return <AIFinanceSubsection onBack={() => setShowSubsection(false)} />;
-  }
-  return (
-    <section
-      className="relative w-full h-screen flex items-center overflow-hidden snap-start shrink-0"
-      style={{
-        background:
-          "linear-gradient(135deg, #a54fd4 0%, #8b24c7 30%, #6b11a6 50%, #8b24c7 70%, #a54fd4 100%)",
-      }}
-    >
-      {/* Background image */}
-      <img
-        src={bgImage}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover z-0"
-        style={{ opacity: 0.55, mixBlendMode: "soft-light" }}
-      />
-
-      {/* Right vignette */}
-      <div
-        className="absolute z-[2] pointer-events-none"
-        style={{
-          right: 0,
-          top: 0,
-          width: "40%",
-          height: "100%",
-          background:
-            "linear-gradient(to left, rgba(5,0,10,1) 0%, rgba(5,0,10,0.85) 35%, rgba(5,0,10,0.4) 65%, transparent 100%)",
+    return (
+      <AIFinanceSubsection
+        onBack={() => {
+          setShowSubsection(false);
+          onToggleSubsection?.(false);
         }}
       />
-      <M.button
-        className="absolute ml-10"
-      >
-        <img src="/src/assets/animicon/button.png" alt="" />
-      </M.button>
+    );
+  }
+  const contentVariants = {
+    initial: { y: "100%", opacity: 0 },
+    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    exit: {
+      x: "-100%",
+      opacity: 0,
+      transition: { duration: 0.8, ease: "easeInOut" },
+    },
+  };
 
-      {/* Right navigation arrow button */}
-      <M.button
-        className="absolute mr-10 right-6 top-1/2 -translate-y-1/2 z-[15]   flex items-center justify-center text-white  transition-all duration-300 cursor-pointer"
+  const imageVariants = {
+    initial: { y: "-100%", opacity: 0 },
+    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    exit: {
+      x: "100%",
+      opacity: 0,
+      transition: { duration: 0.8, ease: "easeInOut" },
+    },
+  };
 
-      >
-        <img src="/src/assets/animicon/arrow-rigth.png" alt="" />
-      </M.button>
+  return (
+    <M.section
+      className="relative w-full min-w-full h-screen flex items-center snap-start shrink-0 bg-transparent"
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       {/* Content — aligned to header width */}
-      <div className="relative z-10 w-[90%] max-w-[1400px] mx-auto pt-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
-          <div className="space-y-6">
-            <M.h1
+      <M.div className="relative z-10 w-[90%] max-w-[1400px] mx-auto pt-20">
+        <M.div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
+          <M.div className="space-y-6" variants={contentVariants}>
+            <h1
               className="text-5xl sm:text-6xl lg:text-8xl xl:text-8xl leading-none"
               style={{ fontWeight: 900, fontStyle: "italic" }}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
             >
-              Finanzas   <br />simples
-
-
-            </M.h1>
-
-            <M.p
-              className="text-2xl sm:text-3xl lg:text-5xl font-semibold leading-tight"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, delay: 0.1 }}
-            >
+              Finanzas <br />
+              simples
+            </h1>
+            <p className="text-2xl sm:text-3xl lg:text-5xl font-semibold leading-tight">
               Organizadas e inteligentes.
-            </M.p>
-
-            <M.p
-              className="text-base sm:text-lg lg:text-3xl max-w-[100ch] opacity-90 leading-relaxed"
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.2 }}
-            >
-              Ahorra en grupo, cumple metas y toma  <br /> mejores decisiones con tu comunidad.
-
-
-            </M.p>
-
-            <M.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.35 }}
-              className="pt-4"
-            >
+            </p>
+            <p className="text-base sm:text-lg lg:text-3xl max-w-[100ch] opacity-90 leading-relaxed">
+              Ahorra en grupo, cumple metas y toma <br /> mejores decisiones con
+              tu comunidad.
+            </p>
+            <div className="pt-4">
               <button
-                className="relative z-30 text-white font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="relative z-30 text-white font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer"
                 style={{
                   width: "250px",
                   height: "60px",
                   borderRadius: "918.42px",
                   background: "#191919",
-                  boxShadow: "5px 5px 20px 0px #4C1868, -5px -5px 20px 0px #C94BF8",
+                  boxShadow:
+                    "5px 5px 20px 0px #4C1868, -5px -5px 20px 0px #C94BF8",
                 }}
-                onClick={() => setShowSubsection(true)}
+                onClick={() => {
+                  setShowSubsection(true);
+                  onToggleSubsection?.(true);
+                }}
               >
                 Descubre Vaihok
               </button>
-            </M.div>
-          </div>
-
-          {/* Right — 3D Character Video */}
+            </div>
+          </M.div>
           <M.div
             className="hidden lg:flex items-center justify-center -translate-x-16 xl:-translate-x-20"
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
+            variants={imageVariants}
           >
             <div className="relative w-[500px] h-[500px] xl:w-[300px] xl:h-[300px] mb-20">
               <M.img
-                src="/src/assets/animicon/anim7coin.png"
+                src={anim7coin}
                 alt="Phone"
                 className="absolute bottom-[80%] left-[-70%] w-[500px] h-[200px]
     lg:w-[250px] lg:h-[250px] drop-shadow-xl"
                 animate={{ y: [0, 10, 0], rotate: [0, -6, 0, 6, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5,
+                }}
               />
               <M.img
-                src="/src/assets/animicon/anim7card.png"
+                src={anim7card}
                 alt="Car"
                 className="absolute bottom-[-80%] left-[-80%] w-[500px] h-[200px]
     lg:w-[320px] lg:h-[320px] drop-shadow-xl"
                 animate={{ y: [0, 10, 0], rotate: [0, -6, 0, 6, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5,
+                }}
               />
               <M.img
-                src="/src/assets/animicon/anim7qr.png"
+                src={anim7qr}
                 alt="Cloud"
                 className="absolute bottom-[-70%] left-[120%] w-[500px] h-[200px]
     lg:w-[200px] lg:h-[200px] drop-shadow-xl "
                 animate={{ y: [0, 10, 0], rotate: [0, -6, 0, 6, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5,
+                }}
               />
               <video
                 src={heroVideo}
@@ -149,18 +140,10 @@ export default function AiFinanceSection() {
                 playsInline
                 className="absolute inset-0 w-full h-full object-contain drop-shadow-2xl scale-300 z-40"
               />
-
-
-
-
-
-
             </div>
           </M.div>
-        </div>
-      </div>
-    </section>
+        </M.div>
+      </M.div>
+    </M.section>
   );
 }
-
-

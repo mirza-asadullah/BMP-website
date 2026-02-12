@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 export function NotFound() {
   return (
     <div className="global-bg">
@@ -14,11 +13,9 @@ export function NotFound() {
         }}
       >
         <div className="flex items-center justify-between max-w-7xl mx-auto">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
             <img src="/logo.png" alt="BeMind Power" className="w-32 h-auto" />
           </Link>
-
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             <Link
@@ -40,7 +37,6 @@ export function NotFound() {
               Contact
             </Link>
           </nav>
-
           {/* Language Selector */}
           <div className="flex items-center gap-4">
             <button className="text-white hover:text-primary hover:bg-primary/10 px-3 py-1 rounded transition-colors">
@@ -52,7 +48,6 @@ export function NotFound() {
           </div>
         </div>
       </header>
-
       {/* Back Arrow Icon */}
       <Link
         to="/"
@@ -75,7 +70,6 @@ export function NotFound() {
           />
         </svg>
       </Link>
-
       <section className="relative flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 ">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           {/* 404 Image */}
@@ -86,7 +80,6 @@ export function NotFound() {
               className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto"
             />
           </div>
-
           {/* Text Content */}
           <div className="text-center lg:text-left space-y-4 sm:space-y-6 order-1 lg:order-2">
             <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-white leading-tight">
@@ -99,7 +92,6 @@ export function NotFound() {
               Oops! The page you're looking for doesn't exist. It might have
               been moved, deleted, or you entered the wrong URL.
             </p>
-
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
