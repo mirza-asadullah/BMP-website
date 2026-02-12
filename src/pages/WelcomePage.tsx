@@ -100,7 +100,7 @@ export default function WelcomePage() {
             >
               <button
                 onClick={() => navigate("/home")}
-                className="bg-black/80 hover:bg-black text-white font-semibold px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-2xl hover:scale-105"
+                className="bg-black/80 hover:bg-black text-white font-semibold px-8 py-4 rounded-full transition-all shadow-lg cursor-pointer hover:shadow-2xl hover:scale-105"
               >
                 Descubre Vaihok
               </button>

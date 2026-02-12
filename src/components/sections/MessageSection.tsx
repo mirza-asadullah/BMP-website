@@ -75,14 +75,8 @@ export default function MessageSection({
               <br />
               escucha música. Sin salir del chat.
             </p>
-            <div
-              className="pt-4"
-            >
+            <div className="pt-4">
               <button
-                onClick={() => {
-                  setShowSubsection(true);
-                  onToggleSubsection?.(true);
-                }}
                 className="relative z-30 text-white font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer"
                 style={{
                   width: "250px",
@@ -92,6 +86,12 @@ export default function MessageSection({
                   boxShadow:
                     "5px 5px 20px 0px #4C1868, -5px -5px 20px 0px #C94BF8",
                 }}
+             
+                onClick={() => {
+                  setShowSubsection(true);
+                  onToggleSubsection?.(true);
+                }}
+               
               >
                 Descubre Vaihok
               </button>

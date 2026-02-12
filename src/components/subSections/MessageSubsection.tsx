@@ -83,10 +83,10 @@ export default function MessageSubsection({ onBack }: MessageSubsectionProps) {
               ))}
             </M.div>
             <M.div className="pt-4 flex gap-4">
-              <button className="text-white font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <button className="text-white font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105  cursor-pointer">
                 <img src={appStoreIcon} alt="" height={250} width={250} />
               </button>
-              <button className="text-white font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <button className="text-white font-semibold flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer ">
                 <img src={playStoreIcon} alt="" height={250} width={250} />
               </button>
             </M.div>
