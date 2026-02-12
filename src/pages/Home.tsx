@@ -3,6 +3,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import Header from "../components/Header";
 import {
   MessageSection,
+  FinanceSection,
+  MarketplaceSection,
+  AppsSection,
+  CommunitySection,
+  NuricionSection,
+  AIFinanceSection,
+  MentalHealthSection,
+  MusicSection,
 } from "../components/sections";
 
 const bgImage = "/src/assets/bg1.png";
@@ -14,6 +22,14 @@ const M = motion as any;
 
 const sections = [
   MessageSection,
+  FinanceSection,
+  MarketplaceSection,
+  AppsSection,
+  CommunitySection,
+  AIFinanceSection, // 6
+  NuricionSection,  // 7
+  MentalHealthSection, // 8
+  MusicSection,  // 9
 ];
 
 export default function Home() {
