@@ -25,20 +25,20 @@ export default function MessageSection({
   }
 
   const contentVariants = {
-    initial: { y: "100%", opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    initial: { y: 0, opacity: 1 },
+    animate: { y: 0, opacity: 1 },
     exit: {
-      x: "-100%",
+      x: ["0%", "10%", "-100%"],
       opacity: 0,
       transition: { duration: 0.8, ease: "easeInOut" },
     },
   };
 
   const imageVariants = {
-    initial: { y: "-100%", opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    initial: { y: 0, opacity: 1 },
+    animate: { y: 0, opacity: 1 },
     exit: {
-      x: "100%",
+      x: ["0%", "-10%", "100%"],
       opacity: 0,
       transition: { duration: 0.8, ease: "easeInOut" },
     },
@@ -54,7 +54,7 @@ export default function MessageSection({
       {/* Content — aligned to header width */}
       <M.div className="relative z-10 w-[90%] max-w-[1400px] mx-auto pt-20">
         <M.div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
-          <M.div className="space-y-6" variants={contentVariants}>
+          <M.div className="space-y-6 relative z-50" variants={contentVariants}>
             <h1
               className="text-5xl sm:text-6xl lg:text-8xl xl:text-8xl leading-none"
               style={{ fontWeight: 900, fontStyle: "italic" }}
@@ -86,12 +86,12 @@ export default function MessageSection({
                   boxShadow:
                     "5px 5px 20px 0px #4C1868, -5px -5px 20px 0px #C94BF8",
                 }}
-             
+
                 onClick={() => {
                   setShowSubsection(true);
                   onToggleSubsection?.(true);
                 }}
-               
+
               >
                 Descubre Vaihok
               </button>
@@ -101,7 +101,7 @@ export default function MessageSection({
             className="hidden lg:flex items-center justify-center -translate-x-16 xl:-translate-x-20"
             variants={imageVariants}
           >
-            <div className="relative w-[500px] h-[500px] xl:w-[600px] xl:h-[600px] mb-20 origin-center">
+            <div className="relative w-[500px] h-[500px] xl:w-[600px] xl:h-[600px] mb-20 origin-center pointer-events-none">
               <video
                 src={heroVideo}
                 autoPlay

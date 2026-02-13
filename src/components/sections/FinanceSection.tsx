@@ -26,19 +26,25 @@ export default function FinanceSection({
 
   const contentVariants = {
     initial: { y: "100%", opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    animate: {
+      y: ["100%", "-10%", "0%"],
+      opacity: 1,
+      transition: { duration: 1.8, ease: "easeOut" },
+    },
     exit: {
-      x: "-100%",
-      opacity: 0,
-      transition: { duration: 0.8, ease: "easeInOut" },
+      transition: { duration: 0 },
     },
   };
 
   const imageVariants = {
     initial: { y: "-100%", opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    animate: {
+      y: ["-100%", "10%", "0%"],
+      opacity: 1,
+      transition: { duration: 1.8, ease: "easeOut" },
+    },
     exit: {
-      x: "100%",
+      y: ["0%", "-10%", "100%"],
       opacity: 0,
       transition: { duration: 0.8, ease: "easeInOut" },
     },
