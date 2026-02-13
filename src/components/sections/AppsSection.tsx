@@ -28,10 +28,10 @@ export default function AppsSection({
     animate: {
       y: ["100%", "-10%", "0%"],
       opacity: 1,
-      transition: { duration: 1.2, ease: "easeOut", delay: 0.8 },
+      transition: { duration: 1.2, ease: "easeOut", delay: 0.5 },
     },
     exit: {
-      x: ["0%", "10%", "-100%"],
+      y: ["0%", "10%", "-100%"],
       opacity: 0,
       transition: { duration: 0.8, ease: "easeInOut" },
     },
@@ -42,10 +42,10 @@ export default function AppsSection({
     animate: {
       y: ["-100%", "10%", "0%"],
       opacity: 1,
-      transition: { duration: 1.2, ease: "easeOut", delay: 0.8 },
+      transition: { duration: 1.2, ease: "easeOut", delay: 0.5 },
     },
     exit: {
-      y: ["0%", "-10%", "-100%"],
+      y: ["0%", "-10%", "100%"],
       opacity: 0,
       transition: { duration: 0.8, ease: "easeInOut" },
     },

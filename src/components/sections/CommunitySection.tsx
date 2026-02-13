@@ -23,20 +23,28 @@ export default function CommunitySection({
     );
   }
   const contentVariants = {
-    initial: { y: "100%", opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
-    exit: {
-      x: "-100%",
+  initial: { y: "100%", opacity: 0 },
+     animate: {
+      y: "100",
+      opacity: 0,
+
+    },
+   exit: {
+      x: ["0%", "10%", "-100%"],
       opacity: 0,
       transition: { duration: 0.8, ease: "easeInOut" },
     },
   };
 
   const imageVariants = {
-    initial: { y: "-100%", opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
-    exit: {
-      x: "100%",
+   initial: { y: "-100%", opacity: 0 },
+    animate: {
+      y: ["-100%", "10%", "0%"],
+      opacity: 1,
+      transition: { duration: 1.8, ease: "easeOut", delay: 0.5  },
+    },
+     exit: {
+      x: ["0%", "-10%", "100%"],
       opacity: 0,
       transition: { duration: 0.8, ease: "easeInOut" },
     },

@@ -23,11 +23,15 @@ export default function NuricionSection({
       />
     );
   }
-  const contentVariants = {
+const contentVariants = {
     initial: { y: "100%", opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
-    exit: {
-      x: "-100%",
+     animate: {
+      x: ["100%", "-10%", "0%"],
+      opacity: 1,
+      transition: { duration: 1.8, ease: "easeOut", delay: 0.5 },
+    },
+   exit: {
+      x: ["0%", "10%", "-100%"],
       opacity: 0,
       transition: { duration: 0.8, ease: "easeInOut" },
     },
@@ -35,13 +39,18 @@ export default function NuricionSection({
 
   const imageVariants = {
     initial: { y: "-100%", opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
-    exit: {
-      x: "100%",
+    animate: {
+      x: ["-100%", "10%", "0%"],
+      opacity: 1,
+      transition: { duration: 1.8, ease: "easeOut", delay: 0.5  },
+    },
+     exit: {
+      x: ["0%", "-10%", "100%"],
       opacity: 0,
       transition: { duration: 0.8, ease: "easeInOut" },
     },
   };
+
 
   return (
     <M.section

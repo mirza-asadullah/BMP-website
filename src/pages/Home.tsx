@@ -107,7 +107,7 @@ export default function Home() {
 
       {/* Main Content Area */}
       <div className="relative z-10 w-full h-full">
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           <M.div
             key={transitionKey}
             className="absolute inset-0 w-full h-full"

@@ -22,11 +22,15 @@ export default function MentalHealthSection({
       />
     );
   }
-  const contentVariants = {
+   const contentVariants = {
     initial: { y: "100%", opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    animate: {
+      y: ["0%", "10%", "-100%"],
+      opacity: 1,
+      transition: { duration: 1.2, ease: "easeOut", delay: 0.5 },
+    },
     exit: {
-      x: "-100%",
+       y: ["100%", "-10%", "0%"],
       opacity: 0,
       transition: { duration: 0.8, ease: "easeInOut" },
     },
@@ -34,9 +38,13 @@ export default function MentalHealthSection({
 
   const imageVariants = {
     initial: { y: "-100%", opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    animate: {
+      y: ["0%", "-10%", "100%"],
+      opacity: 1,
+      transition: { duration: 1.2, ease: "easeOut", delay: 0.5 },
+    },
     exit: {
-      x: "100%",
+      y: ["-100%", "10%", "0%"],
       opacity: 0,
       transition: { duration: 0.8, ease: "easeInOut" },
     },

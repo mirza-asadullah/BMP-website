@@ -29,7 +29,7 @@ export default function FinanceSection({
     animate: {
       y: ["100%", "-10%", "0%"],
       opacity: 1,
-      transition: { duration: 1.8, ease: "easeOut", delay: 0.8 },
+      transition: { duration: 1.8, ease: "easeOut", delay: 0.5 },
     },
     exit: {
       transition: { duration: 0 },
@@ -41,7 +41,7 @@ export default function FinanceSection({
     animate: {
       y: ["-100%", "10%", "0%"],
       opacity: 1,
-      transition: { duration: 1.8, ease: "easeOut", delay: 0.8 },
+      transition: { duration: 1.8, ease: "easeOut", delay: 0.5  },
     },
     exit: {
       y: ["0%", "-10%", "100%"],
