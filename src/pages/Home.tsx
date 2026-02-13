@@ -17,6 +17,19 @@ const bgImage = "/src/assets/bg1.png";
 const buttonIcon = "/src/assets/animicon/button.png";
 const arrowRightIcon = "/src/assets/animicon/arrow-rigth.png";
 
+// Import videos for preloading
+const preloadVideos = [
+  "/src/assets/anim/animation2.webm",
+  "/src/assets/anim/animation3.webm",
+  "/src/assets/anim/animation4.webm",
+  "/src/assets/anim/animation5.webm",
+  "/src/assets/anim/animation6.webm",
+  "/src/assets/anim/animation7.webm",
+  "/src/assets/anim/animation8.webm",
+  "/src/assets/anim/animation9.webm",
+  "/src/assets/anim/animation10.webm",
+];
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const M = motion as any;
 
@@ -101,6 +114,13 @@ export default function Home() {
               "linear-gradient(to left, rgba(5,0,10,1) 0%, rgba(5,0,10,0.85) 35%, rgba(5,0,10,0.4) 65%, transparent 100%)",
           }}
         />
+
+        {/* Video Preloader */}
+        <div className="hidden">
+          {preloadVideos.map((video, index) => (
+            <video key={index} src={video} preload="auto" muted />
+          ))}
+        </div>
       </div>
 
       <Header />
@@ -124,7 +144,7 @@ export default function Home() {
       {!isSubsectionActive && (
         <>
           <M.button
-            className="absolute left-15 top-1/2 -translate-y-1/2 z-20 opacity-70 hover:opacity-100 transition-opacity disabled:opacity-30"
+            className="absolute left-15 top-1/2 -translate-y-1/2 cursor-pointer z-50 opacity-70 hover:opacity-100 transition-opacity disabled:opacity-30"
             onClick={() => handleManualScroll("left")}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -133,7 +153,7 @@ export default function Home() {
           </M.button>
 
           <M.button
-            className="absolute right-15 top-1/2 -translate-y-1/2 z-20 opacity-70 hover:opacity-100 transition-opacity"
+            className="absolute right-15 top-1/2 -translate-y-1/2 z-50 cursor-pointer opacity-70 hover:opacity-100 transition-opacity"
             onClick={() => handleManualScroll("right")}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
