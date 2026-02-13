@@ -22,26 +22,26 @@ export default function MusicSection({
       />
     );
   }
-const contentVariants = {
-    initial: { y: "100%", opacity: 0 },
-     animate: {
-      x: ["100%", "-10%", "0%"],
+  const contentVariants = {
+    initial: { x: "100%", y: 0, opacity: 0 },
+    animate: {
+      x: ["-100%", "10%", "0%"],
       opacity: 1,
-      transition: { duration: 1.8, ease: "easeOut", delay: 0.5 },
+      transition: { duration: 1.8, ease: "easeOut", delay: 0.2 },
     },
-  exit: {
-       y: ["100%", "-10%", "0%"],
+    exit: {
+      y: ["100%", "-10%", "0%"],
       opacity: 0,
       transition: { duration: 0.8, ease: "easeInOut" },
     },
   };
 
   const imageVariants = {
-    initial: { y: "-100%", opacity: 0 },
+    initial: { x: "-100%", y: 0, opacity: 0 },
     animate: {
-      x: ["-100%", "10%", "0%"],
+      x: ["100%", "-10%", "0%"],
       opacity: 1,
-      transition: { duration: 1.8, ease: "easeOut", delay: 0.5  },
+      transition: { duration: 1.8, ease: "easeOut", delay: 0.2 },
     },
     exit: {
       y: ["-100%", "10%", "0%"],

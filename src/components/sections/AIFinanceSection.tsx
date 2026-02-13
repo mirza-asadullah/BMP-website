@@ -28,7 +28,7 @@ export default function AiFinanceSection({
     animate: {
       y: ["100%", "-10%", "0%"],
       opacity: 1,
-      transition: { duration: 1.2, ease: "easeOut", delay: 0.5 },
+      transition: { duration: 1.2, ease: "easeOut", delay: 0.2 },
     },
     exit: {
       y: ["0%", "10%", "-100%"],
@@ -42,7 +42,7 @@ export default function AiFinanceSection({
     animate: {
       y: ["-100%", "10%", "0%"],
       opacity: 1,
-      transition: { duration: 1.2, ease: "easeOut", delay: 0.5 },
+      transition: { duration: 1.2, ease: "easeOut", delay: 0.2 },
     },
     exit: {
       y: ["0%", "-10%", "100%"],

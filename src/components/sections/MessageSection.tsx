@@ -26,7 +26,7 @@ export default function MessageSection({
 
   const contentVariants = {
     initial: { y: 0, opacity: 1 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut", delay: 0.5 } },
+    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut",delay: 0.2 } },
     exit: {
       x: ["0%", "10%", "-100%"],
       opacity: 0,
@@ -36,7 +36,7 @@ export default function MessageSection({
 
   const imageVariants = {
     initial: { y: 0, opacity: 1 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut", delay: 0.5 } },
+    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut",delay: 0.2} },
     exit: {
       x: ["0%", "-10%", "100%"],
       opacity: 0,
