@@ -30,6 +30,35 @@ const preloadVideos = [
   "/src/assets/anim/animation10.webm",
 ];
 
+const preloadImages = [
+  "/src/assets/bg1.png",
+  "/src/assets/logo.png",
+  "/src/assets/msgicon.png",
+  "/src/assets/animicon/anim10mus.png",
+  "/src/assets/animicon/anim10music.png",
+  "/src/assets/animicon/anim2msg.png",
+  "/src/assets/animicon/anim2music.png",
+  "/src/assets/animicon/anim2phone.png",
+  "/src/assets/animicon/anim3mon.png",
+  "/src/assets/animicon/anim3money.png",
+  "/src/assets/animicon/anim4maret.png",
+  "/src/assets/animicon/anim4market.png",
+  "/src/assets/animicon/anim4mt.png",
+  "/src/assets/animicon/anim5app.png",
+  "/src/assets/animicon/anim5car.png",
+  "/src/assets/animicon/anim5cld.png",
+  "/src/assets/animicon/anim6like.png",
+  "/src/assets/animicon/anim6share.png",
+  "/src/assets/animicon/anim7card.png",
+  "/src/assets/animicon/anim7coin.png",
+  "/src/assets/animicon/anim7qr.png",
+  "/src/assets/animicon/anim8apple.png",
+  "/src/assets/animicon/anim8balance.png",
+  "/src/assets/animicon/anim8leaf.png",
+  "/src/assets/animicon/anim9heart.png",
+  "/src/assets/animicon/anim9log.png",
+];
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const M = motion as any;
 
@@ -115,10 +144,13 @@ export default function Home() {
           }}
         />
 
-        {/* Video Preloader */}
+        {/* Video & Image Preloader */}
         <div className="hidden">
           {preloadVideos.map((video, index) => (
-            <video key={index} src={video} preload="auto" muted />
+            <video key={`vid-${index}`} src={video} preload="auto" muted />
+          ))}
+          {preloadImages.map((img, index) => (
+            <img key={`img-${index}`} src={img} alt="" />
           ))}
         </div>
       </div>
@@ -128,15 +160,10 @@ export default function Home() {
       {/* Main Content Area */}
       <div className="relative z-10 w-full h-full">
         <AnimatePresence mode="wait">
-          <M.div
+          <CurrentSection
             key={transitionKey}
-            className="absolute inset-0 w-full h-full"
-            initial="initial"
-            animate="animate"
-            exit="exit"
-          >
-            <CurrentSection onToggleSubsection={setIsSubsectionActive} />
-          </M.div>
+            onToggleSubsection={setIsSubsectionActive}
+          />
         </AnimatePresence>
       </div>
 
@@ -144,7 +171,7 @@ export default function Home() {
       {!isSubsectionActive && (
         <>
           <M.button
-            className="absolute left-15 top-1/2 -translate-y-1/2 cursor-pointer z-50 opacity-70 hover:opacity-100 transition-opacity disabled:opacity-30"
+            className="absolute left-15 top-1/2 -translate-y-1/2 cursor-pointer z-[60] opacity-70 hover:opacity-100 transition-opacity disabled:opacity-30"
             onClick={() => handleManualScroll("left")}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -153,7 +180,7 @@ export default function Home() {
           </M.button>
 
           <M.button
-            className="absolute right-15 top-1/2 -translate-y-1/2 z-50 cursor-pointer opacity-70 hover:opacity-100 transition-opacity"
+            className="absolute right-15 top-1/2 -translate-y-1/2 z-[60] cursor-pointer opacity-70 hover:opacity-100 transition-opacity"
             onClick={() => handleManualScroll("right")}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
