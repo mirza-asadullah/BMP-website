@@ -27,7 +27,7 @@ export default function MertekplaceSection({
 
   const contentVariants = {
     initial: { y: "100%", opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut", delay: 0.8 } },
     exit: {
       x: "-100%",
       opacity: 0,
@@ -37,7 +37,7 @@ export default function MertekplaceSection({
 
   const imageVariants = {
     initial: { y: "-100%", opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut", delay: 0.8 } },
     exit: {
       x: "100%",
       opacity: 0,

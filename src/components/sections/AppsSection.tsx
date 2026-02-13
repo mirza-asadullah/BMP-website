@@ -28,7 +28,7 @@ export default function AppsSection({
     animate: {
       y: ["100%", "-10%", "0%"],
       opacity: 1,
-      transition: { duration: 1.2, ease: "easeOut" },
+      transition: { duration: 1.2, ease: "easeOut", delay: 0.8 },
     },
     exit: {
       x: ["0%", "10%", "-100%"],
@@ -42,7 +42,7 @@ export default function AppsSection({
     animate: {
       y: ["-100%", "10%", "0%"],
       opacity: 1,
-      transition: { duration: 1.2, ease: "easeOut" },
+      transition: { duration: 1.2, ease: "easeOut", delay: 0.8 },
     },
     exit: {
       y: ["0%", "-10%", "-100%"],
