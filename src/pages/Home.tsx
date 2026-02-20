@@ -57,6 +57,15 @@ const preloadImages = [
   "/src/assets/animicon/anim8leaf.png",
   "/src/assets/animicon/anim9heart.png",
   "/src/assets/animicon/anim9log.png",
+  "/src/assets/animicon/arrow-rigth.png",
+  "/src/assets/animicon/button.png",
+  "/src/assets/bgwelcome.png",
+  "/src/assets/logowelcome.png",
+  "/src/assets/subsection/appstore.png",
+  "/src/assets/subsection/msgapp.png",
+  "/src/assets/subsection/phone.png",
+  "/src/assets/subsection/playstore.png",
+  "/src/assets/subsection/subfinances.png",
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,0 +1,156 @@
+---
+// Fondo de la página home: base negro + video + resplandor (tamaño home).
+interface Props {
+  videoSrc?: string;
+  autoplayVideo?: boolean;
+}
+
+const { videoSrc = "https://pub-d1d8eb4932844ef19f969720eed8b94a.r2.dev/finance.mp4", autoplayVideo = false } = Astro.props;
+---
+
+<div class="home-hero-bg">
+  <div class="home-hero-bg-base"></div>
+  
+  <!-- Video de fondo fullscreen -->
+  <video
+    id="home-hero-video"
+    class="home-hero-bg-video"
+    autoplay={autoplayVideo}
+    loop
+    playsinline
+    preload="auto"
+    crossorigin="anonymous"
+
+    muted
+  >
+    <source src={videoSrc} type="video/mp4" />
+  </video>
+  
+  <!-- Overlay oscuro para mejorar legibilidad -->
+  <div class="home-hero-bg-overlay"></div>
+  
+  <div class="home-hero-bg-glow"></div>
+</div>
+
+<style>
+  .home-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .home-hero-bg-base {
+    position: absolute;
+    inset: 0;
+    background-color: #000000;
+  }
+
+  .home-hero-bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    opacity: 0.85;
+  }
+
+  .home-hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 2;
+  }
+
+  .home-hero-bg-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(910px, 80vw);
+    height: min(910px, 80vw);
+    background: radial-gradient(
+      circle,
+      rgba(40, 54, 233, 0.89) 0%,
+      rgba(40, 54, 233, 0.5) 40%,
+      transparent 70%
+    );
+    filter: blur(198px);
+    z-index: 3;
+  }
+
+  /* Optimizaciones para móviles */
+  @media (max-width: 768px) {
+    .home-hero-bg-video {
+      width: 100vw;
+      height: 100vh;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+    }
+  }
+</style>
+
+<script>
+  // Autoplay video with sound
+  function initHomeHeroVideo(): void {
+    const video = document.getElementById('home-hero-video') as HTMLVideoElement;
+    if (!video) return;
+
+    const playVideo = () => {
+      // Try to play with sound
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          console.warn('Autoplay with sound blocked, attempting with muted fallback:', err);
+          // If autoplay with sound is blocked, mute and try again
+          video.muted = true;
+          video.play().catch(err2 => {
+            console.warn('Even muted autoplay failed:', err2);
+          });
+        });
+      }
+    };
+
+    // Handle video errors
+    video.addEventListener('error', (e) => {
+      console.error('Video loading error:', e);
+      setTimeout(() => {
+        if (video.readyState < 2) {
+          video.load();
+        }
+      }, 1000);
+    });
+
+    // Ensure video loops smoothly
+    video.addEventListener('ended', () => {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+
+    if (video.readyState >= 2) {
+      playVideo();
+    } else {
+      video.addEventListener('loadeddata', playVideo, { once: true });
+    }
+    
+    // Ensure opacity transition is set
+    video.style.transition = 'opacity 0.3s ease';
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHomeHeroVideo);
+  } else {
+    initHomeHeroVideo();
+  }
+  
+  // Re-initialize on page navigation (for SPAs)
+  document.addEventListener('astro:page-load', initHomeHeroVideo);
+</script>

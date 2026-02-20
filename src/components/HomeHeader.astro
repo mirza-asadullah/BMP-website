@@ -1,0 +1,647 @@
+---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { href: '/', label: 'Inicio', key: 'nav.home' },
+  { href: '/app', label: 'Chat', key: 'nav.chat' },
+  { href: '/apps', label: 'Apps', key: 'nav.apps' },
+  { href: '/salud', label: 'Salud', key: 'nav.salud' },
+  { href: '/comunidad', label: 'Comunidad', key: 'nav.comunidad' },
+  { href: '/musica', label: 'Música', key: 'nav.musica' },
+  { href: '/salud-mental', label: 'Salud Mental', key: 'nav.saludMental' },
+  { href: '/finanzas-simples', label: 'Finanzas', key: 'nav.finanzas' },
+].map(item => ({
+  ...item,
+  isActive: currentPath === item.href || currentPath === item.href + '/',
+}));
+---
+
+<header class="site-header absolute left-0 right-0 top-6 z-50 px-[6%] max-lg:px-[5%] max-sm:px-4">
+  <div class="header-glass-wrap mx-auto max-w-[1508px]">
+    <div class="header-glass relative flex items-center justify-between h-[70px] max-lg:h-14 rounded-[46px] px-8 max-lg:px-6 max-sm:rounded-2xl max-sm:px-4 max-sm:h-auto max-sm:py-3">
+      <a href="/" class="hidden lg:flex items-center gap-2.5 no-underline shrink-0" aria-label="BeMind Power - Inicio">
+        <img
+          src="/images/logos/Logo_Be-Mind%20night.svg"
+          alt="BeMind Power"
+          class="site-header-logo h-12 w-auto max-lg:h-10"
+        />
+      </a>
+
+      <!-- Navegación Desktop - centrada (misma que primera hoja) -->
+      <nav class="absolute left-1/2 -translate-x-1/2 hidden lg:block" aria-label="Navegación principal">
+        <div class="flex flex-nowrap items-center justify-center gap-5 max-xl:gap-3 max-lg:gap-2">
+          {navItems.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                'nav-link text-white no-underline whitespace-nowrap text-[16px] max-xl:text-[15px] max-lg:text-[14px]',
+                item.isActive ? 'font-black' : 'font-normal'
+              ]}
+            >
+              <span data-i18n={item.key}>{item.label}</span>
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <!-- Acciones: selector idioma + botón descarga Android -->
+      <div class="hidden lg:flex items-center gap-3">
+        <LanguageSwitcher />
+        <a href="https://play.google.com/store/apps/details?id=chat.bemindepower.bmpchat&hl=es_US" class="header-download-btn" aria-label="Get it on Google Play">
+          <img src="/images/google-play-badge.svg" alt="Google Play" class="header-download-icon" />
+        </a>
+      </div>
+
+      <div class="lg:hidden flex flex-col w-full mobile-nav-container">
+      <div class="flex items-center justify-between w-full mobile-nav-row">
+        <a href="/" class="flex items-center gap-2 no-underline mobile-logo-link shrink-0">
+          <img
+            src="/images/logos/Logo_Be-Mind%20night.svg"
+            alt="BeMind Power"
+            class="mobile-logo-img"
+          />
+        </a>
+        
+        <!-- Centered title placeholder for page name -->
+        <div class="flex-1 flex items-center justify-center mobile-center-title">
+          <span class="text-white font-semibold text-sm tracking-wide" data-i18n="nav.pageTitle"></span>
+        </div>
+        
+        <button
+          id="hamburger-btn"
+          class="hamburger-button shrink-0"
+          type="button"
+          aria-label="Abrir menú"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <!-- Icono hamburguesa (3 líneas) -->
+          <svg 
+            class="hamburger-icon w-5 h-5 transition-transform duration-300" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="2" 
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+          <!-- Icono X (cerrar) -->
+          <svg 
+            class="close-icon w-5 h-5 hidden transition-transform duration-300" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="2" 
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Menú desplegable móvil (mismo estilo que primera hoja: glass oscuro) -->
+      <div
+        id="mobile-menu"
+        data-open="false"
+        class="mobile-menu-panel w-full mt-3 origin-top
+               flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-black/80 backdrop-blur-xl px-4 py-4
+               opacity-0 translate-y-[-8px] scale-[0.98] pointer-events-none transition-all duration-300 ease-out
+               max-h-0 overflow-hidden"
+      >
+        <nav class="w-full" aria-label="Mobile">
+          <div class="flex flex-col items-center justify-center gap-2 text-center">
+            {navItems.map((item) => (
+              <a
+                href={item.href}
+                class:list={[
+                  'mobile-menu-item text-white text-[18px] py-2.5 px-4 rounded-xl hover:bg-white/10 transition-colors w-full text-center no-underline',
+                  item.isActive ? 'font-bold' : 'font-normal'
+                ]}
+              >
+                <span data-i18n={item.key}>{item.label}</span>
+              </a>
+            ))}
+          </div>
+        </nav>
+
+        <div class="w-full flex flex-col gap-2 mt-2">
+          <a href="https://play.google.com/store/apps/details?id=chat.bemindepower.bmpchat&hl=es_US" class="header-download-btn header-download-btn-mobile" aria-label="Get it on Google Play">
+            <img src="/images/google-play-badge.svg" alt="Google Play" class="header-download-icon" />
+          </a>
+        </div>
+
+        <div class="w-full h-px bg-white/10 my-3"></div>
+
+        <!-- Selector de idiomas inline para móvil -->
+        <div class="language-grid w-full">
+          <p class="text-white/50 text-[13px] text-center mb-2" data-i18n="menu.selectLanguage">Seleccionar idioma</p>
+          <div class="flex items-center justify-center gap-3">
+            <button type="button" class="mobile-lang-btn" data-lang="en" aria-label="English">
+              <img src="/images/flags/us.svg" alt="English" width="28" height="19" />
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="es" aria-label="Español">
+              <img src="/images/flags/co.svg" alt="Español" width="28" height="19" />
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="pt" aria-label="Português">
+              <img src="/images/flags/br.svg" alt="Português" width="28" height="19" />
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="zh" aria-label="中文">
+              <img src="/images/flags/cn.svg" alt="中文" width="28" height="19" />
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="ar" aria-label="العربية">
+              <img src="/images/flags/sa.svg" alt="العربية" width="28" height="19" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</header>
+
+<style>
+  /* Navbar con glassmorphism */
+  .header-glass-wrap {
+    width: 100%;
+  }
+
+  /* Barra única: colores de la primera hoja (inicio) + efecto glass */
+  .header-glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+      0 4px 30px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-link {
+    text-decoration: none;
+    position: relative;
+    padding: 4px 0;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #1929ff, #6366f1);
+    border-radius: 1px;
+    transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-link:hover {
+    text-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+  }
+
+  /* El link activo siempre muestra la línea */
+  .nav-link.font-black::after {
+    width: 100%;
+    background: linear-gradient(90deg, #1929ff, #818cf8);
+  }
+
+  /* Estado abierto del menú */
+  .mobile-menu-panel[data-open='true'] {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+    max-height: 520px;
+    overflow: hidden;
+  }
+
+  /* Alternar iconos del hamburger */
+  .hamburger-button[aria-expanded='true'] .hamburger-icon {
+    display: none;
+  }
+
+  .hamburger-button[aria-expanded='true'] .close-icon {
+    display: block;
+  }
+
+  /* Botones de idioma en móvil con glass */
+  .mobile-lang-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    backdrop-filter: blur(8px);
+  }
+
+  .mobile-lang-btn:active {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(0.95);
+  }
+
+  .mobile-lang-btn[aria-selected="true"] {
+    background: rgba(139, 92, 246, 0.3);
+    border-color: rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+  }
+
+  /* Botón descarga Android en navbar */
+  .header-download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    padding: 0 16px;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .header-download-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+  }
+
+  .header-download-icon {
+    height: 32px;
+    width: auto;
+  }
+
+  .header-download-btn-mobile {
+    width: 100%;
+    height: 46px;
+    justify-content: center;
+    border-radius: 12px;
+  }
+
+  /* Tablet: menos espacio para que no se apriete */
+  @media (max-width: 900px) {
+    .header-glass {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .nav-link {
+      font-size: 14px;
+    }
+  }
+
+  /* Móvil: navbar compacto */
+  @media (max-width: 640px) {
+    .site-header {
+      padding-left: 0.6rem;
+      padding-right: 0.6rem;
+      top: 0.5rem;
+    }
+
+    /* Hacer la barra menos ancha en móvil */
+    .header-glass-wrap {
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .header-glass {
+      padding: 8px 12px !important;
+      min-height: unset !important;
+      height: auto !important;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Contenedor móvil compacto */
+    .mobile-nav-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 40px;
+    }
+
+    .mobile-logo-link {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      line-height: 0;
+    }
+
+    .mobile-logo-img {
+      height: 22px;
+      width: auto;
+    }
+    
+    .mobile-center-title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      max-width: 160px;
+      text-align: center;
+    }
+    
+    .mobile-center-title span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: block;
+    }
+
+    .hamburger-button {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      min-height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      transition: all 0.2s ease;
+      padding: 0;
+    }
+
+    .hamburger-button:hover,
+    .hamburger-button:active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .hamburger-button svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* El mt-3 del panel suma altura incluso cerrado: neutralizarlo */
+    .mobile-menu-panel {
+      margin-top: 0 !important;
+      /* Importante: aunque tenga max-height:0, el padding/borde lo hace ocupar alto.
+         Colapsamos el panel cerrado para que el navbar se centre verticalmente. */
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      border-width: 0 !important;
+    }
+
+    .mobile-menu-panel[data-open='true'] {
+      margin-top: 0.75rem !important;
+      padding-top: 1rem !important;
+      padding-bottom: 1rem !important;
+      border-width: 1px !important;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .mobile-menu-item {
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .header-btn {
+      min-height: 40px;
+      padding: 0 1rem;
+      font-size: 13px;
+    }
+  }
+
+  /* iPad / tablets: también usan navbar con hamburger (hasta <lg) */
+  @media (max-width: 1023px) and (min-width: 641px) {
+    .mobile-nav-row {
+      height: 44px;
+    }
+
+    .mobile-logo-img {
+      height: 26px;
+      width: auto;
+    }
+    
+    .mobile-center-title {
+      max-width: 200px;
+    }
+
+    .hamburger-button {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+      border-radius: 12px;
+    }
+
+    .hamburger-button svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Evitar que el panel cerrado añada altura (mismo fix que móvil) */
+    .mobile-menu-panel {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      border-width: 0 !important;
+    }
+
+    .mobile-menu-panel[data-open='true'] {
+      margin-top: 0.9rem !important;
+      padding-top: 1rem !important;
+      padding-bottom: 1rem !important;
+      border-width: 1px !important;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+  }
+
+  /* iPad/tablet (coarse pointer): evitar que el panel se salga del viewport */
+  @media (hover: none) and (pointer: coarse) and (min-width: 641px) and (max-width: 1366px) {
+    .mobile-nav-container {
+      position: relative;
+    }
+
+    .mobile-menu-panel {
+      /* Sacar el panel del flujo y anclarlo al viewport */
+      position: fixed;
+      left: max(16px, calc(env(safe-area-inset-left) + 16px));
+      right: max(16px, calc(env(safe-area-inset-right) + 16px));
+      top: calc(env(safe-area-inset-top) + 88px);
+      width: auto !important;
+      box-sizing: border-box;
+      margin-top: 0 !important;
+      z-index: 9999;
+    }
+
+    .mobile-menu-panel[data-open='true'] {
+      /* Alto máximo: viewport - (top + safe-area-bottom) */
+      max-height: calc(100dvh - (env(safe-area-inset-top) + 88px) - (env(safe-area-inset-bottom) + 16px));
+      overflow-y: auto;
+    }
+  }
+
+  /* Para pantallas muy pequeñas (375px y menos) */
+  @media (max-width: 380px) {
+    .site-header {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      top: 0.4rem;
+    }
+
+    .header-glass {
+      padding: 7px 10px !important;
+      border-radius: 16px;
+    }
+
+    .mobile-nav-row {
+      height: 38px;
+    }
+
+    .mobile-logo-img {
+      height: 28px;
+    }
+
+    .hamburger-button {
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      min-height: 38px;
+      border-radius: 10px;
+    }
+
+    .hamburger-button svg {
+      width: 19px;
+      height: 19px;
+    }
+  }
+</style>
+
+<script>
+  import { $menuOpen, toggleMenu, closeMenu } from '../stores';
+  import { $lang, setLanguage, type Lang } from '../stores';
+
+  // Inicializar menú cuando el DOM esté listo
+  function initMobileMenu(): void {
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (!hamburgerBtn || !mobileMenu) return;
+    
+    // Evitar inicialización duplicada
+    if (hamburgerBtn.hasAttribute('data-initialized')) return;
+    hamburgerBtn.setAttribute('data-initialized', 'true');
+
+    // Suscribirse a cambios del store
+    $menuOpen.subscribe((isOpen) => {
+      mobileMenu.setAttribute('data-open', String(isOpen));
+      hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Click en hamburguesa
+    hamburgerBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    // Cerrar menú al hacer click en un enlace
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => closeMenu());
+    });
+
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', (e) => {
+      const target = e.target as Node;
+      if (!hamburgerBtn.contains(target) && !mobileMenu.contains(target)) {
+        closeMenu();
+      }
+    });
+
+    // Cerrar con tecla Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && $menuOpen.get()) {
+        closeMenu();
+      }
+    });
+
+    // Inicializar botones de idioma en móvil
+    initMobileLangButtons();
+  }
+
+  function initMobileLangButtons(): void {
+    const langButtons = document.querySelectorAll<HTMLButtonElement>('.mobile-lang-btn');
+    
+    if (langButtons.length === 0) return;
+    
+    // Evitar inicialización duplicada
+    const firstBtn = langButtons[0];
+    if (firstBtn.hasAttribute('data-initialized')) return;
+    firstBtn.setAttribute('data-initialized', 'true');
+    
+    // Actualizar estado visual de los botones
+    const updateLangButtons = (currentLang: Lang): void => {
+      langButtons.forEach((btn) => {
+        const btnLang = btn.getAttribute('data-lang');
+        btn.setAttribute('aria-selected', String(btnLang === currentLang));
+      });
+    };
+
+    // Inicializar con el idioma actual
+    updateLangButtons($lang.get());
+
+    // Suscribirse a cambios de idioma
+    $lang.subscribe(updateLangButtons);
+
+    // Agregar click handlers a cada botón
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const lang = this.getAttribute('data-lang') as Lang;
+        console.log('Language button clicked:', lang);
+        if (lang) {
+          setLanguage(lang);
+        }
+      });
+    });
+  }
+
+  // Ejecutar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileMenu);
+  } else {
+    initMobileMenu();
+  }
+
+  // También para View Transitions de Astro
+  document.addEventListener('astro:page-load', initMobileMenu);
+</script>

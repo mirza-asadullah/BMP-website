@@ -1,0 +1,20 @@
+---
+// Primera hoja: compuesta por componentes pequeños e inspeccionables por separado.
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import WelcomeHero from '../components/WelcomeHero.astro';
+---
+
+<Layout title="BeMind Power - Bienvenida" description="BeMind Power: transformación personal y bienestar con tecnología inmersiva." bodyClass="welcome-page">
+  <Header currentPath="/" />
+  <WelcomeHero />
+</Layout>
+
+<style is:global>
+  body.welcome-page {
+    background: #000000;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+</style>

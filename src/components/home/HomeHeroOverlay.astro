@@ -1,0 +1,208 @@
+---
+// Capa delantera del home: bloque izquierdo (título, CTA, tiendas) + smartphone. Inspeccionable por separado.
+import HeroHomeLeft from '../hero/HeroHomeLeft.astro';
+
+interface Props {
+  phoneSrc?: string;
+  titleLine1?: string;
+  titleLine2?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  titleLine1Key?: string;
+  titleLine2Key?: string;
+  subtitleKey?: string;
+  ctaKey?: string;
+}
+
+const { phoneSrc = "/images/smartphone_2%201.png", titleLine1, titleLine2, subtitle, ctaText, ctaHref, titleLine1Key, titleLine2Key, subtitleKey, ctaKey } = Astro.props;
+---
+
+<div class="home-hero-overlay">
+  <HeroHomeLeft titleLine1={titleLine1} titleLine2={titleLine2} subtitle={subtitle} ctaText={ctaText} ctaHref={ctaHref} titleLine1Key={titleLine1Key} titleLine2Key={titleLine2Key} subtitleKey={subtitleKey} ctaKey={ctaKey} />
+  <div class="home-hero-phone-wrap">
+    <img id="hero-phone-image" src={phoneSrc} alt="BeMind Power app" class="home-hero-smartphone" transition:name="phone-morph" />
+  </div>
+</div>
+
+<style>
+  .home-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    padding-top: max(100px, 12vh);
+    padding-left: 6.4%;
+    padding-right: 6.4%;
+    padding-bottom: max(80px, 8vh);
+    max-width: 1728px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .home-hero-overlay :global(.hero-home-left),
+  .home-hero-phone-wrap {
+    pointer-events: auto;
+  }
+
+  /* Entrance animations */
+  .home-hero-overlay :global(.hero-home-left) {
+    animation: slideFromLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+  }
+
+  .home-hero-phone-wrap {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin-top: 0;
+    animation: slideFromRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+  }
+
+  .home-hero-smartphone {
+    width: min(579px, 33.5vw);
+    height: auto;
+    max-height: min(908px, 81.3vh);
+    object-fit: contain;
+    object-position: top right;
+  }
+
+  @media (max-width: 1024px) {
+    .home-hero-overlay {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: max(90px, 9vh);
+      padding-left: 5%;
+      padding-right: 5%;
+      padding-bottom: max(70px, 7vh);
+    }
+
+    .home-hero-phone-wrap {
+      display: none;
+    }
+
+    .home-hero-overlay :global(.hero-home-left) {
+      max-width: 100%;
+      min-height: min(360px, 50vh);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .home-hero-overlay {
+      padding-top: max(80px, 8vh);
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .home-hero-overlay {
+      padding-top: max(72px, 8vh);
+      padding-left: 4%;
+      padding-right: 4%;
+      padding-bottom: max(56px, 6vh);
+    }
+
+    .home-hero-overlay :global(.hero-home-left) {
+      text-align: center;
+      align-items: center;
+      max-width: 100%;
+      min-height: min(300px, 45vh);
+    }
+
+    .home-hero-overlay :global(.hero-home-left-content) {
+      align-items: center;
+    }
+
+    .home-hero-overlay :global(.hero-home-subtitle) {
+      text-align: center;
+    }
+
+    .home-hero-overlay :global(.hero-home-badges) {
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .home-hero-overlay {
+      padding-top: max(64px, 7vh);
+      padding-left: 3%;
+      padding-right: 3%;
+      padding-bottom: max(48px, 5vh);
+    }
+
+    .home-hero-overlay :global(.hero-home-left) {
+      min-height: min(280px, 42vh);
+    }
+  }
+
+  /* ── Entrance Keyframes ── */
+  @keyframes slideFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* ── Phone Exit/Enter Animations ── */
+  .home-hero-smartphone.phone-exit-top {
+    animation: phoneExitTop 0.4s cubic-bezier(0.4, 0, 1, 1) forwards;
+  }
+
+  .home-hero-smartphone.phone-enter-bottom {
+    animation: phoneEnterBottom 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes phoneExitTop {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+  }
+
+  @keyframes phoneEnterBottom {
+    from {
+      opacity: 0;
+      transform: translateY(30%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-hero-overlay :global(.hero-home-left),
+    .home-hero-phone-wrap {
+      animation: none !important;
+    }
+
+    .home-hero-smartphone.phone-exit-top,
+    .home-hero-smartphone.phone-enter-bottom {
+      animation: none !important;
+    }
+  }
+</style>

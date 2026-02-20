@@ -1,0 +1,977 @@
+---
+import FeatureCard from './FeatureCard.astro';
+
+interface Props {
+  /** Tarjeta activa al cargar: 0=Chat, 1=Wallet, 2=Marketplace… Default 2 */
+  initialIndex?: number;
+}
+
+const { initialIndex = 2 } = Astro.props;
+
+// Slider: 9 tarjetas (Chat, Wallet, Marketplace, Apps, Nutrition, Comunidades, Música, Salud Mental, AI Finanzas)
+const features = [
+  {
+    // Chat (0, activo por defecto)
+    image: '/images/Chat.svg',
+    logo: '/images/logohorizontal.svg',
+    title: 'Chat',
+    description: 'Comunicación segura, instantánea e inteligente.',
+    titleKey: 'features.chat.title',
+    descriptionKey: 'features.chat.description',
+    link: '/chat'
+  },
+  {
+    image: '/images/wallet.svg',
+    logo: '/images/logohorizontal.svg',
+    title: 'Wallet',
+    description: 'Tu billetera digital segura y conectada.',
+    titleKey: 'features.wallet.title',
+    descriptionKey: 'features.wallet.description',
+    link: '/wallet'
+  },
+  {
+    image: '/images/marketplace.svg',
+    logo: '/images/logohorizontal.svg',
+    title: 'Marketplace',
+    description: 'Compra y vende de forma segura.',
+    titleKey: 'features.marketplace.title',
+    descriptionKey: 'features.marketplace.description',
+    link: '/marketplace'
+  },
+  {
+    image: '/images/apps.svg',
+    logo: '/images/logohorizontal.svg',
+    title: 'Apps',
+    description: 'Una sola puerta a cientos de soluciones.',
+    titleKey: 'features.apps.title',
+    descriptionKey: 'features.apps.description',
+    link: '/apps'
+  },
+  {
+    image: '/images/nutrition.svg',
+    logo: '/images/logohorizontal.svg',
+    title: 'Nutrition',
+    description: 'Alimentación inteligente para tu bienestar.',
+    titleKey: 'features.nutrition.title',
+    descriptionKey: 'features.nutrition.description',
+    link: '/nutrition'
+  },
+  {
+    image: '/images/Community.svg',
+    logo: '/images/logohorizontal.svg',
+    title: 'Comunidades',
+    description: 'Conecta con personas afines a ti.',
+    titleKey: 'features.communities.title',
+    descriptionKey: 'features.communities.description'
+  },
+  {
+    image: '/images/musica.svg',
+    logo: '/images/logohorizontal.svg',
+    title: 'Música',
+    description: 'Tu soundtrack personalizado.',
+    titleKey: 'features.music.title',
+    descriptionKey: 'features.music.description'
+  },
+  {
+    image: '/images/mental.svg',
+    logo: '/images/logohorizontal.svg',
+    title: 'Salud Mental',
+    description: 'Bienestar emocional con apoyo inteligente.',
+    titleKey: 'features.mentalHealth.title',
+    descriptionKey: 'features.mentalHealth.description'
+  },
+  {
+    image: '/images/AiFinanzas.svg',
+    logo: '/images/logohorizontal.svg',
+    title: 'A.I. Finanzas',
+    description: 'Gestión financiera inteligente y personalizada.',
+    titleKey: 'features.finance.title',
+    descriptionKey: 'features.finance.description'
+  }
+];
+
+---
+
+<section class="feature-slider relative w-full flex flex-col items-center justify-center overflow-visible" data-feature-slider>
+  <div class="slider-wrapper relative w-full flex flex-col items-center justify-center flex-1 min-h-0">
+    <div class="slider-container relative w-full flex-1 overflow-visible min-h-[320px]">
+      <div 
+        class="slider-track flex items-center justify-center"
+        data-initial-index={initialIndex}
+      >
+        {features.map((feature, index) => (
+          <div 
+            class="slider-item absolute" 
+            data-index={index}
+            style={`--item-index: ${index};`}
+          >
+            <FeatureCard {...feature} />
+          </div>
+        ))}
+      </div>
+      
+      <!-- Navigation arrows positioned on sides -->
+      <button 
+        class="nav-btn nav-btn-left absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white transition-all z-20"
+        aria-label="Anterior"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button 
+        class="nav-btn nav-btn-right absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white transition-all z-20"
+        aria-label="Siguiente"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-slider {
+    height: 100%;
+    min-height: 200px;
+  }
+
+  .slider-wrapper {
+    padding: 0.5rem 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .slider-container {
+    height: 220px;
+    position: relative;
+    width: 100%;
+  }
+
+  .slider-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .nav-btn {
+    background: none
+   
+  }
+
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .nav-btn:active {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(0.95);
+  }
+
+  .nav-btn:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+
+  /* Tarjetas posicionadas absolutamente */
+  .slider-item {
+    transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transform-origin: center center;
+    left: 50%;
+    top: 50%;
+    will-change: transform, filter, opacity;
+  }
+
+  /* Z-index según distancia */
+  .slider-item.active {
+    z-index: 10;
+  }
+
+  .slider-item.distance-1 {
+    z-index: 8;
+  }
+
+  .slider-item.distance-2 {
+    z-index: 6;
+  }
+
+  .slider-item.distance-3 {
+    z-index: 4;
+  }
+
+  .slider-item.distance-4 {
+    z-index: 2;
+  }
+
+  @media (min-width: 480px) {
+    .slider-container {
+      height: 240px;
+    }
+
+    .feature-slider {
+      min-height: 220px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .slider-container {
+      height: 280px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .slider-container {
+      height: 300px;
+    }
+
+    .feature-slider {
+      min-height: 260px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .slider-container {
+      height: 200px;
+    }
+
+    .nav-btn {
+      min-width: 40px;
+      min-height: 40px;
+    }
+  }
+
+  /* Desktop: hide side arrows, show centered ones */
+  @media (min-width: 900px) {
+    .nav-btn-left,
+    .nav-btn-right {
+      display: none;
+    }
+  }
+
+  /* Mobile: show side arrows */
+  @media (max-width: 899px) {
+    .nav-btn-left {
+      left: 0.5rem;
+    }
+
+    .nav-btn-right {
+      right: 0.5rem;
+    }
+
+    .nav-btn:active {
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    .nav-btn-left:active {
+      transform: translateY(-50%) scale(0.9);
+    }
+
+    .nav-btn-right:active {
+      transform: translateY(-50%) scale(0.9);
+    }
+  }
+</style>
+
+<script>
+  // Track auto-slide intervals per slider element to prevent duplicates
+  const sliderIntervals = new WeakMap<HTMLElement, ReturnType<typeof setInterval>>();
+
+  // Escalas según distancia desde la tarjeta activa (más pronunciadas como en Figma)
+  const SCALES = {
+    0: 1.0,    // activa - tamaño completo
+    1: 0.75,   // adyacente - notablemente más pequeña
+    2: 0.58,   // distancia 2 - mucho más pequeña
+    3: 0.45,   // distancia 3 - muy pequeña
+    4: 0.35    // distancia 4+ - mínima
+  };
+
+  // Blur según distancia (en píxeles)
+  const BLUR = {
+    0: 0,      // activa - sin blur
+    1: 2,      // adyacente - blur leve
+    2: 4,      // distancia 2 - blur medio
+    3: 6,      // distancia 3 - blur fuerte
+    4: 8       // distancia 4+ - blur máximo
+  };
+
+  // Opacidad según distancia
+  const OPACITY = {
+    0: 1.0,    // activa
+    1: 0.85,   // adyacente
+    2: 0.6,    // distancia 2
+    3: 0.4,    // distancia 3
+    4: 0.25    // distancia 4+
+  };
+
+  // Asset mapping (Index -> { video, phone })
+  // 0: Chat -> an1.mp4, s1.png
+  // 1: Wallet -> an2.mp4, s2.png
+  // ...
+  const ASSETS = [
+    { video: '/asad/an1.mp4', phone: '/asad/s1.png' }, // 0: Chat
+    { video: '/asad/an2.mp4', phone: '/asad/s2.png' }, // 1: Wallet
+    { video: '/asad/an3.mp4', phone: '/asad/s3.png' }, // 2: Marketplace
+    { video: '/asad/an4.mp4', phone: '/asad/s4.png' }, // 3: Apps
+    { video: '/asad/an5.mp4', phone: '/asad/s5.png' }, // 4: Nutrition
+    { video: '/asad/an6.mp4', phone: '/asad/s6.png' }, // 5: Communities
+    { video: '/asad/an7.mp4', phone: '/asad/s7.png' }, // 6: Music
+    { video: '/asad/an8.mp4', phone: '/asad/s8.png' }, // 7: Mental Health
+    { video: '/asad/an9.mp4', phone: '/asad/s9.png' }  // 8: Finance
+  ];
+
+  // Content mapping (Index -> { titleLine1, titleLine2, subtitle })
+  const CONTENT = [
+    { // 0: Chat
+      titleLine1: 'Todo empieza',
+      titleLine2: 'con una conversación',
+      subtitle: 'Y desde ahí: paga, vende, sana o escucha música. Sin salir del chat.'
+    },
+    { // 1: Wallet
+      titleLine1: 'Maneja tus finanzas',
+      titleLine2: 'sin salir del chat',
+      subtitle: 'Desde productos locales hasta servicios digitales: todo en una sola comunidad.'
+    },
+    { // 2: Marketplace
+      titleLine1: 'Compra y vende',
+      titleLine2: 'sin salir del chat',
+      subtitle: 'Desde productos locales hasta servicios digitales: todo en una sola comunidad.'
+    },
+    { // 3: Apps
+      titleLine1: 'Una sola app',
+      titleLine2: 'Cientos de soluciones.',
+      subtitle: 'Todo lo que necesitas, en un solo lugar. Como si fuera magia.'
+    },
+    { // 4: Nutrition
+      titleLine1: 'Vive saludable',
+      titleLine2: 'Con los tuyos.',
+      subtitle: 'Comparte recetas, retos saludables y planes de alimentación en tu red.'
+    },
+    { // 5: Communities
+      titleLine1: 'Destácate',
+      titleLine2: 'Crea tu comunidad',
+      subtitle: 'Crea, únete y colabora con personas que comparten tus intereses y valores.'
+    },
+    { // 6: Music
+      titleLine1: 'La música vive',
+      titleLine2: 'Escúchala y comparte.',
+      subtitle: 'Tus canciones, tus playlists y nuevos descubrimientos. Todo en un solo lugar.'
+    },
+    { // 7: Mental Health
+      titleLine1: 'Apoyo real',
+      titleLine2: 'Que inspira confianza.',
+      subtitle: 'Herramientas de bienestar emocional para ti y tu comunidad de apoyo.'
+    },
+    { // 8: Finance
+      titleLine1: 'A.I. Finanzas',
+      titleLine2: 'Tu asesor personal',
+      subtitle: 'Gestión financiera inteligente y personalizada.'
+    }
+  ];
+
+  // Links mapping (Index -> link)
+  const LINKS = [
+  '/app/chatdetails',       // 0: Chat
+  '/app/walletdetails',     // 1: Wallet
+  '/app/marketplacedetails',// 2: Marketplace
+  '/app/appsdetails',       // 3: Apps
+  '/app/nutritiondetails', // 4: Nutrition
+  '/app/communitiesdetails', // 5: Communities
+  '/app/musicdetails', // 6: Music
+  '/app/healthdetails', // 7: Mental Health (detail path)
+  '/app/financedetails'  // 8: Finance
+  ];
+
+  // Titles mapping for navbar (Index -> title)
+  const TITLES = [
+    'Todo empieza',           // 0: Chat
+    'Maneja tus finanzas',         // 1: Wallet
+    'Compra y vende',    // 2: Marketplace
+    'Una sola app',           // 3: Apps
+    'Vive saludable',      // 4: Nutrition
+    'Destácate',    // 5: Communities
+    'La música vive',         // 6: Music
+    'Apoyo real',   // 7: Mental Health
+    'A.I. Finanzas'   // 8: Finance
+  ];
+
+  // Video preloading cache
+  const videoPreloadCache = new Map<string, boolean>();
+  const imagePreloadCache = new Map<string, boolean>();
+  
+  function preloadVideo(videoSrc: string): void {
+    if (videoPreloadCache.has(videoSrc)) return;
+    
+    const video = document.createElement('video');
+    video.preload = 'auto';
+    video.src = videoSrc;
+    video.load();
+    videoPreloadCache.set(videoSrc, true);
+  }
+
+  function preloadImage(imageSrc: string): void {
+    if (imagePreloadCache.has(imageSrc)) return;
+    
+    const img = new Image();
+    img.src = imageSrc;
+    imagePreloadCache.set(imageSrc, true);
+  }
+
+  // Slider card images
+  const CARD_IMAGES = [
+    '/images/Chat.svg',
+    '/images/wallet.svg',
+    '/images/marketplace.svg',
+    '/images/apps.svg',
+    '/images/nutrition.svg',
+    '/images/Community.svg',
+    '/images/musica.svg',
+    '/images/mental.svg',
+    '/images/AiFinanzas.svg',
+    '/images/logohorizontal.svg',
+    '/images/vignette-left.svg',
+    '/images/vignette-right.svg'
+  ];
+
+  // Preload ALL assets upfront to prevent lag
+  function preloadAllAssets(): void {
+    // Preload phone images and videos
+    ASSETS.forEach(asset => {
+      if (asset.video) preloadVideo(asset.video);
+      if (asset.phone) preloadImage(asset.phone);
+    });
+    
+    // Preload slider card images
+    CARD_IMAGES.forEach(src => preloadImage(src));
+  }
+
+  function preloadNextVideos(currentIndex: number, totalItems: number): void {
+    // Preload next 2 videos in the sequence
+    const nextIndex1 = (currentIndex + 1) % totalItems;
+    const nextIndex2 = (currentIndex + 2) % totalItems;
+    
+    if (ASSETS[nextIndex1]?.video) {
+      preloadVideo(ASSETS[nextIndex1].video);
+    }
+    if (ASSETS[nextIndex2]?.video) {
+      preloadVideo(ASSETS[nextIndex2].video);
+    }
+  }
+
+  function initSliderInstance(root: HTMLElement): void {
+    const track = root.querySelector<HTMLElement>('.slider-track');
+    const container = root.querySelector<HTMLElement>('.slider-container');
+    const prevBtn = container?.querySelector<HTMLButtonElement>('.nav-btn[aria-label="Anterior"]') ||
+                    root.querySelector<HTMLButtonElement>('.nav-btn[aria-label="Anterior"]');
+    const nextBtn = container?.querySelector<HTMLButtonElement>('.nav-btn[aria-label="Siguiente"]') ||
+                    root.querySelector<HTMLButtonElement>('.nav-btn[aria-label="Siguiente"]');
+    const items = root.querySelectorAll<HTMLElement>('.slider-item');
+    
+    // Find the layout scope for this slider (mobile vs desktop)
+    const layoutScope = root.closest('.chat-mobile-layout') || 
+                         root.closest('.chat-desktop-layout') || 
+                         root.closest('.home-hero') || 
+                         root;
+    
+    // External elements to update (scoped to the correct layout - NO FALLBACK to avoid cross-layout updates)
+    const heroVideo = layoutScope.querySelector('#home-hero-video') as HTMLVideoElement | null;
+    const heroPhone = layoutScope.querySelector('#hero-phone-image') as HTMLImageElement | null;
+    
+    // Text elements to update (scoped - NO FALLBACK)
+    const heroTitle1 = layoutScope.querySelector('#hero-title-line1') as HTMLElement | null;
+    const heroTitle2 = layoutScope.querySelector('#hero-title-line2') as HTMLElement | null;
+    const heroSubtitle = layoutScope.querySelector('#hero-subtitle') as HTMLElement | null;
+    const heroCta = layoutScope.querySelector('#hero-cta-button') as HTMLElement | null;
+    
+    // Mobile navbar title element (outside layout scope - in header)
+    // Only update navbar title if this slider is in mobile layout
+    const isInMobileLayout = root.closest('.chat-mobile-layout') !== null;
+    const mobilePageTitle = isInMobileLayout 
+      ? document.querySelector('#mobile-page-title') as HTMLElement
+      : null;
+
+    if (!track || !prevBtn || !nextBtn || items.length === 0) return;
+
+    if (track.hasAttribute('data-initialized')) return;
+    track.setAttribute('data-initialized', 'true');
+
+    const rawInitial = track.getAttribute('data-initial-index');
+    const initialIndex = rawInitial !== null ? Math.max(0, parseInt(rawInitial, 10) % items.length) : 0;
+    let currentIndex = initialIndex;
+    const totalItems = items.length;
+    let isFirstUpdate = true;
+    let navbarTitleTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const getCardWidth = (): number => {
+      const w = window.innerWidth;
+      if (w < 380) return 130;
+      if (w < 480) return 140;
+      if (w < 640) return 160;
+      return 240;
+    };
+
+    const getGap = (): number => {
+      const w = window.innerWidth;
+      if (w < 380) return -10;
+      if (w < 640) return -15;
+      return -20;
+    };
+
+    // Calcular distancia circular (para loop infinito)
+    const getCircularDistance = (index: number, current: number, total: number): number => {
+      const directDistance = index - current;
+      const wrapDistance = directDistance > 0 
+        ? directDistance - total 
+        : directDistance + total;
+      
+      // Retornar la distancia más corta
+      return Math.abs(directDistance) <= Math.abs(wrapDistance) ? directDistance : wrapDistance;
+    };
+
+    const updateSlider = (): void => {
+      const cardWidth = getCardWidth();
+      const gap = getGap();
+
+      // Posicionar cada tarjeta con distancia circular
+      items.forEach((item, index) => {
+        const distance = getCircularDistance(index, currentIndex, totalItems);
+        const absDistance = Math.abs(distance);
+        
+        // Limpiar clases anteriores
+        item.classList.remove('active', 'distance-1', 'distance-2', 'distance-3', 'distance-4');
+        
+        // Agregar clase según distancia
+        if (absDistance === 0) {
+          item.classList.add('active');
+        } else if (absDistance === 1) {
+          item.classList.add('distance-1');
+        } else if (absDistance === 2) {
+          item.classList.add('distance-2');
+        } else if (absDistance === 3) {
+          item.classList.add('distance-3');
+        } else {
+          item.classList.add('distance-4');
+        }
+
+        // Obtener valores según distancia
+        const distKey = Math.min(absDistance, 4) as keyof typeof SCALES;
+        const scale = SCALES[distKey];
+        const blur = BLUR[distKey];
+        const opacity = OPACITY[distKey];
+
+        // Calcular posición X
+        let xOffset = 0;
+        
+        for (let i = 0; i < absDistance; i++) {
+          const prevScaleKey = Math.min(i, 4) as keyof typeof SCALES;
+          const nextScaleKey = Math.min(i + 1, 4) as keyof typeof SCALES;
+          const prevScale = SCALES[prevScaleKey];
+          const nextScale = SCALES[nextScaleKey];
+          xOffset += (cardWidth * prevScale / 2) + gap + (cardWidth * nextScale / 2);
+        }
+
+        if (distance < 0) xOffset = -xOffset;
+
+        // Aplicar transformación, blur y opacidad
+        item.style.transform = `translate(-50%, -50%) translateX(${xOffset}px) scale(${scale})`;
+        item.style.filter = blur > 0 ? `blur(${blur}px)` : 'none';
+        item.style.opacity = String(opacity);
+      });
+
+      // En loop infinito, los botones siempre están activos
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+
+      // Update external assets based on currentIndex
+      if (ASSETS[currentIndex]) {
+        const { video, phone } = ASSETS[currentIndex];
+        
+        // Update Video if changed - INSTANT sync with slider
+        if (heroVideo) {
+          // Extract filename from current video src for comparison
+          const currentVideoSrc = heroVideo.src || '';
+          const currentFileName = currentVideoSrc.split('/').pop()?.split('?')[0] || '';
+          const newFileName = video.split('/').pop()?.split('?')[0] || '';
+          
+          // Only update if the video file is actually different
+          if (currentFileName !== newFileName) {
+            const wasPlaying = !heroVideo.paused;
+            
+            // Instantly update video source - no delay to match slider timing
+            heroVideo.style.transition = 'opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)';
+            heroVideo.style.opacity = '0.4';
+            
+            // Change source immediately
+            heroVideo.src = video;
+            heroVideo.load();
+            
+            // Fade in as soon as ready
+            const onCanPlay = () => {
+              heroVideo.removeEventListener('canplay', onCanPlay);
+              heroVideo.style.opacity = '0.85';
+              
+              // Auto-play new video (will fallback to muted if blocked)
+              if (wasPlaying) {
+                heroVideo.play().catch(err => {
+                  // If blocked, try muted
+                  heroVideo.muted = true;
+                  heroVideo.play().catch(() => {});
+                });
+              }
+            };
+            
+            heroVideo.addEventListener('canplay', onCanPlay, { once: true });
+            
+            // Fallback: restore opacity even if video doesn't load quickly
+            setTimeout(() => {
+              if (heroVideo.style.opacity !== '0.85') {
+                heroVideo.style.opacity = '0.85';
+                heroVideo.removeEventListener('canplay', onCanPlay);
+              }
+            }, 800);
+          }
+        }
+
+        // Update Phone Image if changed - sync with slider timing
+        if (heroPhone) {
+          if (!heroPhone.src.includes(phone)) {
+            if (isFirstUpdate) {
+              // No animation on initial load — just set the image
+              heroPhone.src = phone;
+            } else {
+              // Exit animation: slide out from top
+              heroPhone.style.transition = 'transform 0.35s cubic-bezier(0.4, 0, 1, 1), opacity 0.35s cubic-bezier(0.4, 0, 1, 1)';
+              heroPhone.style.transform = 'translateY(-100%)';
+              heroPhone.style.opacity = '0';
+              
+              // Change image after exit animation
+              setTimeout(() => {
+                heroPhone.src = phone;
+                
+                // Prepare for enter animation (start from below)
+                heroPhone.style.transition = 'none';
+                heroPhone.style.transform = 'translateY(30%)';
+                
+                // Enter animation: slide in from bottom
+                requestAnimationFrame(() => {
+                  requestAnimationFrame(() => {
+                    heroPhone.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+                    heroPhone.style.transform = 'translateY(0)';
+                    heroPhone.style.opacity = '1';
+                  });
+                });
+              }, 350); // Match exit animation duration
+            }
+          }
+        }
+      }
+
+      // Update Text Content if changed - sync with slider timing
+      if (CONTENT[currentIndex]) {
+        const { titleLine1, titleLine2, subtitle } = CONTENT[currentIndex];
+        const textChanged = (heroTitle1 && heroTitle1.textContent !== titleLine1) ||
+                           (heroTitle2 && heroTitle2.textContent !== titleLine2) ||
+                           (heroSubtitle && heroSubtitle.textContent !== subtitle);
+
+        if (textChanged && !isFirstUpdate) {
+          // Quick fade out - match slider timing
+          const titleEls = [heroTitle1, heroTitle2].filter(Boolean) as HTMLElement[];
+          const subtitleEl = heroSubtitle;
+
+          titleEls.forEach(el => {
+            el.style.transition = 'opacity 0.25s cubic-bezier(0.25, 0.1, 0.25, 1)';
+            el.style.opacity = '0';
+          });
+          if (subtitleEl) {
+            subtitleEl.style.transition = 'opacity 0.25s cubic-bezier(0.25, 0.1, 0.25, 1)';
+            subtitleEl.style.opacity = '0';
+          }
+
+          setTimeout(() => {
+            // Set new text
+            if (heroTitle1) heroTitle1.textContent = titleLine1;
+            if (heroTitle2) heroTitle2.textContent = titleLine2;
+            if (heroSubtitle) heroSubtitle.textContent = subtitle;
+
+            // Fade in quickly
+            requestAnimationFrame(() => {
+              titleEls.forEach(el => {
+                el.style.transition = 'opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)';
+                el.style.opacity = '1';
+              });
+              if (subtitleEl) {
+                subtitleEl.style.transition = 'opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)';
+                subtitleEl.style.opacity = '1';
+              }
+            });
+          }, 150);
+        } else {
+          // First update or no change — set directly
+          if (heroTitle1 && heroTitle1.textContent !== titleLine1) heroTitle1.textContent = titleLine1;
+          if (heroTitle2 && heroTitle2.textContent !== titleLine2) heroTitle2.textContent = titleLine2;
+          if (heroSubtitle && heroSubtitle.textContent !== subtitle) heroSubtitle.textContent = subtitle;
+        }
+      }
+
+      // Update CTA Link
+      if (heroCta) {
+        const link = LINKS[currentIndex];
+        if (link) {
+          heroCta.setAttribute('href', link);
+        } else {
+          // Fallback or keep current? Maybe fallback to '#' or root?
+          // For now, let's just leave it or set to '#' to avoid broken links if user clicks
+          // But 'ver más' implies there is something to see. 
+          // If no link, maybe we should hide it? But design might require it.
+          // Let's default to specific section or just '#'
+          heroCta.setAttribute('href', '#');
+        }
+      }
+
+      // Update Mobile Navbar Title
+      if (mobilePageTitle && TITLES[currentIndex]) {
+        const newTitle = TITLES[currentIndex];
+        if (mobilePageTitle.textContent !== newTitle) {
+          // Cancel any pending title update to avoid double-updates
+          if (navbarTitleTimeout) {
+            clearTimeout(navbarTitleTimeout);
+            navbarTitleTimeout = null;
+          }
+
+          if (isFirstUpdate) {
+            // First load - set directly
+            mobilePageTitle.textContent = newTitle;
+          } else {
+            // Delay header title change until after slider transform transition
+            // Slider items use a 0.5s transition; sync header update to that.
+            mobilePageTitle.style.transition = 'opacity 0.2s cubic-bezier(0.25, 0.1, 0.25, 1)';
+            mobilePageTitle.style.opacity = '0';
+
+            navbarTitleTimeout = setTimeout(() => {
+              navbarTitleTimeout = null;
+              mobilePageTitle.textContent = newTitle;
+              requestAnimationFrame(() => {
+                mobilePageTitle.style.opacity = '1';
+              });
+            }, 520); // wait slightly more than slider transition (500ms)
+          }
+        }
+      }
+
+      isFirstUpdate = false;
+      
+      // Preload next videos for smooth transitions
+      preloadNextVideos(currentIndex, totalItems);
+    };
+
+    // Navegación circular (loop infinito)
+    const nextSlide = (): void => {
+      currentIndex = (currentIndex + 1) % totalItems;
+      updateSlider();
+    };
+
+    const prevSlide = (): void => {
+      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+      updateSlider();
+    };
+
+    // Auto-slide cada 5 segundos (loop infinito)
+    let autoSlideInterval: ReturnType<typeof setInterval> | null = null;
+
+    const startAutoSlide = (): void => {
+      stopAutoSlide();
+      autoSlideInterval = setInterval(() => {
+        nextSlide();
+      }, 5000);
+    };
+
+    const stopAutoSlide = (): void => {
+      if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = null;
+      }
+    };
+
+    const resetAutoSlide = (): void => {
+      startAutoSlide();
+    };
+
+    // Event listeners for main buttons (if present)
+    prevBtn?.addEventListener('click', () => {
+      prevSlide();
+      resetAutoSlide();
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      nextSlide();
+      resetAutoSlide();
+    });
+
+    // Also wire side arrows (explicit) so side buttons always work
+    const sidePrev = container?.querySelector<HTMLButtonElement>('.nav-btn-left');
+    const sideNext = container?.querySelector<HTMLButtonElement>('.nav-btn-right');
+
+    if (sidePrev && sidePrev !== prevBtn) {
+      sidePrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        prevSlide();
+        resetAutoSlide();
+      });
+    }
+
+    if (sideNext && sideNext !== nextBtn) {
+      sideNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nextSlide();
+        resetAutoSlide();
+      });
+    }
+
+    // Soporte para gestos táctiles
+    let touchStartX = 0;
+    let touchStartedOnButton = false;
+
+    track.parentElement?.addEventListener('touchstart', (e: TouchEvent) => {
+      // Track if touch started on a button to ignore it in touchend
+      const target = e.target as HTMLElement | null;
+      touchStartedOnButton = !!(target && target.closest && target.closest('button, a'));
+      if (touchStartedOnButton) return;
+      
+      touchStartX = e.changedTouches[0].screenX;
+      stopAutoSlide();
+    }, { passive: true });
+
+    track.parentElement?.addEventListener('touchend', (e: TouchEvent) => {
+      // Ignore if touch started on a button (let click handler deal with it)
+      if (touchStartedOnButton) {
+        touchStartedOnButton = false;
+        return;
+      }
+      
+      const touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+      resetAutoSlide();
+    }, { passive: true });
+
+    // Soporte para teclado
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        prevSlide();
+        resetAutoSlide();
+      }
+      if (e.key === 'ArrowRight') {
+        nextSlide();
+        resetAutoSlide();
+      }
+    });
+
+    // Click on slider to scroll (Right to Left / Next)
+    // Avoid double triggering if button clicked (buttons are outside, but check anyway)
+    // Check if dragging happened? Since touchStart/touchEnd are passive, click might fire.
+    // If we want simple click behavior:
+    track.parentElement?.addEventListener('click', (e) => {
+      // Ignore clicks that originate from buttons/links (arrows/CTAs)
+      const target = e.target as HTMLElement | null;
+      if (target && target.closest && target.closest('button, a')) return;
+
+      // Bounce animation: Move right first (wind up)
+      track.style.transition = 'transform 0.15s ease-out';
+      track.style.transform = 'translateX(20px)';
+
+      setTimeout(() => {
+        // Then trigger next slide (scroll left) and reset track
+        nextSlide();
+        resetAutoSlide();
+        track.style.transform = 'translateX(0)';
+      }, 150);
+    });
+
+    // Pausar auto-slide cuando el usuario hace hover
+    track.parentElement?.addEventListener('mouseenter', stopAutoSlide);
+    track.parentElement?.addEventListener('mouseleave', startAutoSlide);
+
+    // Inicializar
+    updateSlider();
+    startAutoSlide();
+
+    // Re-calcular en resize
+    window.addEventListener('resize', updateSlider);
+
+    // Limpiar interval cuando se desmonta
+    window.addEventListener('beforeunload', stopAutoSlide);
+  }
+
+  function initAllSliders(): void {
+    // Inicializar todos los sliders visibles en la página
+    const sliders = document.querySelectorAll<HTMLElement>('[data-feature-slider]');
+    sliders.forEach((slider) => {
+      // Check if any ancestor has display:none (more thorough check)
+      let el: HTMLElement | null = slider;
+      let isVisible = true;
+      while (el) {
+        const style = window.getComputedStyle(el);
+        if (style.display === 'none' || style.visibility === 'hidden') {
+          isVisible = false;
+          break;
+        }
+        el = el.parentElement;
+      }
+      
+      if (isVisible) {
+        initSliderInstance(slider);
+      }
+    });
+  }
+
+  function runInit(): void {
+    // Preload all assets immediately
+    preloadAllAssets();
+    
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        initAllSliders();
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runInit);
+  } else {
+    runInit();
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    // Preload assets on page navigation
+    preloadAllAssets();
+    
+    document.querySelectorAll('[data-feature-slider] .slider-track').forEach((el) => {
+      el.removeAttribute('data-initialized');
+    });
+    runInit();
+  });
+
+  // Re-inicializar cuando cambia el tamaño de pantalla (por si cambia de desktop a mobile)
+  let resizeTimeout: ReturnType<typeof setTimeout>;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      initAllSliders();
+    }, 250);
+  });
+  
+  // Ensure phone is ready for transitions
+  document.addEventListener('astro:page-load', () => {
+      const p = document.getElementById('hero-phone-image');
+      if(p) {
+        p.style.transition = 'transform 0.5s cubic-bezier(0, 0, 0.2, 1), opacity 0.5s ease';
+      }
+  });
+</script>

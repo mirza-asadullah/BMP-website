@@ -1,0 +1,266 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+---
+
+<Layout title="BeMind Power - Sobre Nosotros" description="Conoce al equipo detrás de BeMind Power. Creemos en una vida digital más simple." bodyClass="sobre-nosotros-page">
+  <Header currentPath="/sobre-nosotros" />
+
+  <section class="about-hero">
+    <!-- Background -->
+    <div class="about-bg">
+      <div class="about-bg-base"></div>
+      <div class="about-glow"></div>
+    </div>
+
+
+
+
+    <!-- Logo -->
+    <div class="about-logo">
+      <img src="/images/LOGOBLANCO.svg" alt="BeMind Power" />
+    </div>
+
+    <!-- Content -->
+    <div class="about-content">
+      <h1 class="about-title">
+        Creemos en una vida digital<br />más simple.
+      </h1>
+      <p class="about-subtitle">
+        Construimos un ecosistema que conecta personas, negocios y servicios en una sola app.
+      </p>
+      <p class="about-description">
+        Nuestro equipo está formado por creadores, ingenieros y diseñadores que comparten una misma visión: hacer que cada mensaje, pago o interacción sea más fácil y seguro.
+      </p>
+    </div>
+
+
+  </section>
+</Layout>
+
+<style is:global>
+  body.sobre-nosotros-page {
+    background: #000000;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
+<style>
+  .about-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Background ── */
+  .about-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+    background-color: #030014;
+  }
+
+  .about-bg-base {
+    position: absolute;
+    inset: 0;
+    background-color: #000000;
+    background-image: url('/asad/welcomebg.png');
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0.98;
+  }
+
+  @media (max-width: 1024px) {
+    .about-bg-base {
+      background-image: url('/asad/contactbgr.png');
+    }
+  }
+
+  .about-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(1400px, 150vw);
+    height: min(1400px, 150vw);
+    background: radial-gradient(
+      circle,
+      rgba(25, 41, 255, 0.35) 0%,
+      rgba(25, 41, 255, 0.15) 35%,
+      transparent 65%
+    );
+    filter: blur(120px);
+    z-index: 1;
+    animation: glowPulse 4s ease-in-out infinite alternate;
+  }
+
+
+
+
+  /* ── Logo ── */
+  .about-logo {
+    position: relative;
+    z-index: 10;
+    margin-bottom: 2rem;
+    animation: scaleIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .about-logo img {
+    width: clamp(190px, 18vw, 260px);
+    height: auto;
+  }
+
+  /* ── Content ── */
+  .about-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 1000px;
+    padding: 0 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .about-title {
+    font-family: 'Neometric', 'Inter', sans-serif;
+    font-size: clamp(24px, 3.2vw, 44px);
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: 0.01em;
+    animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  }
+
+  .about-subtitle {
+    font-family: 'Neometric', 'Inter', sans-serif;
+    font-size: clamp(16px, 1.8vw, 28px);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+    margin: 0;
+    max-width: 640px;
+    animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+  }
+
+  .about-description {
+    font-family: 'Neometric', 'Inter', sans-serif;
+    font-size: clamp(12px, 1.1vw, 18px);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 540px;
+    animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+  }
+
+
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .about-glow {
+      width: min(1000px, 140vw);
+      height: min(1000px, 140vw);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-content {
+      gap: 1.25rem;
+    }
+
+    .about-glow {
+      width: min(800px, 160vw);
+      height: min(800px, 160vw);
+      filter: blur(80px);
+    }
+
+
+  }
+
+  @media (max-width: 480px) {
+    .about-content {
+      gap: 1rem;
+    }
+
+    .about-logo img {
+      width: 200px;
+    }
+
+    .about-description {
+      color: #ffffff;
+      font-weight: 400;
+    }
+
+    .about-glow {
+      filter: blur(60px);
+    }
+
+
+  }
+
+  /* ── Animations ── */
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes glowPulse {
+    from {
+      opacity: 0.7;
+      transform: translate(-50%, -50%) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-logo,
+    .about-title,
+    .about-subtitle,
+    .about-description,
+    .about-glow {
+      animation: none !important;
+    }
+  }
+</style>
+
+<style is:global>
+  @media (max-width: 768px) {
+    .sobre-nosotros-page header a[href="/"] {
+      display: none !important;
+    }
+  }
+</style>

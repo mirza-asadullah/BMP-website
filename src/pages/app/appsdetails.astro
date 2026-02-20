@@ -1,0 +1,320 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+
+// Images
+const bannerImg = "/images/chat/banner.png";
+const mobileBannerImg = "/images/mobileview.png";
+const phoneImg = "/images/SmartphoneApps.png";
+const googlePlay = "/images/chat/googleplay.png";
+const appleStore = "/images/chat/apple.png";
+
+const heartIcon = "/images/heartLogo.png";
+const dollarIcon = "/images/doller.png";
+---
+
+<Layout
+  title="BeMind Power - Apps Details"
+  description="Un universo de apps, sin llenar tu memoria"
+  bodyClass="apps-detail-page"
+>
+  <div
+    class="apps-detail-wrap relative min-h-screen w-full overflow-x-hidden bg-[#0A0A1B]"
+  >
+    <Header />
+
+    <main
+      class="relative w-full lg:min-h-screen lg:h-auto pt-28 max-h-[750px]:pt-20 lg:pt-4 px-0 lg:px-8 lg:px-16 flex flex-col-reverse lg:flex-row items-center justify-end lg:justify-center gap-auto lg:gap-20 z-10 overflow-hidden lg:overflow-visible max-h-[750px]:h-auto max-h-[750px]:overflow-y-auto max-h-[750px]:pb-20"
+    >
+      <!-- Background Effect -->
+      <div class="absolute inset-0 z-0">
+        <picture>
+          <source media="(max-width: 1023px)" srcset={mobileBannerImg} />
+          <img src={bannerImg} alt="" class="w-full h-full object-cover" />
+        </picture>
+      </div>
+
+      <!-- Helper Icons (Mobile Only) -->
+      <div
+        class="absolute inset-x-0 bottom-0 top-0 z-20 pointer-events-none lg:hidden overflow-hidden"
+      >
+        <!-- Heart Icon (Left) - Overlapping phone, blurred -->
+        <img
+          src={heartIcon}
+          alt=""
+          class="absolute top-[70%] max-h-[750px]:top-[65%] left-[-0px] w-20 h-auto blur-[1.9px] scale-100"
+        />
+
+        <!-- Dollar Icon (Bottom Right) - Blurred -->
+        <img
+          src={dollarIcon}
+          alt=""
+          class="absolute bottom-[-20px] right-[-20px] w-20 z-5 h-auto blur-[3px] scale-190"
+        />
+
+        <!-- Overlay for Phone & Icons -->
+        <img
+          src="/images/phone-overlay.png"
+          alt=""
+          class="absolute bottom-[-0px] left-1/2 -translate-x-1/2 w-[150%] max-w-[600px] h-auto z-10 pointer-events-none mix-blend-screen"
+        />
+
+        <!-- Mobile Buttons (Moved here for z-index visibility) -->
+        <div
+          class="absolute bottom-[5%] max-h-[750px]:bottom-[2%] left-0 right-0 flex flex-col items-center gap-[8px] lg:hidden z-30 pointer-events-auto"
+        >
+          <a
+            href="#"
+            class="apps-store-btn w-[238px] h-[30px] !bg-black/90 !border-white/20 !backdrop-blur-xl"
+            aria-label="Download on the App Store"
+          >
+            <img
+              src="/images/app-store-badge.svg"
+              alt="Download on the App Store"
+              class="h-[12px]"
+            />
+          </a>
+          <a
+            href="#"
+            class="apps-store-btn w-[238px] h-[30px] !bg-black/90 !border-white/20 !backdrop-blur-xl"
+            aria-label="Get it on Google Play"
+          >
+            <img
+              src="/images/google-play-badge.svg"
+              alt="Get it on Google Play"
+              class="h-[12px]"
+            />
+          </a>
+        </div>
+      </div>
+
+      <!-- Left Content: Smartphone -->
+      <div
+        class="relative z-10 w-full flex flex-col items-center justify-end h-full lg:h-auto lg:justify-center mb-[-230px] max-h-[750px]:mb-[-50px] lg:mb-0 transform scale-y-100 origin-bottom phone-detail-container"
+      >
+        <div
+          class="relative w-[110%] max-h-[750px]:w-[110%] lg:w-full lg:max-w-[650px] lg:mt-20"
+        >
+          <img
+            src={phoneImg}
+            alt="Apps Interface"
+            class="w-full h-auto drop-shadow-2xl"
+            transition:name="phone-morph"
+          />
+        </div>
+      </div>
+
+      <!-- Right Content: Text & Buttons -->
+      <div
+        class="relative z-10 w-full lg:max-w-[750px] text-white flex flex-col items-center lg:items-start lg:ml-1 mr-0 lg:mr-20 mt-[30px] max-h-[750px]:mt-6 lg:mt-0 text-left lg:text-left px-6 lg:px-0"
+      >
+        <h1 class="mb-6 tracking-tight text-white apps-heading">
+          <span>A universe of apps, without filling your memory.</span>
+        </h1>
+
+        <p
+          class="mb-8 w-[249px] lg:w-full max-w-[732px] text-white"
+          style="font-family: 'Neometric', sans-serif; font-size: clamp(18px, 3vw, 32px); line-height: 1.34; font-weight: 600; letter-spacing: -0.04em;"
+        >
+          <span
+            >You no longer need 10 downloads. Everything lives within the
+            ecosystem: request a ride, book your hotel, order food or watch
+            streaming, all without leaving.</span
+          >
+        </p>
+
+        <!-- Features List -->
+        <ul
+          class="space-y-1 lg:space-y-3 mb-10 w-[259px] lg:w-full lg:max-w-[743px] flex flex-col items-start lg:items-start pl-0 lg:pl-2 apps-list"
+        >
+          <li class="flex items-center gap-3 text-white">
+            <span class="text-white text-xl lg:hidden">•</span>
+            <span class="text-[#4F46E5] text-xl hidden lg:inline">✓</span>
+            <span>Delivery, transport, reservations</span>
+          </li>
+          <li class="flex items-center gap-3 text-white">
+            <span class="text-white text-xl lg:hidden">•</span>
+            <span class="text-[#4F46E5] text-xl hidden lg:inline">✓</span>
+            <span>Mini-apps without extra downloads</span>
+          </li>
+          <li class="flex items-center gap-3 text-white">
+            <span class="text-white text-xl lg:hidden">•</span>
+            <span class="text-[#4F46E5] text-xl hidden lg:inline">✓</span>
+            <span>Integration with instant payments</span>
+          </li>
+          <li class="flex items-center gap-3 text-white">
+            <span class="text-white text-xl lg:hidden">•</span>
+            <span class="text-[#4F46E5] text-xl hidden lg:inline">✓</span>
+            <span>Optimized experience according to your country</span>
+          </li>
+        </ul>
+
+        <!-- Download Buttons -->
+        <!-- Center buttons as requested: md:items-center now -->
+        <div
+          class="apps-badges w-full hidden lg:flex flex-col items-center lg:items-center gap-6"
+        >
+          <a
+            href="#"
+            class="apps-store-btn"
+            aria-label="Download on the App Store"
+          >
+            <img
+              src="/images/app-store-badge.svg"
+              alt="Download on the App Store"
+            />
+          </a>
+          <a href="#" class="apps-store-btn" aria-label="Get it on Google Play">
+            <img
+              src="/images/google-play-badge.svg"
+              alt="Get it on Google Play"
+            />
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Back Arrow Icon -->
+    <a
+      href="/app"
+      class="back-arrow hidden lg:inline-flex absolute lg:top-[180px] left-4 font-bold lg:left-48 z-[1001] text-white hover:text-[#4F46E5] transition-colors p-3 border border-transparent hover:border-[#4F46E5]/50 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M19 12H5M12 19L5 12L12 5"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </a>
+  </div>
+</Layout>
+
+<script>
+  // Detect back arrow clicks
+  document.addEventListener("click", (e) => {
+    const backArrow = (e.target as HTMLElement).closest(".back-arrow");
+    if (backArrow) {
+      document.documentElement.setAttribute("data-nav-back", "true");
+
+      // Disable image transition specifically for back navigation
+      const phoneImg = document.querySelector(".phone-detail-container img");
+      if (phoneImg) {
+        (phoneImg as HTMLElement).style.viewTransitionName = "none";
+      }
+    }
+  });
+</script>
+
+<style>
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(200%);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 1.5s infinite;
+  }
+
+  .store-btn {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Apps Buttons Styles */
+  @keyframes blink-shadow {
+    0%,
+    100% {
+      box-shadow:
+        0 4px 14px rgba(38, 4, 209, 0.7),
+        0 -4px 14px rgba(25, 41, 255, 0.9);
+    }
+    50% {
+      box-shadow:
+        0 4px 25px rgba(38, 4, 209, 1),
+        0 -4px 25px rgba(25, 41, 255, 1);
+    }
+  }
+
+  .apps-store-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 238px;
+    height: 30px;
+    padding: 0 18px;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50px;
+    box-shadow:
+      0 4px 14px rgba(38, 4, 209, 0.7),
+      0 -4px 14px rgba(25, 41, 255, 0.9);
+    text-decoration: none;
+    transition: transform 0.2s;
+    animation: blink-shadow 2s infinite;
+  }
+
+  .apps-store-btn:active {
+    transform: scale(1.05);
+    animation: none; /* Stop blinking on hover */
+    box-shadow: 0 6px 20px rgba(55, 27, 190, 0.8);
+  }
+
+  .apps-store-btn img {
+    height: 12px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  /* Apps Heading */
+  .apps-heading {
+    width: 249px;
+    font-family: "OPTIFuturaDemiBold", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .apps-store-btn {
+      width: 250px;
+      height: 70px;
+    }
+    .apps-store-btn img {
+      height: 50px;
+    }
+
+    .apps-heading {
+      width: 100%;
+      font-family: "OPTIFutura-ExtraBlackCond", sans-serif;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1.1;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+  }
+</style>

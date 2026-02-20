@@ -1,0 +1,156 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = "/" } = Astro.props;
+
+const navItems = [
+  { label: "Inicio", href: "/" },
+  { label: "Chat", href: "/chat" },
+  { label: "Wallet", href: "/wallet" },
+  { label: "Marketplace", href: "/marketplace" },
+  { label: "Apps", href: "/apps" },
+  { label: "Nutrición", href: "/nutrition" },
+  { label: "Comunidad", href: "/communities" },
+  { label: "Música", href: "/musica" },
+  { label: "Salud Mental", href: "/salud-mental" },
+  { label: "Finanzas", href: "/finance" },
+  { label: "Sobre nosotros", href: "/sobre-nosotros" },
+  { label: "Contacto", href: "/contacto" },
+];
+
+const languages = [
+  { label: "English", code: "en" },
+  { label: "Español", code: "es", active: true },
+];
+---
+
+<nav class="relative flex items-center gap-8">
+  <!-- Main Navigation -->
+  <ul class="hidden min-[900px]:flex items-center gap-1">
+    {
+      navItems.map((item, index) => (
+        <li>
+          <a
+            href={item.href}
+            class:list={[
+              "px-2 py-2 text-xs font-normal transition-colors duration-300 whitespace-nowrap",
+              currentPath === item.href ? "text-white border-b-2 border-white" : "text-white/70 hover:text-white",
+              `stagger-${index + 1}`,
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <!-- Mobile Menu Button -->
+  <button
+    id="mobile-menu-btn"
+    class="min-[900px]:hidden p-2 rounded-lg text-white hover:bg-white/10 transition-colors"
+    aria-label="Abrir menú"
+  >
+    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+  </button>
+
+  <!-- Mobile Menu Dropdown -->
+  <div
+    id="mobile-menu"
+    class="absolute top-full right-[-60px] mt-2 w-56 hidden origin-top-right z-50"
+  >
+    <div class="bg-[#13045D]/100 rounded-2xl w-40 p-2 animate-menu-pop">
+      <ul class="flex flex-col w-full">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  "flex items-center w-full px-4 py-2 text-sm font-[16px] rounded-xl transition-colors",
+                  "text-white/90 hover:bg-white/10 hover:text-white",
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const initNavigationMenu = () => {
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const closeMenuBtn = document.getElementById("close-menu-btn");
+
+    if (!mobileMenuBtn || !mobileMenu) return;
+
+    const toggleMenu = (e: Event) => {
+      e.stopPropagation();
+      mobileMenu.classList.toggle("hidden");
+    };
+
+    const closeMenu = () => {
+      if (!mobileMenu.classList.contains("hidden")) {
+        mobileMenu.classList.add("hidden");
+        document.body.style.overflow = "";
+      }
+    };
+
+    // Remove existing listeners to prevent duplicates (optional but safe)
+    mobileMenuBtn.onclick = null;
+    if (closeMenuBtn) closeMenuBtn.onclick = null;
+
+    mobileMenuBtn.addEventListener("click", toggleMenu);
+
+    if (closeMenuBtn) {
+      closeMenuBtn.addEventListener("click", closeMenu);
+    }
+
+    // Close on link click
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    // Close on click outside
+    document.addEventListener("click", (event) => {
+      if (
+        !mobileMenu.contains(event.target as Node) &&
+        !mobileMenuBtn.contains(event.target as Node)
+      ) {
+        closeMenu();
+      }
+    });
+  };
+
+  document.addEventListener('astro:page-load', initNavigationMenu);
+</script>
+
+<style>
+  @keyframes menu-pop {
+    0% {
+      opacity: 0;
+      transform: scale(0.95) translateX(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateX(0);
+    }
+  }
+
+  .animate-menu-pop {
+    animation: menu-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+</style>

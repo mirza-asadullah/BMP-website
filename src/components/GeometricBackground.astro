@@ -1,0 +1,712 @@
+---
+import HeroHomeLeft from './hero/HeroHomeLeft.astro';
+
+interface Props {
+  variant?: 'welcome' | 'home';
+}
+
+const { variant = 'welcome' } = Astro.props;
+const heroDescription = 'Aquí no solo tienes una app. Tienes tu red sin complicaciones: escribe, compra, paga, explora y transforma tu día… con la claridad de Be Mind Power.';
+---
+
+<div class="hero-container" class:list={{ 'is-home': variant === 'home' }}>
+  <div class="hero-layer hero-layer-bg">
+    <div class="hero-bg-base"></div>
+    {variant === 'home' && (
+      <>
+        <video
+          id="geometric-bg-video"
+          class="hero-bg-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        >
+          <source src="https://pub-d1d8eb4932844ef19f969720eed8b94a.r2.dev/finance.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-bg-video-overlay"></div>
+      </>
+    )}
+    <div class="hero-glow"></div>
+  </div>
+
+  {variant === 'welcome' && (
+    <div class="hero-layer hero-layer-logo">
+      <div class="hero-logo-geometric">
+        <img src="/images/logos/Logo-bmp.svg" alt="BeMind Power Logo" />
+      </div>
+    </div>
+  )}
+
+  <div class="hero-layer hero-layer-content">
+    {variant === 'welcome' ? (
+      <>
+        <div class="hero-logo-text">
+          <img src="/images/LOGOBLANCO.svg" alt="BeMind Power" />
+        </div>
+        <h1 class="hero-title">Una experiencia sin precedentes</h1>
+        <p class="hero-description">{heroDescription}</p>
+        <div class="hero-store-buttons">
+          <a href="#" class="store-btn">
+            <img src="/images/app-store-badge.svg" alt="Download on App Store" />
+          </a>
+          <a href="#" class="store-btn">
+            <img src="/images/google-play-badge.svg" alt="Get it on Google Play" />
+          </a>
+        </div>
+      </>
+    ) : (
+      <div class="hero-home-wrap">
+        <!-- Capa trasera: slider (detrás del teléfono y del bloque izquierdo) -->
+        <div class="hero-home-slider-layer">
+          <div class="hero-home-slot">
+            <slot />
+          </div>
+        </div>
+        <!-- Capa delantera: bloque izquierdo + teléfono (encima del slider) -->
+        <div class="hero-home-overlay">
+          <HeroHomeLeft />
+          <div class="hero-home-phone-wrap">
+            <img src="/images/smartphonehome.png" alt="BeMind Power app" class="hero-home-smartphone" />
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+
+  {variant === 'welcome' && (
+    <div class="hero-layer hero-layer-icons">
+      <div class="hero-icon hero-icon-left-top">
+        <img src="/images/icono2.png" alt="" />
+      </div>
+      <div class="hero-icon hero-icon-right-top">
+        <img src="/images/icono2.png" alt="" />
+      </div>
+      <div class="hero-icon hero-icon-right-mid">
+        <img src="/images/icono5.png" alt="" />
+      </div>
+      <div class="hero-icon hero-icon-left-bottom">
+        <img src="/images/icono3.png" alt="" />
+      </div>
+    </div>
+  )}
+
+  {variant === 'welcome' && (
+    <div class="hero-layer hero-layer-phone">
+      <div class="hero-phone">
+        <img src="/images/telefono.png" alt="Teléfono BeMind" />
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  .hero-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 100dvh;
+    overflow: hidden;
+  }
+
+  .hero-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-layer-bg {
+    z-index: 1;
+  }
+
+  .hero-bg-base {
+    position: absolute;
+    inset: 0;
+    background-color: #000000;
+  }
+
+  .hero-bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    opacity: 0.85;
+  }
+
+  .hero-bg-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 2;
+  }
+
+  .hero-bg-video ~ .hero-glow {
+    z-index: 3;
+  }
+
+  /* Optimizaciones para móviles */
+  @media (max-width: 768px) {
+    .hero-bg-video {
+      width: 100vw;
+      height: 100vh;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(1284px, 150vw);
+    height: min(1284px, 150vw);
+    background: radial-gradient(
+      circle,
+      rgba(40, 54, 233, 0.89) 0%,
+      rgba(40, 54, 233, 0.5) 40%,
+      transparent 70%
+    );
+    filter: blur(198px);
+  }
+
+  .hero-layer-logo {
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hero-logo-geometric {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(590px, 50vw);
+  }
+
+  .hero-logo-geometric img {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-layer-content {
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 15vh;
+    pointer-events: none;
+  }
+
+  .hero-logo-text {
+    width: min(275px, 30vw);
+    margin-bottom: 2vh;
+    pointer-events: auto;
+  }
+
+  .hero-logo-text img {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-title {
+    color: #ffffff;
+    font-family: 'Neometric', 'Inter', sans-serif;
+    font-size: clamp(20px, 3vw, 32px);
+    font-weight: 400;
+    line-height: 1.8;
+    text-align: center;
+    margin: 0 0 1vh 0;
+    padding: 0 5vw;
+  }
+
+  .hero-description {
+    color: #ffffff;
+    font-family: 'Neometric', 'Inter', sans-serif;
+    font-size: clamp(14px, 1.5vw, 20px);
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    margin: 0 0 2vh 0;
+    padding: 0 5vw;
+    max-width: 817px;
+  }
+
+  .hero-store-buttons {
+    display: flex;
+    gap: 30px;
+    pointer-events: auto;
+  }
+
+  .store-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+    height: 65px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    box-shadow: 
+      0 0 25px 0px rgba(59, 130, 246, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .store-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 
+      0 0 35px 0px rgba(59, 130, 246, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .store-btn img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .hero-layer-icons {
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .hero-icon {
+    position: absolute;
+  }
+
+  .hero-icon img {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-icon-left-top {
+    left: 0;
+    top: 35%;
+    width: min(139px, 10vw);
+    filter: blur(16px);
+  }
+
+  .hero-icon-right-top {
+    right: 0;
+    top: 27%;
+    width: min(139px, 10vw);
+    filter: blur(16px);
+  }
+
+  .hero-icon-right-mid {
+    right: 0;
+    top: 54%;
+    width: min(174px, 12vw);
+  }
+
+  .hero-icon-left-bottom {
+    left: 0;
+    bottom: 0;
+    width: min(185px, 13vw);
+  }
+
+  .hero-layer-phone {
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .hero-phone {
+    position: absolute;
+    left: 50%;
+    bottom: -20%;
+    transform: translateX(-50%) rotate(-10deg);
+    width: min(450px, 35vw);
+  }
+
+  /* Variante home: layout según home1.pen frame "1" (1728×1117) */
+  .hero-container.is-home {
+    min-height: 100dvh;
+  }
+
+  .hero-container.is-home .hero-glow {
+    width: min(910px, 80vw);
+    height: min(910px, 80vw);
+  }
+
+  .hero-container.is-home .hero-layer-content {
+    display: block;
+    padding: 0;
+    pointer-events: auto;
+  }
+
+  /* home: slider detrás (z-index 1), overlay izquierda + teléfono encima (z-index 2) */
+  .hero-home-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Capa trasera: slider (detrás del teléfono y del bloque izquierdo) */
+  .hero-home-slider-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: min(467px, 41.8vh);
+    min-height: 380px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 12.2%;
+    box-sizing: border-box;
+  }
+
+  .hero-home-slider-layer .hero-home-slot {
+    width: 100%;
+    max-width: 1295px;
+    height: 100%;
+    min-height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .hero-home-slider-layer .hero-home-slot :global(.feature-slider) {
+    height: 100%;
+    min-height: 380px;
+    max-height: 467px;
+  }
+
+  .hero-home-slider-layer .hero-home-slot :global(.slider-container) {
+    height: 100%;
+    min-height: 380px;
+  }
+
+  /* Capa delantera: bloque izquierdo + teléfono (encima del slider) */
+  .hero-home-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    padding-top: max(100px, 10vh);
+    padding-left: 6.4%;
+    padding-right: 6.4%;
+    padding-bottom: 2vh;
+    max-width: 1728px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .hero-home-overlay :global(.hero-home-left),
+  .hero-home-phone-wrap {
+    pointer-events: auto;
+  }
+
+  .hero-home-phone-wrap {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin-top: 0;
+  }
+
+  .hero-home-smartphone {
+    width: min(579px, 33.5vw);
+    height: auto;
+    max-height: min(908px, 81.3vh);
+    object-fit: contain;
+    object-position: top right;
+  }
+
+  .hero-phone img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Tablet landscape */
+  @media (max-width: 1024px) {
+    .hero-home-slider-layer {
+      height: min(320px, 38vh);
+      min-height: 280px;
+      padding: 0 6%;
+    }
+
+    .hero-home-slider-layer .hero-home-slot,
+    .hero-home-slider-layer .hero-home-slot :global(.feature-slider),
+    .hero-home-slider-layer .hero-home-slot :global(.slider-container) {
+      min-height: 280px;
+    }
+
+    .hero-home-overlay {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: max(90px, 9vh);
+      padding-left: 5%;
+      padding-right: 5%;
+      padding-bottom: 2vh;
+    }
+
+    .hero-home-phone-wrap {
+      display: none;
+    }
+
+    .hero-home-overlay :global(.hero-home-left) {
+      max-width: 100%;
+      min-height: min(360px, 50vh);
+    }
+  }
+
+  /* Tablet portrait / móvil grande */
+  @media (max-width: 900px) {
+    .hero-home-overlay {
+      padding-top: max(80px, 8vh);
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+
+    .hero-home-slider-layer {
+      min-height: 260px;
+      padding: 0 5%;
+    }
+  }
+
+  /* tablet */
+  @media (max-width: 1024px) {
+    .hero-logo-geometric {
+      width: min(450px, 45vw);
+    }
+
+    .hero-glow {
+      width: min(900px, 130vw);
+      height: min(900px, 130vw);
+    }
+
+    .hero-phone {
+      width: min(400px, 40vw);
+      bottom: -18%;
+    }
+
+    .hero-layer-content {
+      padding-top: 12vh;
+    }
+
+    .store-btn {
+      width: 200px;
+      height: 58px;
+    }
+
+    .store-btn img {
+      height: 35px;
+    }
+  }
+
+  /* Móvil */
+  @media (max-width: 768px) {
+    .hero-home-slider-layer {
+      min-height: 240px;
+      padding: 0 4%;
+    }
+
+    .hero-home-slider-layer .hero-home-slot,
+    .hero-home-slider-layer .hero-home-slot :global(.feature-slider),
+    .hero-home-slider-layer .hero-home-slot :global(.slider-container) {
+      min-height: 240px;
+    }
+
+    .hero-home-overlay {
+      padding-top: max(72px, 8vh);
+      padding-left: 4%;
+      padding-right: 4%;
+      padding-bottom: 4vh;
+    }
+
+    .hero-home-overlay :global(.hero-home-left) {
+      text-align: center;
+      align-items: center;
+      max-width: 100%;
+      min-height: min(300px, 45vh);
+    }
+
+    .hero-home-overlay :global(.hero-home-left-content) {
+      align-items: center;
+    }
+
+    .hero-home-overlay :global(.hero-home-subtitle) {
+      text-align: center;
+    }
+
+    .hero-home-overlay :global(.hero-home-badges) {
+      align-items: center;
+    }
+  }
+
+  /* Móvil pequeño */
+  @media (max-width: 480px) {
+    .hero-home-overlay {
+      padding-top: max(64px, 7vh);
+      padding-left: 3%;
+      padding-right: 3%;
+      padding-bottom: 3vh;
+    }
+
+    .hero-home-slider-layer {
+      min-height: 200px;
+      padding: 0 3%;
+    }
+
+    .hero-home-slider-layer .hero-home-slot,
+    .hero-home-slider-layer .hero-home-slot :global(.feature-slider),
+    .hero-home-slider-layer .hero-home-slot :global(.slider-container) {
+      min-height: 200px;
+    }
+
+    .hero-home-overlay :global(.hero-home-left) {
+      min-height: min(280px, 42vh);
+    }
+  }
+
+  /* mobile grande */
+  @media (max-width: 768px) {
+    .hero-logo-geometric {
+      width: min(350px, 55vw);
+    }
+
+    .hero-glow {
+      width: min(700px, 150vw);
+      height: min(700px, 150vw);
+      filter: blur(100px);
+    }
+
+    .hero-layer-content {
+      padding-top: 12vh;
+    }
+
+    .hero-logo-text {
+      width: min(220px, 40vw);
+    }
+
+    .hero-title {
+      font-size: clamp(18px, 4vw, 28px);
+    }
+
+    .hero-description {
+      font-size: clamp(13px, 2.5vw, 18px);
+    }
+
+    .hero-store-buttons {
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .store-btn {
+      width: 200px;
+      height: 55px;
+    }
+
+    .store-btn img {
+      height: 32px;
+    }
+
+    .hero-phone {
+      width: min(320px, 50vw);
+      bottom: -15%;
+    }
+
+    .hero-icon {
+      display: none;
+    }
+  }
+
+  /* mobile */
+  @media (max-width: 480px) {
+    .hero-logo-geometric {
+      width: min(260px, 65vw);
+    }
+
+    .hero-glow {
+      width: min(500px, 180vw);
+      height: min(500px, 180vw);
+      filter: blur(60px);
+    }
+
+    .hero-layer-content {
+      padding-top: 10vh;
+    }
+
+    .hero-logo-text {
+      width: min(180px, 50vw);
+      margin-bottom: 2vh;
+    }
+
+    .hero-title {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .hero-description {
+      font-size: 14px;
+      padding: 0 8vw;
+    }
+
+    .store-btn {
+      width: 180px;
+      height: 50px;
+    }
+
+    .store-btn img {
+      height: 28px;
+    }
+
+    .hero-phone {
+      width: min(260px, 55vw);
+      bottom: -18%;
+    }
+  }
+</style>
+
+<script>
+  // Optimizar reproducción de video en geometric background
+  function initGeometricBgVideo(): void {
+    const video = document.getElementById('geometric-bg-video') as HTMLVideoElement;
+    if (!video) return;
+
+    const playVideo = () => {
+      video.play().catch(() => {
+        // Si falla autoplay, esperar interacción del usuario
+        document.addEventListener('touchstart', () => {
+          video.play();
+        }, { once: true });
+      });
+    };
+
+    if (video.readyState >= 2) {
+      playVideo();
+    } else {
+      video.addEventListener('loadeddata', playVideo, { once: true });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGeometricBgVideo);
+  } else {
+    initGeometricBgVideo();
+  }
+</script>

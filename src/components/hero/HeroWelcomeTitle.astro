@@ -1,0 +1,66 @@
+---
+// Título bienvenida
+interface Props {
+  text?: string;
+}
+
+const { text = "Te Damos La Bienvenida" } = Astro.props;
+---
+
+<div id="hero-title-line1" class="hero-welcome-title">{text}</div>
+
+<style>
+  .hero-welcome-title {
+    color: #ffffff;
+    font-family: 'OPTIFutura', 'Inter', sans-serif;
+    font-size: clamp(20px, 2.8vw, 42px);
+    font-weight: 800;
+    text-align: center;
+    margin: 0 0 clamp(8px, 1vh, 14px) 0;
+    padding: 0 5vw;
+
+    letter-spacing: clamp(1.2px, 0.12vw, 2px);
+  }
+
+  @media (min-width: 1440px) {
+    .hero-welcome-title {
+      font-size: clamp(28px, 3vw, 46px);
+      margin-bottom: clamp(10px, 1.1vh, 16px);
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .hero-welcome-title {
+      font-size: clamp(32px, 3.2vw, 52px);
+      margin-bottom: clamp(12px, 1.2vh, 18px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-welcome-title {
+      font-size: 34px;
+      line-height: 1.15;
+      letter-spacing: 1.1px;
+      margin-bottom: 1vh;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-welcome-title {
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: 0.9px;
+      margin-bottom: 1vh;
+    }
+  }
+
+  /* iPhone SE y pantallas muy pequeñas */
+  @media (max-width: 375px) {
+    .hero-welcome-title {
+      font-size: 26px;
+      line-height: 1.15;
+      letter-spacing: 0.7px;
+      margin-bottom: 1vh;
+    }
+  }
+</style>
