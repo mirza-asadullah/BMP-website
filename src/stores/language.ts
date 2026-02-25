@@ -6,19 +6,38 @@ export type Lang = 'es' | 'en' | 'pt' | 'zh' | 'ar';
 
 // Lista idiomas + metadata
 export const languages = [
-  { code: 'en', label: 'English', flag: '/images/flags/us.svg', dir: 'ltr' },
-  { code: 'es', label: 'Español', flag: '/images/flags/co.svg', dir: 'ltr' },
-  { code: 'pt', label: 'Português', flag: '/images/flags/br.svg', dir: 'ltr' },
-  { code: 'zh', label: '中文', flag: '/images/flags/cn.svg', dir: 'ltr' },
-  { code: 'ar', label: 'العربية', flag: '/images/flags/sa.svg', dir: 'rtl' }
+  { code: 'es', label: 'Español', flag: '/common/flags/co.svg', dir: 'ltr' },
+  { code: 'en', label: 'English', flag: '/common/flags/us.svg', dir: 'ltr' },
+  { code: 'pt', label: 'Português', flag: '/common/flags/br.svg', dir: 'ltr' },
+  { code: 'zh', label: '中文', flag: '/common/flags/cn.svg', dir: 'ltr' },
+  { code: 'ar', label: 'العربية', flag: '/common/flags/sa.svg', dir: 'ltr' }
 ] as const;
 
 // Traducciones
 const translations: Record<Lang, Record<string, string>> = {
   es: {
     'nav.home': 'Inicio',
+    'nav.chat': 'Chat',
+    'nav.wallet': 'Wallet',
+    'nav.marketplace': 'Marketplace',
+    'nav.apps': 'Apps',
+    'nav.nutrition': 'Nutrición',
+    'nav.communities': 'Comunidades',
+    'nav.musica': 'Música',
+    'nav.salud-mental': 'Salud Mental',
+    'nav.finance': 'Finanzas',
     'nav.about': 'Sobre nosotros',
     'nav.contact': 'Contacto',
+    'nav.features': 'Funcionalidades',
+    'about.title': 'Creemos en una vida digital<br />más simple.',
+    'about.subtitle': 'Construimos un ecosistema que conecta personas, negocios y servicios en una sola app.',
+    'about.description': 'Nuestro equipo está formado por creadores, ingenieros y diseñadores que comparten una misma visión: hacer que cada mensaje, pago o interacción sea más fácil y seguro.',
+    'contact.title': '¿Hablamos?',
+    'contact.subtitle': 'Queremos escucharte: tus preguntas,<br />ideas o propuestas.',
+    'contact.name': 'Nombre',
+    'contact.email': 'Correo electrónico',
+    'contact.message': 'Mensaje',
+    'contact.submit': 'Enviar',
     'skip': 'Omitir Intro',
     'menu.open': 'Abrir menú',
     'menu.close': 'Cerrar menú',
@@ -64,11 +83,65 @@ const translations: Record<Lang, Record<string, string>> = {
     'features.music.title': 'Música',
     'features.music.description': 'Tu soundtrack personalizado.',
     'features.music.cta': 'Escucha tu\nmúsica',
-    'home.hero.title': 'Todo empieza con una conversación',
-    'home.hero.titleLine1': 'Todo empieza',
-    'home.hero.titleLine2': 'con una conversación',
-    'home.hero.subtitle': 'Y desde ahí: paga, vende, sana o escucha música. Sin salir del chat.',
+    'home.hero.welcome': 'Te Damos La Bienvenida',
+    'home.hero.title': 'A una experiencia sin precedentes',
+    'home.hero.description': '<strong>Aquí no solo tienes una app.</strong> Tienes tu red sin complicaciones: escribe, compra, paga, explora y transforma tu día… con la claridad de <strong>Be Mind Power.</strong>',
     'home.hero.cta': 'Ver Más',
+    // Hero sections for each page
+    'chat.hero.titleLine1': 'Todo empieza',
+    'chat.hero.titleLine2': 'con una conversación',
+    'chat.hero.subtitle': 'Y desde ahí: paga, vende, sana o escucha música. Sin salir del chat.',
+    'chat.hero.cta': 'Ver Más',
+    'apps.hero.titleLine1': 'Una sola app',
+    'apps.hero.titleLine2': 'Cientos de soluciones',
+    'apps.hero.subtitle': 'Una sola puerta a cientos de soluciones. Accede a todas las apps que necesitas desde un solo lugar.',
+    'apps.hero.cta': 'Ver Más',
+    'marketplace.hero.titleLine1': 'Todo lo que quieras',
+    'marketplace.hero.titleLine2': 'en un solo mercado',
+    'marketplace.hero.subtitle': 'Desde productos locales hasta servicios digitales: todo en una sola comunidad.',
+    'marketplace.hero.cta': 'Ver Más',
+    'wallet.hero.titleLine1': 'Tu billetera',
+    'wallet.hero.titleLine2': 'en el bolsillo',
+    'wallet.hero.subtitle': 'Desde productos locales hasta servicios digitales: todo en una sola comunidad.',
+    'wallet.hero.cta': 'Ver Más',
+    'finance.hero.titleLine1': 'Finanzas inteligentes',
+    'finance.hero.titleLine2': 'decisiones poderosas',
+    'finance.hero.subtitle': 'Controla, proyecta y crece con inteligencia artificial.',
+    'finance.hero.cta': 'Ver Más',
+    'nutrition.hero.titleLine1': 'Nutrición inteligente',
+    'nutrition.hero.titleLine2': 'diseñada para ti',
+    'nutrition.hero.subtitle': 'Conecta tus dispositivos, recibe recetas personalizadas.',
+    'nutrition.hero.cta': 'Ver Más',
+    'communities.hero.titleLine1': 'Conecta',
+    'communities.hero.titleLine2': 'con tu comunidad',
+    'communities.hero.subtitle': 'Donde las ideas se convierten en conexiones reales.',
+    'communities.hero.cta': 'Ver Más',
+    'music.hero.titleLine1': 'La música que amas',
+    'music.hero.titleLine2': 'contigo',
+    'music.hero.subtitle': 'El ritmo de tu vida, en tus espacios.',
+    'music.hero.cta': 'Ver Más',
+    // Alias keys used by pages (musica, saludmental, salud, finanzas)
+    'musica.hero.titleLine1': 'La música vive',
+    'musica.hero.titleLine2': 'Escúchala y comparte.',
+    'musica.hero.subtitle': 'Tus canciones, tus playlists y nuevos descubrimientos. Todo en un solo lugar.',
+    'musica.hero.cta': 'Ver Más',
+    'saludmental.hero.titleLine1': 'Salud Mental',
+    'saludmental.hero.titleLine2': 'Tu bienestar importa',
+    'saludmental.hero.subtitle': 'Cuida tu mente con herramientas inteligentes y apoyo profesional.',
+    'saludmental.hero.cta': 'Ver Más',
+    'salud.hero.titleLine1': 'Tu salud',
+    'salud.hero.titleLine2': 'en tus manos',
+    'salud.hero.subtitle': 'Conecta tus dispositivos y monitorea tu bienestar.',
+    'salud.hero.cta': 'Ver Más',
+    'finanzas.hero.titleLine1': 'A.I. Finanzas',
+    'finanzas.hero.titleLine2': 'Tu asesor personal',
+    'finanzas.hero.subtitle': 'Gestión financiera inteligente y personalizada.',
+    'finanzas.hero.cta': 'Ver Más',
+    'health.hero.titleLine1': 'Encuentra calma',
+    'health.hero.titleLine2': 'cuando más la necesitas',
+    'health.hero.subtitle': 'Bienestar emocional con apoyo inteligente.',
+    'health.hero.cta': 'Ver Más',
+    // Detail pages
     'chat.detail.title': 'Imagina tu chat con superpoderes',
     'chat.detail.subtitle': 'No solo escribes: compartes fotos, llamas, mandas archivos y hasta dinero sin salir de la conversación.',
     'chat.detail.feature1': 'Chats privados y seguros',
@@ -94,18 +167,26 @@ const translations: Record<Lang, Record<string, string>> = {
     'apps.detail.feature3': 'Integración con pagos instantáneos',
 
     'apps.detail.feature4': 'Experiencia optimizada según tu país',
-    'nutrition.detail.title': 'Conecta tus dispositivos, recibe recetas.',
-    'nutrition.detail.subtitle': '',
-    'nutrition.detail.feature1': 'Recomendaciones según ingredientes que tienes',
+    "nutrition.detail.title": "Conecta tus dispositivos, recibe recetas.",
+    "nutrition.detail.subtitle": "Tecnología que cuida lo que comes.",
+    "nutrition.detail.feature1": "Recomendaciones según ingredientes que tienes",
     "nutrition.detail.feature2": "Compra lo que falta con un clic",
     "nutrition.detail.feature3": "Planes de alimentación saludables",
-    "nutrition.detail.feature4": "",
+    "nutrition.detail.feature4": "Consultas con expertos",
 
-    "communities.detail.title": "Tus decisiones, más inteligentes.",
-    "communities.detail.subtitle": "",
-    "communities.detail.feature1": "Asistente financiero automático",
-    "communities.detail.feature2": "Ahorros y metas personalizadas",
-    "communities.detail.feature3": "Reportes fáciles de entender",
+    "communities.detail.title": "Conéctate con tu comunidad.",
+    "communities.detail.subtitle": "Donde las ideas se convierten en conexiones reales.",
+    "communities.detail.feature1": "Grupos y foros temáticos",
+    "communities.detail.feature2": "Eventos y encuentros locales",
+    "communities.detail.feature3": "Colaboración en tiempo real",
+    "communities.detail.feature4": "Red de apoyo y crecimiento",
+
+    "finance.detail.title": "Tus decisiones, más inteligentes.",
+    "finance.detail.subtitle": "Gestión financiera inteligente y personalizada.",
+    "finance.detail.feature1": "Asistente financiero automático",
+    "finance.detail.feature2": "Ahorros y metas personalizadas",
+    "finance.detail.feature3": "Reportes fáciles de entender",
+    "finance.detail.feature4": "Control total de tus gastos",
 
     'health.detail.title': 'Encuentra calma cuando más la necesitas.',
     'health.detail.subtitle': '',
@@ -119,11 +200,44 @@ const translations: Record<Lang, Record<string, string>> = {
     'music.detail.feature2': 'Comparte música en tus chats',
     'music.detail.feature3': 'Playlists colaborativas',
     'music.detail.feature4': 'Integración con tus actividades diarias',
+    // Header titles for mobile
+    'chat.header.title': 'Todo empieza',
+    'wallet.header.title': 'Envía y recibe Dinero',
+    'marketplace.header.title': 'Compra y Vende',
+    'finance.header.title': 'Finanzas inteligentes',
+    'communities.header.title': 'Comunidades',
+    'musica.header.title': 'La música vive',
+    'nutrition.header.title': 'Vive saludable',
+    'saludmental.header.title': 'Salud mental',
+    'apps.header.title': 'Tips y herramientas',
   },
   en: {
+    'finanzas.hero.titleLine1': 'A.I. Finanzas',
+    'finanzas.hero.titleLine2': 'Tu asesor personal',
+    'finanzas.hero.subtitle': 'Gestión financiera inteligente y personalizada.',
+    'finanzas.hero.cta': 'Ver Más',
     'nav.home': 'Home',
+    'nav.chat': 'Chat',
+    'nav.wallet': 'Wallet',
+    'nav.marketplace': 'Marketplace',
+    'nav.apps': 'Apps',
+    'nav.nutrition': 'Nutrition',
+    'nav.communities': 'Communities',
+    'nav.musica': 'Music',
+    'nav.salud-mental': 'Mental Health',
+    'nav.finance': 'Finance',
     'nav.about': 'About us',
     'nav.contact': 'Contact',
+    'nav.features': 'Features',
+    'about.title': 'We believe in a simpler<br />digital life.',
+    'about.subtitle': 'We build an ecosystem that connects people, businesses and services in a single app.',
+    'about.description': 'Our team consists of creators, engineers and designers who share the same vision: making every message, payment or interaction easier and safer.',
+    'contact.title': 'Shall we talk?',
+    'contact.subtitle': 'We want to hear from you: your questions,<br />ideas or proposals.',
+    'contact.name': 'Name',
+    'contact.email': 'Email',
+    'contact.message': 'Message',
+    'contact.submit': 'Send',
     'skip': 'Skip Intro',
     'menu.open': 'Open menu',
     'menu.close': 'Close menu',
@@ -140,10 +254,10 @@ const translations: Record<Lang, Record<string, string>> = {
     'features.finance.description': 'Smart and personalized financial management.',
     'features.finance.cta': 'Manage your\nfinances',
     'features.wallet.title': 'Wallet',
-    'features.wallet.description': 'Your money, in your hands.  Administra. Envia. Protege',
+    'features.wallet.description': 'Your secure and connected digital wallet.',
     'features.wallet.cta': 'Discover your\nnew wallet',
     'features.chat.title': 'Chat',
-    'features.chat.description': 'Comunication segura, instantanea e inteligente.',
+    'features.chat.description': 'Secure, instant, and intelligent communication.',
     'features.chat.cta': 'Discover the\nnew chat',
     'chat.detail.title': 'Imagine your chat with superpowers',
     'chat.detail.subtitle': 'You don\'t just write: share photos, call, send files and even money without leaving the conversation.',
@@ -176,23 +290,19 @@ const translations: Record<Lang, Record<string, string>> = {
     'nutrition.detail.feature3': 'Healthy and easy recipes',
     'nutrition.detail.feature4': 'Expert consultations',
 
-    'health.detail.title': 'Find calm when you need it most.',
-    'health.detail.subtitle': '',
-    'health.detail.feature1': 'Meditation exercises',
-    'health.detail.feature2': '24/7 AI and professional support',
-    'health.detail.feature3': 'Daily content',
+    'communities.detail.title': 'Connect with your community.',
+    'communities.detail.subtitle': 'Where ideas turn into real connections.',
+    'communities.detail.feature1': 'Thematic groups and forums',
+    'communities.detail.feature2': 'Local events and meetups',
+    'communities.detail.feature3': 'Real-time collaboration',
+    'communities.detail.feature4': 'Support and growth network',
 
-    'music.detail.title': 'The music you love, with you',
-    'music.detail.subtitle': 'Listen, share and save your playlists. Share what is playing in your app with a single click',
-    'music.detail.feature1': 'Streaming songs and podcasts',
-    'music.detail.feature2': 'Share music in your chats',
-    'music.detail.feature3': 'Collaborative playlists',
-    'music.detail.feature4': 'Integration with your daily activities',
-
-    "communities.detail.title": "Conecta tus dispositivos, recibe recetas.",
-    "communities.detail.feature1": "Recomendaciones según ingredientes que tienes",
-    "communities.detail.feature2": "Compra lo que falta con un clic",
-    "communities.detail.feature3": "Planes de alimentación saludables",
+    'finance.detail.title': 'Your decisions, made smarter.',
+    'finance.detail.subtitle': 'Intelligent and personalized financial management.',
+    'finance.detail.feature1': 'Automatic financial assistant',
+    'finance.detail.feature2': 'Personalized savings and goals',
+    'finance.detail.feature3': 'Easy-to-understand reports',
+    'finance.detail.feature4': 'Total control of your expenses',
     'features.streaming.title': 'Streaming',
     'features.streaming.description': 'High-quality live content without interruptions.',
     'features.streaming.cta': 'Discover the\nnew streaming',
@@ -203,30 +313,109 @@ const translations: Record<Lang, Record<string, string>> = {
     'features.education.description': 'Learn and grow with personalized content.',
     'features.education.cta': 'Learn\nwith us',
     'features.marketplace.title': 'Marketplace',
-    'features.marketplace.description': 'Todo lo gue necesitas, sin salir del ecomsistema. Compra inteligence. Acceso global.',
+    'features.marketplace.description': 'Buy and sell securely in our global market.',
     'features.marketplace.cta': 'Explore the\nmarketplace',
     'features.apps.title': 'Apps',
-    'features.apps.description': 'Uno sola puerta a cientos de solution.',
+    'features.apps.description': 'A single gateway to hundreds of solutions.',
     'features.apps.cta': 'Experience\nour apps',
     'features.nutrition.title': 'Nutrition',
-    'features.nutrition.description': 'Alimentacion inteligente, disenada para ti, Tecnologia que cuida lo que comes.',
+    'features.nutrition.description': 'Smart nutrition for your well-being.',
     'features.nutrition.cta': 'Improve your\nnutrition',
     'features.communities.title': 'Communities',
-    'features.communities.description': 'Donede las ideas se convienten en conexiones reales. Habia, comparte y crece con otros.',
+    'features.communities.description': 'Connect with people like you.',
     'features.communities.cta': 'Join the\ncommunities',
     'features.music.title': 'Music',
-    'features.music.description': 'El ritmo de tu vida, en tus espacio. Escucha. Descubre. Vibra.',
+    'features.music.description': 'Your personalized soundtrack.',
     'features.music.cta': 'Listen to\nyour music',
-    'home.hero.title': 'It all starts with a conversation',
-    'home.hero.titleLine1': 'Todo empieza',
-    'home.hero.titleLine2': 'con una conversación',
-    'home.hero.subtitle': 'Y desde ahí: paga, vende, sana o escucha música.Sin salir del chat. ',
-    'home.hero.cta': 'Ver Más'
+    'home.hero.welcome': 'Welcome',
+    'home.hero.title': 'To an unprecedented experience',
+    'home.hero.description': '<strong>Here you don\'t just have an app.</strong> You have your network without complications: write, buy, pay, explore and transform your day... with the clarity of <strong>Be Mind Power.</strong>',
+    'home.hero.cta': 'Learn More',
+    // Hero sections for each page
+    'chat.hero.titleLine1': 'It all starts',
+    'chat.hero.titleLine2': 'with a conversation',
+    'chat.hero.subtitle': 'And from there: pay, sell, heal or listen to music. Without leaving the chat.',
+    'chat.hero.cta': 'Learn More',
+    'apps.hero.titleLine1': 'One app',
+    'apps.hero.titleLine2': 'Hundreds of solutions',
+    'apps.hero.subtitle': 'A single door to hundreds of solutions. Access all the apps you need from one place.',
+    'apps.hero.cta': 'Learn More',
+    'marketplace.hero.titleLine1': 'Everything you want',
+    'marketplace.hero.titleLine2': 'in one market',
+    'marketplace.hero.subtitle': 'From local products to digital services: everything in one community.',
+    'marketplace.hero.cta': 'Learn More',
+    'wallet.hero.titleLine1': 'Your wallet',
+    'wallet.hero.titleLine2': 'in your pocket',
+    'wallet.hero.subtitle': 'Send and receive money instantly. Your digital wallet, always with you.',
+    'wallet.hero.cta': 'Learn More',
+    'finance.hero.titleLine1': 'Smart finance',
+    'finance.hero.titleLine2': 'powerful decisions',
+    'finance.hero.subtitle': 'Control, project and grow with artificial intelligence.',
+    'finance.hero.cta': 'Learn More',
+    'nutrition.hero.titleLine1': 'Intelligent nutrition',
+    'nutrition.hero.titleLine2': 'designed for you',
+    'nutrition.hero.subtitle': 'Connect your devices, receive personalized recipes.',
+    'nutrition.hero.cta': 'Learn More',
+    'communities.hero.titleLine1': 'Connect',
+    'communities.hero.titleLine2': 'with your community',
+    'communities.hero.subtitle': 'Where ideas turn into real connections.',
+    'communities.hero.cta': 'Learn More',
+    'music.hero.titleLine1': 'The music you love',
+    'music.hero.titleLine2': 'with you',
+    'music.hero.subtitle': 'The rhythm of your life, in your spaces.',
+    'music.hero.cta': 'Learn More',
+    // Alias keys used by pages (musica, saludmental, salud, finanzas)
+    'musica.hero.titleLine1': 'Music lives',
+    'musica.hero.titleLine2': 'Listen and share.',
+    'musica.hero.subtitle': 'Your songs, your playlists and new discoveries. All in one place.',
+    'musica.hero.cta': 'Learn More',
+    'saludmental.hero.titleLine1': 'Mental Health',
+    'saludmental.hero.titleLine2': 'Your wellbeing matters',
+    'saludmental.hero.subtitle': 'Take care of your mind with intelligent tools and professional support.',
+    'saludmental.hero.cta': 'Learn More',
+    'salud.hero.titleLine1': 'Your health',
+    'salud.hero.titleLine2': 'in your hands',
+    'salud.hero.subtitle': 'Connect your devices and monitor your wellbeing.',
+    'salud.hero.cta': 'Learn More',
+    'health.hero.titleLine1': 'Find calm',
+    'health.hero.titleLine2': 'when you need it most',
+    'health.hero.subtitle': 'Emotional wellbeing with intelligent support.',
+    'health.hero.cta': 'Learn More',
+    // Header titles for mobile
+    'chat.header.title': 'It all starts',
+    'wallet.header.title': 'Send and receive Money',
+    'marketplace.header.title': 'Buy and Sell',
+    'finance.header.title': 'Smart finances',
+    'communities.header.title': 'Communities',
+    'musica.header.title': 'Music lives',
+    'nutrition.header.title': 'Live healthy',
+    'saludmental.header.title': 'Mental health',
+    'apps.header.title': 'Tips and tools',
   },
   pt: {
+
     'nav.home': 'Início',
+    'nav.chat': 'Chat',
+    'nav.wallet': 'Wallet',
+    'nav.marketplace': 'Marketplace',
+    'nav.apps': 'Apps',
+    'nav.nutrition': 'Nutrição',
+    'nav.communities': 'Comunidades',
+    'nav.musica': 'Música',
+    'nav.salud-mental': 'Saúde Mental',
+    'nav.finance': 'Finanças',
     'nav.about': 'Sobre nós',
     'nav.contact': 'Contato',
+    'nav.features': 'Recursos',
+    'about.title': 'Acreditamos em uma vida digital<br />mais simples.',
+    'about.subtitle': 'Construímos um ecossistema que conecta pessoas, negócios et serviços em um único aplicativo.',
+    'about.description': 'Nossa equipe é formada por criadores, engenheiros e designers que compartilham a mesma visão: tornar cada mensagem, pagamento ou interação mais fácil e segura.',
+    'contact.title': 'Vamos conversar?',
+    'contact.subtitle': 'Queremos ouvir você: suas perguntas,<br />ideias ou propostas.',
+    'contact.name': 'Nome',
+    'contact.email': 'E-mail',
+    'contact.message': 'Mensagem',
+    'contact.submit': 'Enviar',
     'skip': 'Pular Intro',
     'menu.open': 'Abrir menu',
     'menu.close': 'Fechar menu',
@@ -272,16 +461,151 @@ const translations: Record<Lang, Record<string, string>> = {
     'features.music.title': 'Música',
     'features.music.description': 'Sua trilha sonora personalizada.',
     'features.music.cta': 'Ouça sua\nmúsica',
-    'home.hero.title': 'Tudo começa com uma conversa',
-    'home.hero.titleLine1': 'Tudo começa',
-    'home.hero.titleLine2': 'com uma conversa',
-    'home.hero.subtitle': 'E a partir daí: pague, venda, cure ou ouça música. Sem sair do chat.',
-    'home.hero.cta': 'Ver mais'
+    'home.hero.welcome': 'Bem-vindo',
+    'home.hero.title': 'Para uma experiência sem precedentes',
+    'home.hero.description': '<strong>Aqui você não tem apenas um aplicativo.</strong> Você tem sua rede sem complicações: escreva, compre, pague, explore e transforme seu dia... com a clareza da <strong>Be Mind Power.</strong>',
+    'home.hero.cta': 'Ver mais',
+    // Hero sections for each page
+    'chat.hero.titleLine1': 'Tudo começa',
+    'chat.hero.titleLine2': 'com uma conversa',
+    'chat.hero.subtitle': 'E a partir daí: pague, venda, cure ou ouça música. Sem sair do chat.',
+    'chat.hero.cta': 'Ver mais',
+    'apps.hero.titleLine1': 'Um app',
+    'apps.hero.titleLine2': 'Centenas de soluções',
+    'apps.hero.subtitle': 'Uma porta para centenas de soluções. Acesse todos os aplicativos que você precisa em um só lugar.',
+    'apps.hero.cta': 'Ver mais',
+    'marketplace.hero.titleLine1': 'Tudo o que você quer',
+    'marketplace.hero.titleLine2': 'em um mercado',
+    'marketplace.hero.subtitle': 'De produtos locais a serviços digitais: tudo em uma comunidade.',
+    'marketplace.hero.cta': 'Ver mais',
+    'wallet.hero.titleLine1': 'Sua carteira',
+    'wallet.hero.titleLine2': 'no bolso',
+    'wallet.hero.subtitle': 'Envie e receba dinheiro instantaneamente. Sua carteira digital, sempre com você.',
+    'wallet.hero.cta': 'Ver mais',
+    'finance.hero.titleLine1': 'Finanças inteligentes',
+    'finance.hero.titleLine2': 'decisões poderosas',
+    'finance.hero.subtitle': 'Controle, projete e cresça com inteligência artificial.',
+    'finance.hero.cta': 'Ver mais',
+    'nutrition.hero.titleLine1': 'Nutrição inteligente',
+    'nutrition.hero.titleLine2': 'projetada para você',
+    'nutrition.hero.subtitle': 'Conecte seus dispositivos, receba receitas personalizadas.',
+    'nutrition.hero.cta': 'Ver mais',
+    'communities.hero.titleLine1': 'Conecte',
+    'communities.hero.titleLine2': 'com sua comunidade',
+    'communities.hero.subtitle': 'Onde ideias se transformam em conexões reais.',
+    'communities.hero.cta': 'Ver mais',
+    'music.hero.titleLine1': 'A música que você ama',
+    'music.hero.titleLine2': 'com você',
+    'music.hero.subtitle': 'O ritmo da sua vida, em seus espaços.',
+    'music.hero.cta': 'Ver mais',
+    // Alias keys used by pages (musica, saludmental, salud, finanzas)
+    'musica.hero.titleLine1': 'A música vive',
+    'musica.hero.titleLine2': 'Ouça e compartilhe.',
+    'musica.hero.subtitle': 'Suas músicas, suas playlists e novas descobertas. Tudo em um só lugar.',
+    'musica.hero.cta': 'Ver mais',
+    'saludmental.hero.titleLine1': 'Saúde Mental',
+    'saludmental.hero.titleLine2': 'Seu bem-estar importa',
+    'saludmental.hero.subtitle': 'Cuide da sua mente com ferramentas inteligentes e apoio profissional.',
+    'saludmental.hero.cta': 'Ver mais',
+    'salud.hero.titleLine1': 'Sua saúde',
+    'salud.hero.titleLine2': 'em suas mãos',
+    'salud.hero.subtitle': 'Conecte seus dispositivos e monitore seu bem-estar.',
+    'salud.hero.cta': 'Ver mais',
+    'finanzas.hero.titleLine1': 'A.I. Finanças',
+    'finanzas.hero.titleLine2': 'Seu consultor pessoal',
+    'finanzas.hero.subtitle': 'Gestão financeira inteligente e personalizada.',
+    'finanzas.hero.cta': 'Ver mais',
+    'health.hero.cta': 'Ver mais',
+    // Detail pages
+    'chat.detail.title': 'Imagine o seu chat com superpoderes',
+    'chat.detail.subtitle': 'Você não apenas escreve: compartilhe fotos, ligue, envie arquivos e até dinheiro sem sair da conversa.',
+    'chat.detail.feature1': 'Chats privados e seguros',
+    'chat.detail.feature2': 'Pagamentos no próprio chat',
+    'chat.detail.feature3': 'Chamadas e videochamadas HD',
+    'chat.detail.feature4': 'Grupos com milhares de membros',
+    'wallet.detail.title': 'Sua carteira no bolso, pronta em segundos.',
+    'wallet.detail.subtitle': 'Envie e receba dinheiro com um clique. Converta moedas, pague com QR ou recarregue sua conta a qualquer momento.',
+    'wallet.detail.feature1': 'Transferências instantâneas',
+    'wallet.detail.feature2': 'Pagamentos com QR e NFC',
+    'wallet.detail.feature3': 'Multimoeda (USD, EUR, COP, cripto)',
+    'wallet.detail.feature4': 'Transparência total nas taxas',
+    'marketplace.detail.title': 'Tudo o que você quer, em um único mercado.',
+    'marketplace.detail.subtitle': 'De um celular a comida em casa. Compre com confiança, com pagamentos rápidos e sem taxas ocultas.',
+    'marketplace.detail.feature1': 'Preços globais, entregas locais',
+    'marketplace.detail.feature2': 'Compre direto de um chat ou QR',
+    'marketplace.detail.feature3': 'Integração com Wallet multimoeda',
+    'marketplace.detail.feature4': 'Lojas e negócios na sua cidade',
+    'apps.detail.title': 'Um universo de apps, sem encher sua memória.',
+    'apps.detail.subtitle': 'Você não precisa mais de 10 downloads. Tudo vive dentro do ecossistema: peça um transporte, reserve seu hotel, peça comida ou assista streaming, tudo sem sair.',
+    'apps.detail.feature1': 'Delivery, transporte, reservas',
+    'apps.detail.feature2': 'Miniapps sem downloads extras',
+    'apps.detail.feature3': 'Integração com pagamentos instantâneos',
+    'apps.detail.feature4': 'Experiência otimizada de acordo com seu país',
+    'nutrition.detail.title': 'Nutrição inteligente, desenhada para você.',
+    'nutrition.detail.subtitle': 'Tecnologia que cuida do que você come.',
+    'nutrition.detail.feature1': 'Planos de refeições personalizados',
+    'nutrition.detail.feature2': 'Acompanhamento de calorias e macros',
+    'nutrition.detail.feature3': 'Receitas saudáveis e fáceis',
+    'nutrition.detail.feature4': 'Consultas com especialistas',
+    'communities.detail.title': 'Conecte-se com sua comunidade.',
+    'communities.detail.subtitle': 'Onde as ideias se transformam em conexões reais.',
+    'communities.detail.feature1': 'Grupos e fóruns temáticos',
+    'communities.detail.feature2': 'Eventos e encontros locais',
+    'communities.detail.feature3': 'Colaboração em tempo real',
+    'communities.detail.feature4': 'Rede de apoio e crescimento',
+    'finance.detail.title': 'Suas decisões, mais inteligentes.',
+    'finance.detail.subtitle': 'Gestão financeira inteligente e personalizada.',
+    'finance.detail.feature1': 'Assistente financeiro automático',
+    'finance.detail.feature2': 'Economias e metas personalizadas',
+    'finance.detail.feature3': 'Relatórios fáceis de entender',
+    'finance.detail.feature4': 'Controle total de seus gastos',
+    'health.detail.title': 'Encontre a calma quando mais precisar.',
+    'health.detail.subtitle': '',
+    'health.detail.feature1': 'Exercícios de meditação',
+    'health.detail.feature2': 'Apoio 24/7 com IA e profissionais',
+    'health.detail.feature3': 'Conteúdo para o dia a dia',
+    'music.detail.title': 'A música que você ama, com você',
+    'music.detail.feature1': 'Músicas e podcasts em streaming',
+    'music.detail.feature2': 'Compartilhe música em seus chats',
+    'music.detail.feature3': 'Playlists colaborativas',
+    'music.detail.feature4': 'Integração com suas atividades diárias',
+    // Header titles for mobile
+    'chat.header.title': 'Tudo começa',
+    'wallet.header.title': 'Envie e receba Dinheiro',
+    'marketplace.header.title': 'Compre e Venda',
+    'finance.header.title': 'Finanças inteligentes',
+    'communities.header.title': 'Comunidades',
+    'musica.header.title': 'A música vive',
+    'nutrition.header.title': 'Viva saudável',
+    'saludmental.header.title': 'Saúde mental',
+    'apps.header.title': 'Dicas e ferramentas',
   },
   zh: {
+    'finanzas.hero.titleLine1': 'A.I. 金融',
+    'finanzas.hero.titleLine2': '你的个人顾问',
+    'finanzas.hero.subtitle': '智能化个性化财务管理。',
     'nav.home': '首页',
+    'nav.chat': '聊天',
+    'nav.wallet': '钱包',
+    'nav.marketplace': '市场',
+    'nav.apps': '应用',
+    'nav.nutrition': '营养',
+    'nav.communities': '社区',
+    'nav.musica': '音乐',
+    'nav.salud-mental': '心理健康',
+    'nav.finance': '金融',
     'nav.about': '关于我们',
     'nav.contact': '联系我们',
+    'nav.features': '功能',
+    'about.title': '我们相信更简单的<br />数字生活。',
+    'about.subtitle': '我们构建了一个在单一应用程序中连接人、业务和服务的生态系统。',
+    'about.description': '我们的团队由创作者、工程师和设计师组成，他们有着共同的愿景：使每条消息、付款或交互变得更加轻松和安全。',
+    'contact.title': '我们要谈谈吗？',
+    'contact.subtitle': '我们想听听您的意见：您的问题、<br />想法或建议。',
+    'contact.name': '姓名',
+    'contact.email': '电子邮件',
+    'contact.message': '信息',
+    'contact.submit': '发送',
     'skip': '跳过介绍',
     'menu.open': '打开菜单',
     'menu.close': '关闭菜单',
@@ -327,16 +651,145 @@ const translations: Record<Lang, Record<string, string>> = {
     'features.music.title': '音乐',
     'features.music.description': '您的个性化音乐。',
     'features.music.cta': '听你的\n音乐',
-    'home.hero.title': '一切从对话开始',
-    'home.hero.titleLine1': '一切开始',
-    'home.hero.titleLine2': '于对话',
-    'home.hero.subtitle': '从这里：支付、出售、疗愈或听音乐。无需离开聊天。',
-    'home.hero.cta': '了解更多'
+    'home.hero.welcome': '欢迎',
+    'home.hero.title': '前所未有的体验',
+    'home.hero.description': '<strong>在这里，您不仅拥有一个应用程序。</strong> 您拥有一个无复杂性的网络：写作、购买、支付、探索并改变您的生活......带着 <strong>Be Mind Power 的清晰感。</strong>',
+    'home.hero.cta': '了解更多',
+    // Hero sections for each page
+    'chat.hero.titleLine1': '一切开始',
+    'chat.hero.titleLine2': '于对话',
+    'chat.hero.subtitle': '从这里：支付、出售、疗愈或听音乐。无需离开聊天。',
+    'chat.hero.cta': '了解更多',
+    'apps.hero.titleLine1': '一个应用',
+    'apps.hero.titleLine2': '数百种解决方案',
+    'apps.hero.subtitle': '通往数百种解决方案的大门。在一个地方访问所有您需要的应用。',
+    'apps.hero.cta': '了解更多',
+    'marketplace.hero.titleLine1': '您想要的一切',
+    'marketplace.hero.titleLine2': '在一个市场',
+    'marketplace.hero.subtitle': '从本地产品到数字服务：一切尽在一个社区。',
+    'marketplace.hero.cta': '了解更多',
+    'wallet.hero.titleLine1': '您的钱包',
+    'wallet.hero.titleLine2': '在您的口袋里',
+    'wallet.hero.subtitle': '即时发送和接收金钱。您的数字钱包，始终与您同在。',
+    'wallet.hero.cta': '了解更多',
+    'finance.hero.titleLine1': '智能金融',
+    'finance.hero.titleLine2': '强大决策',
+    'finance.hero.subtitle': '使用人工智能控制、预测和增长。',
+    'finance.hero.cta': '了解更多',
+    'nutrition.hero.titleLine1': '智能营养',
+    'nutrition.hero.titleLine2': '为您设计',
+    'nutrition.hero.subtitle': '连接您的设备，获取个性化食谱।',
+    'nutrition.hero.cta': '了解更多',
+    'communities.hero.titleLine1': '连接',
+    'communities.hero.titleLine2': '与您的社区',
+    'communities.hero.subtitle': '想法变成真实连接的地方。',
+    'communities.hero.cta': '了解更多',
+    'music.hero.titleLine1': '您喜爱的音乐',
+    'music.hero.titleLine2': '与您同在',
+    'music.hero.subtitle': '您生活的节奏，在您的空间。',
+    'music.hero.cta': '了解更多',
+    'health.hero.cta': '了解更多',
+    // Alias keys used by pages (musica, saludmental, salud, finanzas)
+    'musica.hero.titleLine1': '音乐直播',
+    'musica.hero.titleLine2': '聆听并分享',
+    'musica.hero.subtitle': '您的歌曲、您的播放列表和新发现。一切尽在一个地方。',
+    'musica.hero.cta': '了解更多',
+    'saludmental.hero.titleLine1': '心理健康',
+    'saludmental.hero.titleLine2': '您的健康至关重要',
+    'saludmental.hero.subtitle': '通过智能工具和专业支持关爱您的心灵。',
+    'saludmental.hero.cta': '了解更多',
+    'finanzas.hero.cta': '了解更多',
+    // Detail pages
+    'chat.detail.title': '想象你的聊天拥有超能力',
+    'chat.detail.subtitle': '你不只是在写字：无需离开对话即可分享照片、通话、发送文件甚至转账。',
+    'chat.detail.feature1': '私密且安全的聊天',
+    'chat.detail.feature2': '聊天内支付',
+    'chat.detail.feature3': '高清通话和视频通话',
+    'chat.detail.feature4': '拥有数千名成员的群组',
+    'wallet.detail.title': '你的钱包在口袋里，秒速就绪。',
+    'wallet.detail.subtitle': '点击即可收发资金。随时兑换货币、二维码支付或为账户充值。',
+    'wallet.detail.feature1': '即时转账',
+    'wallet.detail.feature2': '二维码和NFC支付',
+    'wallet.detail.feature3': '多货币支持（美元、欧元、比索、加密货币）',
+    'wallet.detail.feature4': '费用完全透明',
+    'marketplace.detail.title': '你想要的一切，尽在一个市场。',
+    'marketplace.detail.subtitle': '从手机到外卖。放心购买，快速支付，无隐藏费用。',
+    'marketplace.detail.feature1': '全球价格，本地配送',
+    'marketplace.detail.feature2': '直接从聊天或二维码购买',
+    'marketplace.detail.feature3': '与多货币钱包集成',
+    'marketplace.detail.feature4': '你所在城市的商店和业务',
+    'apps.detail.title': '应用宇宙，不占用你的内存。',
+    'apps.detail.subtitle': '你不再需要下载10个应用。一切都存在于生态系统中：叫车、订酒店、点餐或看直播，一切都无需离开。',
+    'apps.detail.feature1': '外卖、交通、预订',
+    'apps.detail.feature2': '无需额外下载的微应用',
+    'apps.detail.feature3': '与即时支付集成',
+    'apps.detail.feature4': '根据你所在国家优化的体验',
+    'nutrition.detail.title': '智能营养，为你设计。',
+    'nutrition.detail.subtitle': '关心你饮食的技术。',
+    'nutrition.detail.feature1': '个性化饮食计划',
+    'nutrition.detail.feature2': '卡路里和宏量营养素追踪',
+    'nutrition.detail.feature3': '健康且简单的食谱',
+    'nutrition.detail.feature4': '专家咨询',
+    'communities.detail.title': '与你的社区连接。',
+    'communities.detail.subtitle': '想法转化为真实连接的地方。',
+    'communities.detail.feature1': '主题小组和论坛',
+    'communities.detail.feature2': '本地活动和聚会',
+    'communities.detail.feature3': '实时协作',
+    'communities.detail.feature4': '支持和成长网络',
+    'finance.detail.title': '你的决策，更明智。',
+    'finance.detail.subtitle': '智能化个性化财务管理。',
+    'finance.detail.feature1': '自动财务助手',
+    'finance.detail.feature2': '个性化储蓄和目标',
+    'finance.detail.feature3': '易于理解的报告',
+    'finance.detail.feature4': '完全掌控你的开支',
+    'health.detail.title': '在最需要的时候找到平静。',
+    'health.detail.subtitle': '',
+    'health.detail.feature1': '冥想练习',
+    'health.detail.feature2': '24/7 AI和专业支持',
+    'health.detail.feature3': '日常内容',
+    'music.detail.title': '你喜爱的音乐，与你同在',
+    'music.detail.feature1': '流媒体音乐和播客',
+    'music.detail.feature2': '在聊天中分享音乐',
+    'music.detail.feature3': '协作播放列表',
+    'music.detail.feature4': '与你的日常活动集成',
+    // Header titles for mobile
+    'chat.header.title': '一切开始',
+    'wallet.header.title': '收发资金',
+    'marketplace.header.title': '买卖交易',
+    'finance.header.title': '智能财务',
+    'communities.header.title': '社区',
+    'musica.header.title': '音乐生活',
+    'nutrition.header.title': '健康生活',
+    'saludmental.header.title': '心理健康',
+    'apps.header.title': '技巧和工具',
   },
   ar: {
+    'finanzas.hero.titleLine1': 'A.I. المالية',
+    'finanzas.hero.titleLine2': 'المستشار الشخصي',
+    'finanzas.hero.subtitle': 'إدارة مالية ذكية وشخصية.',
+    'finanzas.hero.cta': 'تعلم المزيد',
     'nav.home': 'الرئيسية',
+    'nav.chat': 'الدردشة',
+    'nav.wallet': 'المحفظة',
+    'nav.marketplace': 'السوق',
+    'nav.apps': 'التطبيقات',
+    'nav.nutrition': 'التغذية',
+    'nav.communities': 'المجتمعات',
+    'nav.musica': 'الموسيقى',
+    'nav.salud-mental': 'الصحة النفسية',
+    'nav.finance': 'المالية',
     'nav.about': 'من نحن',
     'nav.contact': 'اتصل بنا',
+    'nav.features': 'المميزات',
+    'about.title': 'نحن نؤمن بحياة رقمية<br />أكثر بساطة.',
+    'about.subtitle': 'نحن نبني نظاماً يربط الأشخاص والشركات والخدمات في تطبيق واحد.',
+    'about.description': 'يتكون فريقنا من مبدعين ومهندسين ومصممين يتشاركون نفس الرؤية: جعل كل رسالة أو دفعة أو تفاعل أسهل وأكثر أماناً.',
+    'contact.title': 'هل نتحدث؟',
+    'contact.subtitle': 'نريد أن نسمع منك: أسئلتك،<br />أفكارك أو مقترحاتك.',
+    'contact.name': 'الاسم',
+    'contact.email': 'البريد الإلكتروني',
+    'contact.message': 'الرسالة',
+    'contact.submit': 'إرسال',
     'skip': 'تخطي المقدمة',
     'menu.open': 'فتح القائمة',
     'menu.close': 'إغلاق القائمة',
@@ -382,11 +835,115 @@ const translations: Record<Lang, Record<string, string>> = {
     'features.music.title': 'الموسيقى',
     'features.music.description': 'موسيقاك المخصصة.',
     'features.music.cta': 'استمع إلى\nموسيقاك',
-    'home.hero.title': 'كل شيء يبدأ بمحادثة',
-    'home.hero.titleLine1': 'كل شيء يبدأ',
-    'home.hero.titleLine2': 'بمحادثة',
-    'home.hero.subtitle': 'ومن هناك: ادفع، بع، عالج أو استمع للموسيقى. دون مغادرة الدردشة.',
-    'home.hero.cta': 'اعرض المزيد'
+    'home.hero.welcome': 'مرحباً بك',
+    'home.hero.title': 'لتجربة غير مسبوقة',
+    'home.hero.description': '<strong>هنا لا تمتلك تطبيقاً فحسب.</strong> لديك شبكتك دون تعقيدات: اكتب، اشترِ، ادفع، استكشف وحوّل يومك... بوضوح <strong>Be Mind Power.</strong>',
+    'home.hero.cta': 'اعرض المزيد',
+    // Hero sections for each page
+    'chat.hero.titleLine1': 'كل شيء يبدأ',
+    'chat.hero.titleLine2': 'بمحادثة',
+    'chat.hero.subtitle': 'ومن هناك: ادفع، بع، عالج أو استمع للموسيقى. دون مغادرة الدردشة.',
+    'chat.hero.cta': 'اعرض المزيد',
+    'apps.hero.titleLine1': 'تطبيق واحد',
+    'apps.hero.titleLine2': 'مئات الحلول',
+    'apps.hero.subtitle': 'باب واحد لمئات الحلول. الوصول إلى جميع التطبيقات التي تحتاجها من مكان واحد.',
+    'apps.hero.cta': 'اعرض المزيد',
+    'marketplace.hero.titleLine1': 'كل ما تريد',
+    'marketplace.hero.titleLine2': 'في سوق واحد',
+    'marketplace.hero.subtitle': 'من المنتجات المحلية إلى الخدمات الرقمية: كل شيء في مجتمع واحد.',
+    'marketplace.hero.cta': 'اعرض المزيد',
+    'wallet.hero.titleLine1': 'محفظتك',
+    'wallet.hero.titleLine2': 'في جيبك',
+    'wallet.hero.subtitle': 'أرسل واستقبل الأموال فوراً. محفظتك الرقمية، دائماً معك.',
+    'wallet.hero.cta': 'اعرض المزيد',
+    'finance.hero.titleLine1': 'مالية ذكية',
+    'finance.hero.titleLine2': 'قرارات قوية',
+    'finance.hero.subtitle': 'تحكم، توقع وانمو مع الذكاء الاصطناعي.',
+    'finance.hero.cta': 'اعرض المزيد',
+    'nutrition.hero.titleLine1': 'تغذية ذكية',
+    'nutrition.hero.titleLine2': 'مصممة لك',
+    'nutrition.hero.subtitle': 'اربط أجهزتك، واحصل على وصفات مخصصة.',
+    'nutrition.hero.cta': 'اعرض المزيد',
+    'communities.hero.titleLine1': 'اتصل',
+    'communities.hero.titleLine2': 'بمجتمعك',
+    'communities.hero.subtitle': 'حيث تتحول الأفكار إلى اتصالات حقيقية.',
+    'communities.hero.cta': 'اعرض المزيد',
+    'music.hero.titleLine1': 'الموسيقى التي تحبها',
+    'music.hero.titleLine2': 'معك',
+    'music.hero.subtitle': 'إيقاع حياتك، في مساحاتك.',
+    'health.hero.cta': 'اعرض المزيد',
+    // Alias keys used by pages (musica, saludmental, salud, finanzas)
+    'musica.hero.titleLine1': 'الموسيقى تعيش',
+    'musica.hero.titleLine2': 'استمع وشارك.',
+    'musica.hero.subtitle': 'أغانيك، قوائم التشغيل الخاصة بك واكتشافات جديدة. كل ذلك في مكان واحد.',
+    'musica.hero.cta': 'اعرض المزيد',
+    'saludmental.hero.titleLine1': 'الصحة النفسية',
+    'saludmental.hero.titleLine2': 'رفاهيتك تهمنا',
+    'saludmental.hero.subtitle': 'اعتنِ بعقلك باستخدام أدوات ذكية ودعم احترافي.',
+    'saludmental.hero.cta': 'اعرض المزيد',
+    // Detail pages
+    'chat.detail.title': 'تخيل دردشتك بقوى خارقة',
+    'chat.detail.subtitle': 'أنت لا تكتب فقط: شارك الصور، اتصل، أرسل الملفات وحتى الأموال دون مغادرة المحادثة.',
+    'chat.detail.feature1': 'دردشات خاصة وآمنة',
+    'chat.detail.feature2': 'الدفع داخل الدردشة نفسها',
+    'chat.detail.feature3': 'مكالمات ومكالمات فيديو عالية الدقة',
+    'chat.detail.feature4': 'مجموعات تضم آلاف الأعضاء',
+    'wallet.detail.title': 'محفظتك في جيبك، جاهزة في ثوانٍ.',
+    'wallet.detail.subtitle': 'أرسل واستقبل الأموال بنقرة واحدة. حول العملات، ادفع عبر QR، أو اشحن حسابك في أي وقت.',
+    'wallet.detail.feature1': 'تحويلات فورية',
+    'wallet.detail.feature2': 'دفعات عبر QR و NFC',
+    'wallet.detail.feature3': 'متعدد العملات (دولار، يورو، بيزو، كريبتو)',
+    'wallet.detail.feature4': 'شفافية كاملة في العمولات',
+    'marketplace.detail.title': 'كل ما تريده، في سوق واحد.',
+    'marketplace.detail.subtitle': 'من الهاتف الخلوي إلى توصيل الطعام. اشترِ بثقة، مع دفع سريع وبدون رسوم مخفية.',
+    'marketplace.detail.feature1': 'أسعار عالمية، تسليم محلي',
+    'marketplace.detail.feature2': 'اشترِ مباشرة من الدردشة أو QR',
+    'marketplace.detail.feature3': 'تكامل مع المحفظة متعددة العملات',
+    'marketplace.detail.feature4': 'متاجر وأعمال في مدينتك',
+    'apps.detail.title': 'عالم من التطبيقات، دون ملء ذاكرتك.',
+    'apps.detail.subtitle': 'لم تعد بحاجة إلى 10 تنزيلات. كل شيء يعيش داخل النظام: اطلب وسيلة نقل، احجز فندقك، اطلب الطعام أو شاهد البث المباشر، كل ذلك دون مغادرة.',
+    'apps.detail.feature1': 'توصيل، نقل، حجوزات',
+    'apps.detail.feature2': 'تطبيقات مصغرة بدون تنزيلات إضافية',
+    'apps.detail.feature3': 'تكامل مع الدفع الفوري',
+    'apps.detail.feature4': 'تجربة محسنة حسب بلدك',
+    'nutrition.detail.title': 'تغذية ذكية، مصممة لك.',
+    'nutrition.detail.subtitle': 'تكنولوجيا تهتم بما تأكله.',
+    'nutrition.detail.feature1': 'خطط وجبات مخصصة',
+    'nutrition.detail.feature2': 'تتبع السعرات الحرارية والعناصر الغذائية',
+    'nutrition.detail.feature3': 'وصفات صحية وسهلة',
+    'nutrition.detail.feature4': 'استشارات مع خبراء',
+    'communities.detail.title': 'تواصل مع مجتمعك.',
+    'communities.detail.subtitle': 'حيث تتحول الأفكار إلى اتصالات حقيقية.',
+    'communities.detail.feature1': 'مجموعات ومنتديات موضوعية',
+    'communities.detail.feature2': 'فعاليات ولقاءات محلية',
+    'communities.detail.feature3': 'تعاون في الوقت الفعلي',
+    'communities.detail.feature4': 'شبكة دعم ونمو',
+    'finance.detail.title': 'قراراتك، أكثر ذكاءً.',
+    'finance.detail.subtitle': 'إدارة مالية ذكية وشخصية.',
+    'finance.detail.feature1': 'مساعد مالي تلقائي',
+    'finance.detail.feature2': 'مدخرات وأهداف مخصصة',
+    'finance.detail.feature3': 'تقارير سهلة الفهم',
+    'finance.detail.feature4': 'تحكم كامل في نفقاتك',
+    'health.detail.title': 'اعثر على الهدوء عندما تحتاجه أكثر.',
+    'health.detail.subtitle': '',
+    'health.detail.feature1': 'تمارين التأمل',
+    'health.detail.feature2': 'دعم 24/7 مع الذكاء الاصطناعي والمحترفين',
+    'health.detail.feature3': 'محتوى يومي',
+    'music.detail.title': 'الموسيقى التي تحبها، معك',
+    'music.detail.feature1': 'أغاني وبودكاست عبر البث المباشر',
+    'music.detail.feature2': 'شارك الموسيقى في دردشاتك',
+    'music.detail.feature3': 'قوائم تشغيل تعاونية',
+    'music.detail.feature4': 'تكامل مع أنشطتك اليومية',
+    // Header titles for mobile
+    'chat.header.title': 'كل شيء يبدأ',
+    'wallet.header.title': 'أرسل واستلم المال',
+    'marketplace.header.title': 'اشترِ وبِع',
+    'finance.header.title': 'مالية ذكية',
+    'communities.header.title': 'المجتمعات',
+    'musica.header.title': 'الموسيقى تعيش',
+    'nutrition.header.title': 'عش بصحة',
+    'saludmental.header.title': 'الصحة النفسية',
+    'apps.header.title': 'نصائح وأدوات',
   }
 };
 
@@ -397,23 +954,13 @@ const isValidLang = (lang: string): lang is Lang => {
   return ['es', 'en', 'pt', 'zh', 'ar'].includes(lang);
 };
 
-// Detectar idioma del navegador
-const detectBrowserLang = (): Lang => {
-  if (typeof window === 'undefined') return 'en';
-  const browserLang = navigator.languages?.[0] || navigator.language || 'en';
-  const langCode = browserLang.toLowerCase().split('-')[0];
-
-  if (langCode === 'es') return 'es';
-  if (langCode === 'pt') return 'pt';
-  if (langCode === 'zh') return 'zh';
-  if (langCode === 'ar') return 'ar';
-  return 'en';
-};
-
 // Store persistente para el idioma
-export const $lang = persistentAtom<Lang>('lang', detectBrowserLang(), {
+export const $lang = persistentAtom<Lang>('bm_lang', 'es', {
   encode: (value) => value,
-  decode: (value) => (isValidLang(value) ? value : 'en')
+  decode: (value) => {
+    console.log('Decoding language from storage, value found:', value);
+    return isValidLang(value) ? value : 'es';
+  }
 });
 
 // Obtiene traducción
@@ -433,6 +980,7 @@ export const getCurrentLanguage = () => {
 
 // Acciones del store
 export const setLanguage = (lang: Lang): void => {
+  console.log('setLanguage called with:', lang);
   if (isValidLang(lang)) {
     $lang.set(lang);
     // Actualizar atributo lang del documento (sin cambiar dirección)
@@ -444,30 +992,106 @@ export const setLanguage = (lang: Lang): void => {
   }
 };
 
-// Inicialización (actualiza el DOM cuando el store cambia)
-if (typeof window !== 'undefined') {
-  // Suscribirse a cambios del idioma
-  $lang.subscribe((lang) => {
-    // Actualizar lang del documento (mantener siempre LTR)
-    document.documentElement.lang = lang;
-    document.documentElement.dir = 'ltr';
+// Función para aplicar traducciones a todos los elementos del DOM
+export const refreshTranslations = (lang: Lang = $lang.get()): void => {
+  if (typeof document === 'undefined') return;
 
-    // Actualizar todos los elementos con data-i18n
-    document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
-      const key = el.getAttribute('data-i18n');
-      if (key && translations[lang][key]) {
-        el.textContent = translations[lang][key];
-      }
-    });
+  console.log('[i18n] refreshTranslations called with lang:', lang);
 
-    // Actualizar opciones de idioma seleccionadas
-    document.querySelectorAll<HTMLElement>('[data-lang]').forEach((el) => {
-      const elLang = el.getAttribute('data-lang');
-      const isActive = elLang === lang;
-      el.setAttribute('aria-selected', String(isActive));
-    });
+  // Actualizar lang del documento
+  document.documentElement.lang = lang;
+  document.documentElement.dir = 'ltr';
 
-    // Emitir evento personalizado
-    window.dispatchEvent(new CustomEvent('languagechange', { detail: { lang } }));
+  // Actualizar elementos con data-i18n (texto plano)
+  document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    const fallback = el.getAttribute('data-fallback');
+
+    // Debug logging
+    if (el.id === 'mobile-page-title') {
+      console.log('Header title element found:', { key, lang, fallback, hasTranslation: !!(key && translations[lang]?.[key]) });
+    }
+
+    if (key && translations[lang] && translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    } else if (fallback) {
+      el.textContent = fallback;
+    }
+    // Reveal hidden elements after translation
+    if (el.classList.contains('opacity-0')) {
+      el.classList.remove('opacity-0');
+      el.classList.add('opacity-100');
+    }
   });
+
+  // Actualizar elementos con HTML
+  document.querySelectorAll<HTMLElement>('[data-i18n-html]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-html');
+    if (key && translations[lang] && translations[lang][key]) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+
+  // Actualizar placeholders
+  document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-i18n-placeholder]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (key && translations[lang] && translations[lang][key]) {
+      el.placeholder = translations[lang][key];
+    }
+  });
+
+  // Actualizar opciones de idioma seleccionadas (aria-selected)
+  document.querySelectorAll<HTMLElement>('[data-lang]').forEach((el) => {
+    const elLang = el.getAttribute('data-lang');
+    el.setAttribute('aria-selected', String(elLang === lang));
+  });
+
+  // Emitir evento personalizado para otros componentes
+  window.dispatchEvent(new CustomEvent('languagechange', { detail: { lang } }));
+};
+
+// Inicialización global
+if (typeof window !== 'undefined') {
+  // Expose translations to window for early inline scripts
+  // @ts-ignore
+  window.__bmTranslations = translations;
+
+  // Suscribirse a cambios del store para re-traducir dinámicamente
+  $lang.subscribe((lang) => {
+    console.log('[i18n] $lang.subscribe fired with:', lang);
+    refreshTranslations(lang);
+  });
+
+  // IMPORTANTE: Re-traducir al cargar cada pág (necesario para View Transitions)
+  document.addEventListener('astro:page-load', () => {
+    console.log('[i18n] astro:page-load fired, current lang:', $lang.get());
+    refreshTranslations();
+  });
+
+  // Helper global para elementos inyectados dinámicamente después del load
+  // @ts-ignore
+  window.__translateElement = (el: HTMLElement) => {
+    const lang = $lang.get();
+    const key = el.getAttribute('data-i18n');
+    const htmlKey = el.getAttribute('data-i18n-html');
+    const placeholderKey = el.getAttribute('data-i18n-placeholder');
+
+    if (key && translations[lang]?.[key]) {
+      el.textContent = translations[lang][key];
+    } else if (key && translations.en[key]) {
+      el.textContent = translations.en[key];
+    }
+
+    if (htmlKey && translations[lang]?.[htmlKey]) {
+      el.innerHTML = translations[lang][htmlKey];
+    } else if (htmlKey && translations.en[htmlKey]) {
+      el.innerHTML = translations.en[htmlKey];
+    }
+
+    if (placeholderKey && translations[lang]?.[placeholderKey]) {
+      (el as HTMLInputElement).placeholder = translations[lang][placeholderKey];
+    } else if (placeholderKey && translations.en[placeholderKey]) {
+      (el as HTMLInputElement).placeholder = translations.en[placeholderKey];
+    }
+  };
 }

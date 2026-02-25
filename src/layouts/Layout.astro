@@ -1,6 +1,6 @@
 ---
-import '../styles/global.css';
-import { ViewTransitions } from 'astro:transitions';
+import "../styles/global.css";
+import { ViewTransitions } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -8,7 +8,7 @@ interface Props {
   bodyClass?: string;
 }
 
-const { title, description = 'BeMind Power', bodyClass = '' } = Astro.props;
+const { title, description = "BeMind Power", bodyClass = "" } = Astro.props;
 ---
 
 <!doctype html>
@@ -23,50 +23,127 @@ const { title, description = 'BeMind Power', bodyClass = '' } = Astro.props;
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/common/icons/common/icons/favicon-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="/common/icons/common/icons/favicon.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/common/icons/common/icons/apple-touch-icon.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Preload critical slider assets -->
-    <link rel="preload" href="/asad/s1.png" as="image" />
-    <link rel="preload" href="/asad/s2.png" as="image" />
-    <link rel="preload" href="/asad/s3.png" as="image" />
-    <link rel="preload" href="/asad/s4.png" as="image" />
-    <link rel="preload" href="/asad/s5.png" as="image" />
-    <link rel="preload" href="/asad/s6.png" as="image" />
-    <link rel="preload" href="/asad/s7.png" as="image" />
-    <link rel="preload" href="/asad/s8.png" as="image" />
-    <link rel="preload" href="/asad/s9.png" as="image" />
-    <link rel="preload" href="/asad/an1.mp4" as="video" />
-    <link rel="preload" href="/asad/an2.mp4" as="video" />
-    <link rel="preload" href="/asad/an3.mp4" as="video" />
-    <link rel="preload" href="/asad/an4.mp4" as="video" />
-    <link rel="preload" href="/asad/an5.mp4" as="video" />
-    <link rel="preload" href="/asad/an6.mp4" as="video" />
-    <link rel="preload" href="/asad/an7.mp4" as="video" />
-    <link rel="preload" href="/asad/an8.mp4" as="video" />
-    <link rel="preload" href="/asad/an9.mp4" as="video" />
-    
+    <link rel="preload" href="/sliderImages/s1.png" as="image" />
+    <link rel="preload" href="/sliderImages/s2.png" as="image" />
+    <link rel="preload" href="/sliderImages/s3.png" as="image" />
+    <link rel="preload" href="/sliderImages/s4.png" as="image" />
+    <link rel="preload" href="/sliderImages/s5.png" as="image" />
+    <link rel="preload" href="/sliderImages/s6.png" as="image" />
+    <link rel="preload" href="/sliderImages/s7.png" as="image" />
+    <link rel="preload" href="/sliderImages/s8.png" as="image" />
+    <link rel="preload" href="/sliderImages/s9.png" as="image" />
+    <link rel="preload" href="/vedioes/an1.mp4" as="video" />
+    <link rel="preload" href="/vedioes/an2.mp4" as="video" />
+    <link rel="preload" href="/vedioes/an3.mp4" as="video" />
+    <link rel="preload" href="/vedioes/an4.mp4" as="video" />
+    <link rel="preload" href="/vedioes/an5.mp4" as="video" />
+    <link rel="preload" href="/vedioes/an6.mp4" as="video" />
+    <link rel="preload" href="/vedioes/an7.mp4" as="video" />
+    <link rel="preload" href="/vedioes/an8.mp4" as="video" />
+    <link rel="preload" href="/vedioes/an9.mp4" as="video" />
+
     <!-- Preload slider card images -->
-    <link rel="preload" href="/images/Chat.svg" as="image" type="image/svg+xml" />
-    <link rel="preload" href="/images/wallet.svg" as="image" type="image/svg+xml" />
-    <link rel="preload" href="/images/marketplace.svg" as="image" type="image/svg+xml" />
-    <link rel="preload" href="/images/apps.svg" as="image" type="image/svg+xml" />
-    <link rel="preload" href="/images/nutrition.svg" as="image" type="image/svg+xml" />
-    <link rel="preload" href="/images/Community.svg" as="image" type="image/svg+xml" />
-    <link rel="preload" href="/images/musica.svg" as="image" type="image/svg+xml" />
-    <link rel="preload" href="/images/mental.svg" as="image" type="image/svg+xml" />
-    <link rel="preload" href="/images/AiFinanzas.svg" as="image" type="image/svg+xml" />
-    <link rel="preload" href="/images/logohorizontal.svg" as="image" type="image/svg+xml" />
-    <link rel="preload" href="/images/vignette-left.svg" as="image" type="image/svg+xml" />
-    <link rel="preload" href="/images/vignette-right.svg" as="image" type="image/svg+xml" />
-    
+    <link
+      rel="preload"
+      href="/detailPageImages/Chat.svg"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="preload"
+      href="/detailPageImages/wallet.svg"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="preload"
+      href="/detailPageImages/marketplace.svg"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="preload"
+      href="/detailPageImages/apps.svg"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="preload"
+      href="/detailPageImages/nutrition.svg"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="preload"
+      href="/detailPageImages/Community.svg"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="preload"
+      href="/detailPageImages/musica.svg"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="preload"
+      href="/detailPageImages/mental.svg"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="preload"
+      href="/detailPageImages/AiFinanzas.svg"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="preload"
+      href="/detailPageImages/logohorizontal.svg"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="preload"
+      href="/detailPageImages/vignette-left.svg"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="preload"
+      href="/detailPageImages/vignette-right.svg"
+      as="image"
+      type="image/svg+xml"
+    />
+
     <ViewTransitions />
     <title>{title}</title>
-    
+
     <style is:global>
       /* Custom view transition animations for phone-morph */
       ::view-transition-old(phone-morph),
@@ -93,50 +170,64 @@ const { title, description = 'BeMind Power', bodyClass = '' } = Astro.props;
       }
 
       @keyframes slideOutLeft {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(-100px); opacity: 0; }
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(-100px);
+          opacity: 0;
+        }
       }
 
       @keyframes slideInFromRight {
-        from { transform: translateX(100px); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
+        from {
+          transform: translateX(100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
       }
     </style>
   </head>
   <body class={bodyClass}>
     <slot />
-    
+
     <!-- SupportButton removed: floating support button hidden globally -->
-    
+
     <script>
       // Importar stores para inicializarlos
-      import '../stores/language';
-      import '../stores/menu';
+      import "../stores/language";
+      import "../stores/menu";
     </script>
 
     <script>
       // Global navigation direction detection for view transitions
-      document.addEventListener('astro:before-preparation', (event) => {
+      document.addEventListener("astro:before-preparation", (event) => {
         const targetUrl = new URL(event.to);
         const currentUrl = new URL(event.from);
-        
+
         // Check if navigating back (from any details page to its parent)
-        const isBackNavigation = 
-          (currentUrl.pathname.includes('/details') && !targetUrl.pathname.includes('/details')) ||
-          (currentUrl.pathname.split('/').length > targetUrl.pathname.split('/').length);
-        
+        const isBackNavigation =
+          (currentUrl.pathname.includes("/details") &&
+            !targetUrl.pathname.includes("/details")) ||
+          currentUrl.pathname.split("/").length >
+            targetUrl.pathname.split("/").length;
+
         if (isBackNavigation) {
-          document.documentElement.setAttribute('data-nav-back', 'true');
+          document.documentElement.setAttribute("data-nav-back", "true");
         } else {
-          document.documentElement.removeAttribute('data-nav-back');
+          document.documentElement.removeAttribute("data-nav-back");
         }
       });
 
       // Clean up after navigation completes
-      document.addEventListener('astro:after-swap', () => {
+      document.addEventListener("astro:after-swap", () => {
         // Keep the attribute during the transition, remove after a short delay
         setTimeout(() => {
-          document.documentElement.removeAttribute('data-nav-back');
+          document.documentElement.removeAttribute("data-nav-back");
         }, 100);
       });
     </script>

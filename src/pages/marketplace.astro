@@ -1,25 +1,33 @@
 ---
 // Página Marketplace: contenido específico de Marketplace con hero slider.
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import HomeHero from '../components/home/HomeHero.astro';
-import FeatureSlider from '../components/FeatureSlider.astro';
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/common/Header.astro";
+import HomeHero from "../components/home/HomeHero.astro";
+import FeatureSlider from "../components/sliders/FeatureSlider.astro";
 ---
 
-<Layout title="BeMind Power - Marketplace" description="BeMind Power: marketplace y bienestar con tecnología inmersiva." bodyClass="marketplace-page">
+<Layout
+  title="BeMind Power - Marketplace"
+  description="BeMind Power: marketplace y bienestar con tecnología inmersiva."
+  bodyClass="marketplace-page"
+>
   <div class="marketplace-page-wrap relative min-h-[100dvh] w-full">
-    <Header currentPath="/marketplace" />
+    <Header
+      currentPath="/marketplace"
+      pageTitle="Todo lo que quieras"
+      pageTitleKey="marketplace.hero.titleLine1"
+    />
 
     <!-- Layout Desktop: usa HomeHero con video y phone de Marketplace, slider inicia en Marketplace (index 2) -->
     <div class="marketplace-desktop-layout">
       <HomeHero
-        videoSrc="/asad/an3.mp4"
-        phoneSrc="/asad/s3.png"
+        videoSrc="/vedioes/an3.mp4"
+        phoneSrc="/sliderImages/s3.png"
         titleLine1="Compra y vende"
         titleLine2="sin salir del chat"
         subtitle="Desde productos locales hasta servicios digitales: todo en una sola comunidad."
         ctaText="Ver Más"
-        ctaHref="/app/marketplacedetails"
+        ctaHref="/detailsPages/marketplacedetails"
         titleLine1Key="marketplace.hero.titleLine1"
         titleLine2Key="marketplace.hero.titleLine2"
         subtitleKey="marketplace.hero.subtitle"
@@ -34,44 +42,80 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       <!-- Video de fondo -->
       <div class="marketplace-mobile-bg">
         <video
+          id="home-hero-video"
           class="marketplace-mobile-video"
+          autoplay
           muted
           loop
           playsinline
           preload="auto"
         >
-          <source src="/asad/an3.mp4" type="video/mp4" />
+          <source src="/vedioes/an3.mp4" type="video/mp4" />
         </video>
         <div class="marketplace-mobile-overlay"></div>
         <div class="marketplace-mobile-glow"></div>
       </div>
 
-      <!-- Contenido superior: título + botones -->
+      <!-- Slider arriba, inicia en Marketplace (index 2) -->
+      <div class="marketplace-mobile-slider" id="slider">
+        <FeatureSlider initialIndex={2} />
+      </div>
+
+      <!-- Contenido inferior: título + botones -->
       <div class="marketplace-mobile-content">
-        <div class="marketplace-mobile-title">
+        <div class="marketplace-mobile-text">
           <h1 class="marketplace-m-title">
-            <span class="marketplace-m-title-line1">Compra y vende</span>
-            <span class="marketplace-m-title-line2">sin salir del chat</span>
+            <span
+              id="hero-title-line1"
+              class="marketplace-m-title-line1"
+              data-i18n="marketplace.hero.titleLine1">Compra y vende</span
+            >
+            <span
+              id="hero-title-line2"
+              class="marketplace-m-title-line2"
+              data-i18n="marketplace.hero.titleLine2">sin salir del chat</span
+            >
           </h1>
-          <p class="marketplace-m-subtitle">Desde productos locales hasta servicios digitales: todo en una sola comunidad.</p>
+          <p
+            id="hero-subtitle"
+            class="marketplace-m-subtitle"
+            data-i18n="marketplace.hero.subtitle"
+          >
+            Desde productos locales hasta servicios digitales: todo en una sola
+            comunidad.
+          </p>
         </div>
 
         <div class="marketplace-mobile-buttons">
-          <a href="/app/marketplacedetails" class="marketplace-m-cta">Ver Más</a>
+          <a
+            id="hero-cta-button"
+            href="/detailsPages/marketplacedetails"
+            class="marketplace-m-cta"
+            data-i18n="marketplace.hero.cta">Ver Más</a
+          >
           <div class="marketplace-m-badges">
-            <a href="#" class="marketplace-m-store-btn" aria-label="Download on the App Store">
-              <img src="/images/app-store-badge.svg" alt="Download on the App Store" />
+            <a
+              href="#"
+              class="marketplace-m-store-btn"
+              aria-label="Download on the App Store"
+            >
+              <img
+                src="/detailPageImages/app-store-badge.svg"
+                alt="Download on the App Store"
+              />
             </a>
-            <a href="#" class="marketplace-m-store-btn" aria-label="Get it on Google Play">
-              <img src="/images/google-play-badge.svg" alt="Get it on Google Play" />
+            <a
+              href="#"
+              class="marketplace-m-store-btn"
+              aria-label="Get it on Google Play"
+            >
+              <img
+                src="/detailPageImages/google-play-badge.svg"
+                alt="Get it on Google Play"
+              />
             </a>
           </div>
         </div>
-      </div>
-
-      <!-- Slider abajo, inicia en Marketplace (index 2) -->
-      <div class="marketplace-mobile-slider">
-        <FeatureSlider initialIndex={2} />
       </div>
     </div>
   </div>
@@ -95,7 +139,8 @@ import FeatureSlider from '../components/FeatureSlider.astro';
   }
 
   /* ===== MOBILE + TABLETS TÁCTILES ===== */
-  @media (max-width: 768px), (hover: none) and (pointer: coarse) and (min-width: 769px) and (max-width: 1366px) {
+  @media (max-width: 768px),
+    (hover: none) and (pointer: coarse) and (min-width: 769px) and (max-width: 1366px) {
     body.marketplace-page {
       overflow-x: hidden;
       overscroll-behavior: none;
@@ -109,6 +154,7 @@ import FeatureSlider from '../components/FeatureSlider.astro';
     .marketplace-mobile-layout {
       display: flex;
       flex-direction: column;
+      justify-content: flex-end;
       position: relative;
       width: 100%;
       height: 100dvh;
@@ -116,13 +162,25 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       overflow: clip;
       box-sizing: border-box;
       padding-top: calc(70px + env(safe-area-inset-top));
-      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+      padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
     }
 
-    /* Video de fondo */
-    .marketplace-mobile-bg {
+    /* Full screen background color */
+    .marketplace-mobile-layout::before {
+      content: "";
       position: fixed;
       inset: 0;
+      background: #0b0245;
+      z-index: -1;
+    }
+
+    /* Video de fondo - solo en area media */
+    .marketplace-mobile-bg {
+      position: absolute;
+      top: calc(70px + env(safe-area-inset-top));
+      left: 0;
+      right: 0;
+      height: clamp(280px, 45vh, 400px);
       z-index: 0;
       overflow: hidden;
     }
@@ -131,78 +189,87 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       position: absolute;
       top: 50%;
       left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
+      width: 100%;
+      height: 100%;
       transform: translate(-50%, -50%);
       object-fit: cover;
-      object-position: center;
-      opacity: 0.85;
+      object-position: center top;
+      opacity: 0.9;
     }
 
     .marketplace-mobile-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.3);
+      background: linear-gradient(
+        to bottom,
+        rgba(11, 2, 69, 0.2) 0%,
+        rgba(11, 2, 69, 0.6) 80%,
+        rgba(11, 2, 69, 1) 100%
+      );
       z-index: 1;
     }
 
     .marketplace-mobile-glow {
       position: absolute;
-      top: 40%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 80vw;
       height: 80vw;
       background: radial-gradient(
         circle,
-        rgba(40, 54, 233, 0.89) 0%,
-        rgba(40, 54, 233, 0.5) 40%,
+        rgba(40, 54, 233, 0.7) 0%,
+        rgba(40, 54, 233, 0.4) 40%,
         transparent 70%
       );
-      filter: blur(198px);
+      filter: blur(150px);
       z-index: 2;
     }
 
-    /* === CONTENIDO SUPERIOR (textos + botones) — 60% del espacio === */
+    /* === CONTENIDO INFERIOR (textos + botones) — parte inferior === */
     .marketplace-mobile-content {
       position: relative;
       z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      flex: 6;
+      justify-content: flex-start;
+      flex: 0 0 auto;
       min-height: 0;
       padding: 0 5%;
-      gap: clamp(1rem, 2.5vh, 1.5rem);
+      gap: clamp(0.8rem, 1.5vh, 1rem);
     }
 
     /* Título */
-    .marketplace-mobile-title {
+    .marketplace-mobile-text {
       text-align: center;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .marketplace-m-title {
       color: #fff;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      text-align: center;
       gap: 0;
       margin: 0 0 clamp(0.3rem, 1vh, 0.6rem) 0;
       line-height: 1.1;
+      width: 100%;
     }
 
     .marketplace-m-title-line1 {
-      font-family: 'OPTIFutura-ExtraBlackCond', 'Inter', sans-serif;
+      font-family: "OPTIFutura-ExtraBlackCond", "Inter", sans-serif;
       font-size: clamp(24px, 7vw, 40px);
       font-weight: 900;
       letter-spacing: 0.01em;
     }
 
     .marketplace-m-title-line2 {
-      font-family: 'Neometric', 'Inter', sans-serif;
+      font-family: "Neometric", "Inter", sans-serif;
       font-size: clamp(14px, 4vw, 24px);
       font-weight: 700;
       letter-spacing: 0.01em;
@@ -210,7 +277,7 @@ import FeatureSlider from '../components/FeatureSlider.astro';
 
     .marketplace-m-subtitle {
       color: #fff;
-      font-family: 'Neometric', 'Inter', sans-serif;
+      font-family: "Neometric", "Inter", sans-serif;
       font-size: clamp(11px, 2.8vw, 14px);
       font-weight: 400;
       line-height: 1.3;
@@ -218,6 +285,7 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       max-width: 92%;
       margin-left: auto;
       margin-right: auto;
+      text-align: center;
     }
 
     /* Botones */
@@ -235,16 +303,18 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       justify-content: center;
       height: clamp(42px, 5.5vh, 50px);
       padding: 0 2rem;
-      width: min(280px, 72vw);
+      width: min(260px, 68vw);
       background: #1929ff;
       color: #fff;
-      font-family: 'OPTIFutura-ExtraBlackCond', 'Inter', sans-serif;
+      font-family: "OPTIFutura-ExtraBlackCond", "Inter", sans-serif;
       font-weight: 900;
       font-size: clamp(14px, 3.8vw, 16px);
       letter-spacing: 0.02em;
       border-radius: 999px;
       text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s;
     }
 
     .marketplace-m-cta:hover,
@@ -270,9 +340,13 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       background: rgba(0, 0, 0, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 50px;
-      box-shadow: 0 4px 14px rgba(55, 27, 190, 0.25), 0 -4px 14px rgba(25, 41, 255, 0.2);
+      box-shadow:
+        0 4px 14px rgba(55, 27, 190, 0.25),
+        0 -4px 14px rgba(25, 41, 255, 0.2);
       text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s;
     }
 
     .marketplace-m-store-btn:hover,
@@ -288,40 +362,38 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       object-fit: contain;
     }
 
-    /* === SLIDER ABAJO — 40% del espacio === */
+    /* === SLIDER — encima del contenido === */
     .marketplace-mobile-slider {
       position: relative;
       z-index: 5;
       width: 100%;
-      flex: 4;
-      min-height: 0;
+      flex: 0 0 auto;
+      min-height: 180px;
+      height: clamp(180px, 32vh, 280px);
+      padding-top: 0;
+      margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 2%;
+      padding-left: 2%;
+      padding-right: 2%;
       overflow: visible;
     }
 
     .marketplace-mobile-slider .feature-slider {
       width: 100%;
       height: 100%;
-      min-height: 0 !important;
-      flex: 1 1 0%;
       overflow: visible;
     }
 
     .marketplace-mobile-slider .slider-wrapper {
       padding: 0;
       height: 100%;
-      min-height: 0;
-      flex: 1 1 0%;
       overflow: visible;
     }
 
     .marketplace-mobile-slider .slider-container {
       height: 100%;
-      min-height: 0 !important;
-      flex: 1 1 0%;
       overflow: visible;
     }
 
@@ -341,7 +413,7 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       padding-top: calc(90px + env(safe-area-inset-top));
     }
 
-    .marketplace-mobile-title {
+    .marketplace-mobile-text {
       max-width: 720px;
     }
 
@@ -352,7 +424,6 @@ import FeatureSlider from '../components/FeatureSlider.astro';
     .marketplace-m-store-btn {
       width: min(520px, 60vw);
     }
-
   }
 
   /* ===== TABLETS PEQUEÑAS / MÓVILES GRANDES (601-768px) ===== */
@@ -429,7 +500,6 @@ import FeatureSlider from '../components/FeatureSlider.astro';
     .marketplace-m-store-btn img {
       height: 26px;
     }
-
   }
 
   /* ===== PANTALLAS MUY CORTAS ===== */
@@ -462,7 +532,6 @@ import FeatureSlider from '../components/FeatureSlider.astro';
     .marketplace-m-store-btn img {
       height: 22px;
     }
-
   }
 
   /* /marketplace móvil: centrar botón de asistencia verticalmente */
@@ -493,7 +562,7 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       gap: 0.25rem;
     }
 
-    .marketplace-mobile-title {
+    .marketplace-mobile-text {
       padding: 0;
     }
 
@@ -553,26 +622,32 @@ import FeatureSlider from '../components/FeatureSlider.astro';
 <script>
   // Optimizar reproducción de video en mobile
   function initMarketplaceMobileVideo(): void {
-    const video = document.querySelector('.marketplace-mobile-video') as HTMLVideoElement;
+    const video = document.querySelector(
+      ".marketplace-mobile-video",
+    ) as HTMLVideoElement;
     if (!video) return;
 
     const playVideo = () => {
       video.play().catch(() => {
-        document.addEventListener('touchstart', () => {
-          video.play();
-        }, { once: true });
+        document.addEventListener(
+          "touchstart",
+          () => {
+            video.play();
+          },
+          { once: true },
+        );
       });
     };
 
     if (video.readyState >= 2) {
       playVideo();
     } else {
-      video.addEventListener('loadeddata', playVideo, { once: true });
+      video.addEventListener("loadeddata", playVideo, { once: true });
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initMarketplaceMobileVideo);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMarketplaceMobileVideo);
   } else {
     initMarketplaceMobileVideo();
   }

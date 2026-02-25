@@ -1,0 +1,225 @@
+---
+interface Props {
+  size?: 'md' | 'sm';
+  variant?: 'dropdown' | 'inline';
+}
+
+const { size = 'md', variant = 'dropdown' } = Astro.props;
+
+// Idiomas y banderas (SVG images)
+const languages = [
+  { code: 'en', label: 'English', flag: '/common/flags/us.svg' },
+  { code: 'es', label: 'Español', flag: '/common/flags/co.svg' },
+  { code: 'pt', label: 'Português', flag: '/common/flags/br.svg' },
+  { code: 'zh', label: '中文', flag: '/common/flags/cn.svg' },
+  { code: 'ar', label: 'العربية', flag: '/common/flags/sa.svg' }
+];
+---
+
+<div class:list={["lang-container relative", variant === 'dropdown' ? 'lang-dropdown' : 'lang-inline']} data-variant={variant} data-dropdown>
+  <!-- Botón que muestra el idioma actual -->
+  <button
+    type="button"
+    class:list={[
+      'lang-trigger flex items-center gap-2 text-white transition-all duration-200 cursor-pointer w-full',
+      variant === 'dropdown' ? 'glass hover:bg-white/20 px-4 py-2 border border-white/20 rounded-full' : 'px-4 py-2 text-sm font-medium hover:bg-white/5 rounded-xl text-white/70 hover:text-white',
+      variant === 'inline' ? 'justify-start' : 'justify-center'
+    ]}
+    aria-expanded="false"
+    aria-haspopup={variant === 'dropdown' ? 'listbox' : undefined}
+  >
+    <div class="flex items-center gap-2">
+      <img class="current-flag" src="/common/flags/co.svg" alt="" width="24" height="16" />
+      <span class="current-label">Español</span>
+    </div>
+    <svg class="dropdown-arrow w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <!-- Lista desplegable -->
+  <div 
+    class:list={[
+      'lang-menu transition-all duration-200 z-[100] overflow-hidden',
+      variant === 'dropdown' 
+        ? 'absolute left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-0 bottom-full sm:bottom-auto sm:top-full mb-2 sm:mb-0 sm:mt-2 min-w-[180px] rounded-2xl border border-white/10 bg-slate-900/95 backdrop-blur-xl shadow-2xl opacity-0 invisible translate-y-2' 
+        : 'hidden w-full mt-1 bg-white/5 rounded-xl'
+    ]}
+    role={variant === 'dropdown' ? 'listbox' : undefined}
+  >
+    {languages.map((lang) => (
+      <button
+        type="button"
+        class:list={[
+          'lang-option w-full flex items-center gap-3 px-4 py-3 text-left text-white/80 hover:bg-white/10 hover:text-white transition-colors',
+          variant === 'inline' && 'text-sm py-2 px-6'
+        ]}
+        data-lang={lang.code}
+        role="option"
+        aria-selected="false"
+      >
+        <img class="lang-flag-img" src={lang.flag} alt="" width="24" height="16" />
+        <span class="flex-1">{lang.label}</span>
+        <svg class="check-icon w-4 h-4 opacity-0 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+      </button>
+    ))}
+  </div>
+</div>
+
+<style>
+  .current-flag,
+  .lang-flag-img {
+    width: 24px;
+    height: 16px;
+    object-fit: cover;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .lang-dropdown[data-open="true"] .lang-trigger {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .lang-trigger[aria-expanded="true"] .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  .lang-dropdown[data-open="true"] .lang-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* En móviles, el menú aparece arriba del botón */
+  @media (max-width: 639px) {
+    .lang-dropdown[data-open="true"] .lang-menu {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  .lang-option[aria-selected="true"] {
+    background: rgba(139, 92, 246, 0.15);
+    color: white;
+  }
+
+  .lang-option[aria-selected="true"] .check-icon {
+    opacity: 1;
+  }
+
+  .lang-option:first-child {
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .lang-option:last-child {
+    border-radius: 0 0 1rem 1rem;
+  }
+
+  .lang-inline .lang-menu {
+    transition: max-height 0.3s ease-out;
+  }
+</style>
+
+<script>
+  import { $lang, setLanguage, languages, type Lang } from '../../stores';
+
+  // Función para inicializar todos los dropdowns de idioma
+  function initLanguageDropdowns(): void {
+    const dropdowns = document.querySelectorAll<HTMLElement>('.lang-dropdown, .lang-inline');
+    
+    dropdowns.forEach((dropdown) => {
+      // Evitar inicialización duplicada
+      if (dropdown.hasAttribute('data-initialized')) return;
+      dropdown.setAttribute('data-initialized', 'true');
+
+      const trigger = dropdown.querySelector<HTMLButtonElement>('.lang-trigger');
+      const menu = dropdown.querySelector<HTMLElement>('.lang-menu');
+      const options = dropdown.querySelectorAll<HTMLButtonElement>('.lang-option');
+      const currentFlag = dropdown.querySelector<HTMLImageElement>('.current-flag');
+      const currentLabel = dropdown.querySelector<HTMLElement>('.current-label');
+      const variant = dropdown.getAttribute('data-variant');
+
+      if (!trigger || !menu) return;
+
+      // Actualizar UI con el idioma actual
+      const updateUI = (lang: Lang): void => {
+        const langInfo = languages.find(l => l.code === lang);
+        if (langInfo) {
+          if (currentFlag) currentFlag.src = langInfo.flag;
+          if (currentLabel) currentLabel.textContent = langInfo.label;
+        }
+
+        options.forEach((opt) => {
+          const optLang = opt.getAttribute('data-lang');
+          opt.setAttribute('aria-selected', String(optLang === lang));
+        });
+      };
+
+      // Inicializar UI inmediatamente con el valor actual
+      updateUI($lang.get());
+
+      // Suscribirse a cambios futuros
+      $lang.subscribe(updateUI);
+
+      // Toggle dropdown
+      const toggle = (open?: boolean): void => {
+        const isOpen = open ?? trigger.getAttribute('aria-expanded') !== 'true';
+        trigger.setAttribute('aria-expanded', String(isOpen));
+        
+        if (variant === 'dropdown') {
+          dropdown.setAttribute('data-open', String(isOpen));
+        } else {
+          if (isOpen) {
+            menu.classList.remove('hidden');
+          } else {
+            menu.classList.add('hidden');
+          }
+        }
+      };
+
+      const close = (): void => toggle(false);
+
+      // Event listeners
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggle();
+      });
+
+      options.forEach((opt) => {
+        opt.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const lang = opt.getAttribute('data-lang') as Lang;
+          if (lang) {
+            setLanguage(lang);
+            close();
+          }
+        });
+      });
+
+      // Cerrar al click fuera (solo para dropdown)
+      if (variant === 'dropdown') {
+        document.addEventListener('click', (e) => {
+          if (!dropdown.contains(e.target as Node)) close();
+        });
+
+        // Cerrar con Escape
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') close();
+        });
+      }
+    });
+  }
+
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLanguageDropdowns);
+  } else {
+    initLanguageDropdowns();
+  }
+
+  // También inicializar después de navegación (para Astro View Transitions)
+  document.addEventListener('astro:page-load', initLanguageDropdowns);
+</script>

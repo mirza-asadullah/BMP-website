@@ -1,6 +1,6 @@
 ---
 // Capa delantera del home: bloque izquierdo (título, CTA, tiendas) + smartphone. Inspeccionable por separado.
-import HeroHomeLeft from '../hero/HeroHomeLeft.astro';
+import HeroHomeLeft from '../welcome/HeroHomeLeft.astro';
 
 interface Props {
   phoneSrc?: string;
@@ -15,7 +15,7 @@ interface Props {
   ctaKey?: string;
 }
 
-const { phoneSrc = "/images/smartphone_2%201.png", titleLine1, titleLine2, subtitle, ctaText, ctaHref, titleLine1Key, titleLine2Key, subtitleKey, ctaKey } = Astro.props;
+const { phoneSrc = "/common/smartphone_2%201.png", titleLine1, titleLine2, subtitle, ctaText, ctaHref, titleLine1Key, titleLine2Key, subtitleKey, ctaKey } = Astro.props;
 ---
 
 <div class="home-hero-overlay">

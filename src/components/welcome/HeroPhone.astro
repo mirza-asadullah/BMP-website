@@ -1,0 +1,107 @@
+---
+// Teléfono (imagen + rotación)
+interface Props {
+  src?: string;
+  mobileSrc?: string;
+  rotation?: number;
+}
+
+const {
+  src = "/common/telefono.png",
+  mobileSrc = "/common/welcomephoner.png",
+  rotation = -10,
+} = Astro.props;
+---
+
+<a
+  href="/chat"
+  class="hero-phone"
+  style={`--rotation: ${rotation}deg`}
+  aria-label="Ir al chat"
+>
+  <picture>
+    <source media="(max-width: 768px)" srcset={mobileSrc} />
+    <img id="hero-phone-image" src={src} alt="Teléfono BeMind" />
+  </picture>
+</a>
+
+<style>
+  .hero-phone {
+    position: absolute;
+    left: 0;
+    top: 60%;
+    width: 100%;
+    height: 50%;
+    z-index: 25;
+    pointer-events: auto;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-phone picture {
+    display: contents;
+  }
+
+  .hero-phone img {
+    width: clamp(900px, 95vw, 1800px);
+    height: auto;
+    transform: rotate(var(--rotation, -10deg));
+    max-height: 150%;
+    object-fit: contain;
+  }
+
+  /* Desktop breakpoints */
+  @media (min-width: 1280px) and (max-height: 900px) {
+    .hero-phone img {
+      width: clamp(800px, 85vw, 1400px);
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .hero-phone img {
+      width: clamp(1000px, 90vw, 1800px);
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .hero-phone img {
+      width: clamp(1200px, 95vw, 2000px);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .hero-phone img {
+      width: min(900px, 90vw);
+    }
+  }
+
+  /* Mobile: new phone image takes 50% height */
+  @media (max-width: 768px) {
+    .hero-phone {
+      top: 40%;
+      height: 60%;
+      overflow: hidden;
+    }
+
+    .hero-phone img {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transform: rotate(0deg);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-phone img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+</style>

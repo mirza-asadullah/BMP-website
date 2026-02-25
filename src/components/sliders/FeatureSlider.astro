@@ -1,0 +1,1195 @@
+---
+import FeatureCard from "./FeatureCard.astro";
+
+interface Props {
+  /** Tarjeta activa al cargar: 0=Chat, 1=Wallet, 2=Marketplace… Default 2 */
+  initialIndex?: number;
+}
+
+const { initialIndex = 2 } = Astro.props;
+
+// Slider: 9 tarjetas (Chat, Wallet, Marketplace, Apps, Nutrition, Comunidades, Música, Salud Mental, AI Finanzas)
+const features = [
+  {
+    // Chat (0, activo por defecto)
+    image: "/detailPageImages/Chat.svg",
+    logo: "/common/logos/Logo-bmp.svg",
+    title: "Chat",
+    description: "Comunicación segura, instantánea e inteligente.",
+    titleKey: "features.chat.title",
+    descriptionKey: "features.chat.description",
+    link: "/chat",
+  },
+  {
+    image: "/detailPageImages/wallet.svg",
+    logo: "/common/logos/Logo-bmp.svg",
+    title: "Wallet",
+    description: "Tu billetera digital segura y conectada.",
+    titleKey: "features.wallet.title",
+    descriptionKey: "features.wallet.description",
+    link: "/wallet",
+  },
+  {
+    image: "/detailPageImages/marketplace.svg",
+    logo: "/common/logos/Logo-bmp.svg",
+    title: "Marketplace",
+    description: "Compra y vende de forma segura.",
+    titleKey: "features.marketplace.title",
+    descriptionKey: "features.marketplace.description",
+    link: "/marketplace",
+  },
+  {
+    image: "/detailPageImages/apps.svg",
+    logo: "/common/logos/Logo-bmp.svg",
+    title: "Apps",
+    description: "Una sola puerta a cientos de soluciones.",
+    titleKey: "features.apps.title",
+    descriptionKey: "features.apps.description",
+    link: "/apps",
+  },
+  {
+    image: "/detailPageImages/nutrition.svg",
+    logo: "/common/logos/Logo-bmp.svg",
+    title: "Nutrition",
+    description: "Alimentación inteligente para tu bienestar.",
+    titleKey: "features.nutrition.title",
+    descriptionKey: "features.nutrition.description",
+    link: "/nutrition",
+  },
+  {
+    image: "/detailPageImages/Community.svg",
+    logo: "/common/logos/Logo-bmp.svg",
+    title: "Comunidades",
+    description: "Conecta con personas afines a ti.",
+    titleKey: "features.communities.title",
+    descriptionKey: "features.communities.description",
+  },
+  {
+    image: "/detailPageImages/musica.svg",
+    logo: "/common/logos/Logo-bmp.svg",
+    title: "Música",
+    description: "Tu soundtrack personalizado.",
+    titleKey: "features.music.title",
+    descriptionKey: "features.music.description",
+  },
+  {
+    image: "/detailPageImages/mental.svg",
+    logo: "/common/logos/Logo-bmp.svg",
+    title: "Salud Mental",
+    description: "Bienestar emocional con apoyo inteligente.",
+    titleKey: "features.mentalHealth.title",
+    descriptionKey: "features.mentalHealth.description",
+  },
+  {
+    image: "/detailPageImages/AiFinanzas.svg",
+    logo: "/common/logos/Logo-bmp.svg",
+    title: "A.I. Finanzas",
+    description: "Gestión financiera inteligente y personalizada.",
+    titleKey: "features.finance.title",
+    descriptionKey: "features.finance.description",
+  },
+];
+---
+
+<section
+  class="feature-slider relative w-full flex flex-col items-center justify-center overflow-visible"
+  data-feature-slider
+>
+  <div
+    class="slider-wrapper relative w-full flex flex-col items-center justify-center flex-1 min-h-0"
+  >
+    <div
+      class="slider-container relative w-full flex-1 overflow-visible min-h-[320px]"
+    >
+      <div
+        class="slider-track flex items-center justify-center"
+        data-initial-index={initialIndex}
+      >
+        {
+          features.map((feature, index) => (
+            <div
+              class="slider-item absolute"
+              data-index={index}
+              style={`--item-index: ${index};`}
+            >
+              <FeatureCard {...feature} />
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Navigation arrows positioned on sides -->
+      <button
+        class="nav-btn nav-btn-left absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white transition-all z-20"
+        aria-label="Anterior"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+      <button
+        class="nav-btn nav-btn-right absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white transition-all z-20"
+        aria-label="Siguiente"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-slider {
+    height: 100%;
+    min-height: 220px;
+  }
+
+  .slider-wrapper {
+    padding: 0.5rem 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .slider-container {
+    height: 240px;
+    position: relative;
+    width: 100%;
+  }
+
+  .slider-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .nav-btn {
+    background: none;
+  }
+
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .nav-btn:active {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(0.95);
+  }
+
+  .nav-btn:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+
+  /* Tarjetas posicionadas absolutamente */
+  .slider-item {
+    transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transform-origin: center center;
+    left: 50%;
+    top: 50%;
+    will-change: transform, filter, opacity;
+  }
+
+  /* Z-index según distancia */
+  .slider-item.active {
+    z-index: 10;
+  }
+
+  .slider-item.distance-1 {
+    z-index: 8;
+  }
+
+  .slider-item.distance-2 {
+    z-index: 6;
+  }
+
+  .slider-item.distance-3 {
+    z-index: 4;
+  }
+
+  .slider-item.distance-4 {
+    z-index: 2;
+  }
+
+  @media (min-width: 480px) {
+    .slider-container {
+      height: 260px;
+    }
+
+    .feature-slider {
+      min-height: 240px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .slider-container {
+      height: 280px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .slider-container {
+      height: 300px;
+    }
+
+    .feature-slider {
+      min-height: 260px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .slider-container {
+      height: 220px;
+    }
+
+    .nav-btn {
+      min-width: 40px;
+      min-height: 40px;
+    }
+  }
+
+  /* Desktop: hide side arrows, show centered ones */
+  @media (min-width: 900px) {
+    .nav-btn-left,
+    .nav-btn-right {
+      display: none;
+    }
+  }
+
+  /* Mobile: show side arrows */
+  @media (max-width: 899px) {
+    .nav-btn-left {
+      left: 0.5rem;
+    }
+
+    .nav-btn-right {
+      right: 0.5rem;
+    }
+
+    .nav-btn:active {
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    .nav-btn-left:active {
+      transform: translateY(-50%) scale(0.9);
+    }
+
+    .nav-btn-right:active {
+      transform: translateY(-50%) scale(0.9);
+    }
+  }
+</style>
+
+<script>
+  // Track auto-slide intervals per slider element to prevent duplicates
+  const sliderIntervals = new WeakMap<
+    HTMLElement,
+    ReturnType<typeof setInterval>
+  >();
+
+  // Escalas según distancia desde la tarjeta activa (más pronunciadas como en Figma)
+  const SCALES = {
+    0: 1.0, // activa - tamaño completo
+    1: 0.75, // adyacente - notablemente más pequeña
+    2: 0.58, // distancia 2 - mucho más pequeña
+    3: 0.45, // distancia 3 - muy pequeña
+    4: 0.35, // distancia 4+ - mínima
+  };
+
+  // Blur según distancia (en píxeles)
+  const BLUR = {
+    0: 0, // activa - sin blur
+    1: 2, // adyacente - blur leve
+    2: 4, // distancia 2 - blur medio
+    3: 6, // distancia 3 - blur fuerte
+    4: 8, // distancia 4+ - blur máximo
+  };
+
+  // Opacidad según distancia
+  const OPACITY = {
+    0: 1.0, // activa
+    1: 0.85, // adyacente
+    2: 0.6, // distancia 2
+    3: 0.4, // distancia 3
+    4: 0.25, // distancia 4+
+  };
+
+  // Asset mapping (Index -> { video, phone })
+  // 0: Chat -> an1.mp4, s1.png
+  // 1: Wallet -> an2.mp4, s2.png
+  // ...
+  const ASSETS = [
+    { video: "/vedioes/an1.mp4", phone: "/sliderImages/s1.png" }, // 0: Chat
+    { video: "/vedioes/an2.mp4", phone: "/sliderImages/s2.png" }, // 1: Wallet
+    { video: "/vedioes/an3.mp4", phone: "/sliderImages/s3.png" }, // 2: Marketplace
+    { video: "/vedioes/an4.mp4", phone: "/sliderImages/s4.png" }, // 3: Apps
+    { video: "/vedioes/an5.mp4", phone: "/sliderImages/s5.png" }, // 4: Nutrition
+    { video: "/vedioes/an6.mp4", phone: "/sliderImages/s6.png" }, // 5: Communities
+    { video: "/vedioes/an7.mp4", phone: "/sliderImages/s7.png" }, // 6: Music
+    { video: "/vedioes/an8.mp4", phone: "/sliderImages/s8.png" }, // 7: Mental Health
+    { video: "/vedioes/an9.mp4", phone: "/sliderImages/s9.png" }, // 8: Finance
+  ];
+
+  // Content mapping (Index -> { titleLine1, titleLine2, subtitle })
+  const CONTENT = [
+    {
+      // 0: Chat
+      titleLine1: "Todo empieza",
+      titleLine2: "con una conversación",
+      subtitle:
+        "Y desde ahí: paga, vende, sana o escucha música. Sin salir del chat.",
+      titleLine1Key: "chat.hero.titleLine1",
+      titleLine2Key: "chat.hero.titleLine2",
+      subtitleKey: "chat.hero.subtitle",
+      ctaKey: "chat.hero.cta",
+      headerTitleKey: "chat.header.title",
+    },
+    {
+      // 1: Wallet
+      titleLine1: "Maneja tus finanzas",
+      titleLine2: "sin salir del chat",
+      subtitle:
+        "Desde productos locales hasta servicios digitales: todo en una sola comunidad.",
+      titleLine1Key: "wallet.hero.titleLine1",
+      titleLine2Key: "wallet.hero.titleLine2",
+      subtitleKey: "wallet.hero.subtitle",
+      ctaKey: "wallet.hero.cta",
+      headerTitleKey: "wallet.header.title",
+    },
+    {
+      // 2: Marketplace
+      titleLine1: "Compra y vende",
+      titleLine2: "sin salir del chat",
+      subtitle:
+        "Desde productos locales hasta servicios digitales: todo en una sola comunidad.",
+      titleLine1Key: "marketplace.hero.titleLine1",
+      titleLine2Key: "marketplace.hero.titleLine2",
+      subtitleKey: "marketplace.hero.subtitle",
+      ctaKey: "marketplace.hero.cta",
+      headerTitleKey: "marketplace.header.title",
+    },
+    {
+      // 3: Apps
+      titleLine1: "Una sola app",
+      titleLine2: "Cientos de soluciones.",
+      subtitle: "Todo lo que necesitas, en un solo lugar. Como si fuera magia.",
+      titleLine1Key: "apps.hero.titleLine1",
+      titleLine2Key: "apps.hero.titleLine2",
+      subtitleKey: "apps.hero.subtitle",
+      ctaKey: "apps.hero.cta",
+      headerTitleKey: "apps.header.title",
+    },
+    {
+      // 4: Nutrition
+      titleLine1: "Vive saludable",
+      titleLine2: "Con los tuyos.",
+      subtitle:
+        "Comparte recetas, retos saludables y planes de alimentación en tu red.",
+      titleLine1Key: "nutrition.hero.titleLine1",
+      titleLine2Key: "nutrition.hero.titleLine2",
+      subtitleKey: "nutrition.hero.subtitle",
+      ctaKey: "nutrition.hero.cta",
+      headerTitleKey: "nutrition.header.title",
+    },
+    {
+      // 5: Communities
+      titleLine1: "Destácate",
+      titleLine2: "Crea tu comunidad",
+      subtitle:
+        "Crea, únete y colabora con personas que comparten tus intereses y valores.",
+      titleLine1Key: "communities.hero.titleLine1",
+      titleLine2Key: "communities.hero.titleLine2",
+      subtitleKey: "communities.hero.subtitle",
+      ctaKey: "communities.hero.cta",
+      headerTitleKey: "communities.header.title",
+    },
+    {
+      // 6: Music
+      titleLine1: "La música vive",
+      titleLine2: "Escúchala y comparte.",
+      subtitle:
+        "Tus canciones, tus playlists y nuevos descubrimientos. Todo en un solo lugar.",
+      titleLine1Key: "musica.hero.titleLine1",
+      titleLine2Key: "musica.hero.titleLine2",
+      subtitleKey: "musica.hero.subtitle",
+      ctaKey: "musica.hero.cta",
+      headerTitleKey: "musica.header.title",
+    },
+    {
+      // 7: Mental Health
+      titleLine1: "Apoyo real",
+      titleLine2: "Que inspira confianza.",
+      subtitle:
+        "Herramientas de bienestar emocional para ti y tu comunidad de apoyo.",
+      titleLine1Key: "saludmental.hero.titleLine1",
+      titleLine2Key: "saludmental.hero.titleLine2",
+      subtitleKey: "saludmental.hero.subtitle",
+      ctaKey: "saludmental.hero.cta",
+      headerTitleKey: "saludmental.header.title",
+    },
+    {
+      // 8: Finance
+      titleLine1: "A.I. Finanzas",
+      titleLine2: "Tu asesor personal",
+      subtitle: "Gestión financiera inteligente y personalizada.",
+      titleLine1Key: "finanzas.hero.titleLine1",
+      titleLine2Key: "finanzas.hero.titleLine2",
+      subtitleKey: "finanzas.hero.subtitle",
+      ctaKey: "finanzas.hero.cta",
+      headerTitleKey: "finance.header.title",
+    },
+  ];
+
+  // Links mapping (Index -> link)
+  const LINKS = [
+    "/chatdetails", // 0: Chat
+    "/walletdetails", // 1: Wallet
+    "/marketplacedetails", // 2: Marketplace
+    "/appsdetails", // 3: Apps
+    "/nutritiondetails", // 4: Nutrition
+    "/communitiesdetails", // 5: Communities
+    "/musicdetails", // 6: Music
+    "/healthdetails", // 7: Mental Health (detail path)
+    "/financedetails", // 8: Finance
+  ];
+
+  // Titles mapping for navbar (Index -> title)
+  const TITLES = [
+    "Todo empieza", // 0: Chat
+    "Maneja tus finanzas", // 1: Wallet
+    "Compra y vende", // 2: Marketplace
+    "Una sola app", // 3: Apps
+    "Vive saludable", // 4: Nutrition
+    "Destácate", // 5: Communities
+    "La música vive", // 6: Music
+    "Apoyo real", // 7: Mental Health
+    "A.I. Finanzas", // 8: Finance
+  ];
+
+  // Video preloading cache
+  const videoPreloadCache = new Map<string, boolean>();
+  const imagePreloadCache = new Map<string, boolean>();
+
+  function preloadVideo(videoSrc: string): void {
+    if (videoPreloadCache.has(videoSrc)) return;
+
+    const video = document.createElement("video");
+    video.preload = "auto";
+    video.src = videoSrc;
+    video.load();
+    videoPreloadCache.set(videoSrc, true);
+  }
+
+  function preloadImage(imageSrc: string): void {
+    if (imagePreloadCache.has(imageSrc)) return;
+
+    const img = new Image();
+    img.src = imageSrc;
+    imagePreloadCache.set(imageSrc, true);
+  }
+
+  // Slider card images
+  const CARD_IMAGES = [
+    "/detailPageImages/Chat.svg",
+    "/detailPageImages/wallet.svg",
+    "/detailPageImages/marketplace.svg",
+    "/detailPageImages/apps.svg",
+    "/detailPageImages/nutrition.svg",
+    "/detailPageImages/Community.svg",
+    "/detailPageImages/musica.svg",
+    "/detailPageImages/mental.svg",
+    "/detailPageImages/AiFinanzas.svg",
+    "/detailPageImages/logohorizontal.svg",
+    "/detailPageImages/vignette-left.svg",
+    "/detailPageImages/vignette-right.svg",
+  ];
+
+  // Preload ALL assets upfront to prevent lag
+  function preloadAllAssets(): void {
+    // Preload phone images and videos
+    ASSETS.forEach((asset) => {
+      if (asset.video) preloadVideo(asset.video);
+      if (asset.phone) preloadImage(asset.phone);
+    });
+
+    // Preload slider card images
+    CARD_IMAGES.forEach((src) => preloadImage(src));
+  }
+
+  function preloadNextVideos(currentIndex: number, totalItems: number): void {
+    // Preload next 2 videos in the sequence
+    const nextIndex1 = (currentIndex + 1) % totalItems;
+    const nextIndex2 = (currentIndex + 2) % totalItems;
+
+    if (ASSETS[nextIndex1]?.video) {
+      preloadVideo(ASSETS[nextIndex1].video);
+    }
+    if (ASSETS[nextIndex2]?.video) {
+      preloadVideo(ASSETS[nextIndex2].video);
+    }
+  }
+
+  function initSliderInstance(root: HTMLElement): void {
+    const track = root.querySelector<HTMLElement>(".slider-track");
+    const container = root.querySelector<HTMLElement>(".slider-container");
+    const prevBtn =
+      container?.querySelector<HTMLButtonElement>(
+        '.nav-btn[aria-label="Anterior"]',
+      ) ||
+      root.querySelector<HTMLButtonElement>('.nav-btn[aria-label="Anterior"]');
+    const nextBtn =
+      container?.querySelector<HTMLButtonElement>(
+        '.nav-btn[aria-label="Siguiente"]',
+      ) ||
+      root.querySelector<HTMLButtonElement>('.nav-btn[aria-label="Siguiente"]');
+    const items = root.querySelectorAll<HTMLElement>(".slider-item");
+
+    // Find the layout scope for this slider (mobile vs desktop)
+    const layoutScope =
+      root.closest(".chat-mobile-layout") ||
+      root.closest(".chat-desktop-layout") ||
+      root.closest(".home-hero") ||
+      root.closest('[class$="-mobile-layout"]') ||
+      root;
+
+    // External elements to update (scoped to the correct layout - NO FALLBACK to avoid cross-layout updates)
+    const heroVideo = layoutScope.querySelector(
+      "#home-hero-video",
+    ) as HTMLVideoElement | null;
+    const heroPhone = layoutScope.querySelector(
+      "#hero-phone-image",
+    ) as HTMLImageElement | null;
+
+    // Text elements to update (scoped - NO FALLBACK)
+    const heroTitle1 = layoutScope.querySelector(
+      "#hero-title-line1",
+    ) as HTMLElement | null;
+    const heroTitle2 = layoutScope.querySelector(
+      "#hero-title-line2",
+    ) as HTMLElement | null;
+    const heroSubtitle = layoutScope.querySelector(
+      "#hero-subtitle",
+    ) as HTMLElement | null;
+    const heroCta = layoutScope.querySelector(
+      "#hero-cta-button",
+    ) as HTMLElement | null;
+
+    // Mobile navbar title element (outside layout scope - in header)
+    // Only update navbar title if this slider is in a mobile layout
+    const isInMobileLayout = root.closest('[class$="-mobile-layout"]') !== null;
+    const mobilePageTitle = isInMobileLayout
+      ? (document.querySelector("#mobile-page-title") as HTMLElement)
+      : null;
+
+    if (!track || !prevBtn || !nextBtn || items.length === 0) return;
+
+    if (track.hasAttribute("data-initialized")) return;
+    track.setAttribute("data-initialized", "true");
+
+    const rawInitial = track.getAttribute("data-initial-index");
+    const initialIndex =
+      rawInitial !== null
+        ? Math.max(0, parseInt(rawInitial, 10) % items.length)
+        : 0;
+    let currentIndex = initialIndex;
+    const totalItems = items.length;
+    let isFirstUpdate = true;
+    let navbarTitleTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const getCardWidth = (): number => {
+      const w = window.innerWidth;
+      if (w < 380) return 130;
+      if (w < 480) return 140;
+      if (w < 640) return 160;
+      return 240;
+    };
+
+    const getGap = (): number => {
+      const w = window.innerWidth;
+      if (w < 380) return -10;
+      if (w < 640) return -15;
+      return -20;
+    };
+
+    // Calcular distancia circular (para loop infinito)
+    const getCircularDistance = (
+      index: number,
+      current: number,
+      total: number,
+    ): number => {
+      const directDistance = index - current;
+      const wrapDistance =
+        directDistance > 0 ? directDistance - total : directDistance + total;
+
+      // Retornar la distancia más corta
+      return Math.abs(directDistance) <= Math.abs(wrapDistance)
+        ? directDistance
+        : wrapDistance;
+    };
+
+    const updateSlider = (): void => {
+      const cardWidth = getCardWidth();
+      const gap = getGap();
+
+      // Posicionar cada tarjeta con distancia circular
+      items.forEach((item, index) => {
+        const distance = getCircularDistance(index, currentIndex, totalItems);
+        const absDistance = Math.abs(distance);
+
+        // Limpiar clases anteriores
+        item.classList.remove(
+          "active",
+          "distance-1",
+          "distance-2",
+          "distance-3",
+          "distance-4",
+        );
+
+        // Agregar clase según distancia
+        if (absDistance === 0) {
+          item.classList.add("active");
+        } else if (absDistance === 1) {
+          item.classList.add("distance-1");
+        } else if (absDistance === 2) {
+          item.classList.add("distance-2");
+        } else if (absDistance === 3) {
+          item.classList.add("distance-3");
+        } else {
+          item.classList.add("distance-4");
+        }
+
+        // Obtener valores según distancia
+        const distKey = Math.min(absDistance, 4) as keyof typeof SCALES;
+        const scale = SCALES[distKey];
+        const blur = BLUR[distKey];
+        const opacity = OPACITY[distKey];
+
+        // Calcular posición X
+        let xOffset = 0;
+
+        for (let i = 0; i < absDistance; i++) {
+          const prevScaleKey = Math.min(i, 4) as keyof typeof SCALES;
+          const nextScaleKey = Math.min(i + 1, 4) as keyof typeof SCALES;
+          const prevScale = SCALES[prevScaleKey];
+          const nextScale = SCALES[nextScaleKey];
+          xOffset +=
+            (cardWidth * prevScale) / 2 + gap + (cardWidth * nextScale) / 2;
+        }
+
+        if (distance < 0) xOffset = -xOffset;
+
+        // Aplicar transformación, blur y opacidad
+        item.style.transform = `translate(-50%, -50%) translateX(${xOffset}px) scale(${scale})`;
+        item.style.filter = blur > 0 ? `blur(${blur}px)` : "none";
+        item.style.opacity = String(opacity);
+      });
+
+      // En loop infinito, los botones siempre están activos
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+
+      // Update external assets based on currentIndex
+      if (ASSETS[currentIndex]) {
+        const { video, phone } = ASSETS[currentIndex];
+
+        // Update Video if changed - INSTANT sync with slider
+        if (heroVideo) {
+          // Extract filename from current video src for comparison
+          const currentVideoSrc = heroVideo.src || "";
+          const currentFileName =
+            currentVideoSrc.split("/").pop()?.split("?")[0] || "";
+          const newFileName = video.split("/").pop()?.split("?")[0] || "";
+
+          // Only update if the video file is actually different
+          if (currentFileName !== newFileName) {
+            const wasPlaying = !heroVideo.paused;
+
+            // Instantly update video source - no delay to match slider timing
+            heroVideo.style.transition =
+              "opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)";
+            heroVideo.style.opacity = "0.4";
+
+            // Change source immediately
+            heroVideo.src = video;
+            heroVideo.load();
+
+            // Fade in as soon as ready
+            const onCanPlay = () => {
+              heroVideo.removeEventListener("canplay", onCanPlay);
+              heroVideo.style.opacity = "0.85";
+
+              // Auto-play new video (will fallback to muted if blocked)
+              if (wasPlaying) {
+                heroVideo.play().catch((err) => {
+                  // If blocked, try muted
+                  heroVideo.muted = true;
+                  heroVideo.play().catch(() => {});
+                });
+              }
+            };
+
+            heroVideo.addEventListener("canplay", onCanPlay, { once: true });
+
+            // Fallback: restore opacity even if video doesn't load quickly
+            setTimeout(() => {
+              if (heroVideo.style.opacity !== "0.85") {
+                heroVideo.style.opacity = "0.85";
+                heroVideo.removeEventListener("canplay", onCanPlay);
+              }
+            }, 800);
+          }
+        }
+
+        // Update Phone Image if changed - sync with slider timing
+        if (heroPhone) {
+          if (!heroPhone.src.includes(phone)) {
+            if (isFirstUpdate) {
+              // No animation on initial load — just set the image
+              heroPhone.src = phone;
+            } else {
+              // Exit animation: slide out from top
+              heroPhone.style.transition =
+                "transform 0.35s cubic-bezier(0.4, 0, 1, 1), opacity 0.35s cubic-bezier(0.4, 0, 1, 1)";
+              heroPhone.style.transform = "translateY(-100%)";
+              heroPhone.style.opacity = "0";
+
+              // Change image after exit animation
+              setTimeout(() => {
+                heroPhone.src = phone;
+
+                // Prepare for enter animation (start from below)
+                heroPhone.style.transition = "none";
+                heroPhone.style.transform = "translateY(30%)";
+
+                // Enter animation: slide in from bottom
+                requestAnimationFrame(() => {
+                  requestAnimationFrame(() => {
+                    heroPhone.style.transition =
+                      "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1)";
+                    heroPhone.style.transform = "translateY(0)";
+                    heroPhone.style.opacity = "1";
+                  });
+                });
+              }, 350); // Match exit animation duration
+            }
+          }
+        }
+      }
+
+      // Update Text Content if changed - sync with slider timing
+      if (CONTENT[currentIndex]) {
+        const {
+          titleLine1,
+          titleLine2,
+          subtitle,
+          titleLine1Key,
+          titleLine2Key,
+          subtitleKey,
+          ctaKey,
+        } = CONTENT[currentIndex];
+        const textChanged =
+          (heroTitle1 && heroTitle1.textContent !== titleLine1) ||
+          (heroTitle2 && heroTitle2.textContent !== titleLine2) ||
+          (heroSubtitle && heroSubtitle.textContent !== subtitle);
+
+        if (textChanged && !isFirstUpdate) {
+          // Quick fade out - match slider timing
+          const titleEls = [heroTitle1, heroTitle2].filter(
+            Boolean,
+          ) as HTMLElement[];
+          const subtitleEl = heroSubtitle;
+
+          titleEls.forEach((el) => {
+            el.style.transition =
+              "opacity 0.25s cubic-bezier(0.25, 0.1, 0.25, 1)";
+            el.style.opacity = "0";
+          });
+          if (subtitleEl) {
+            subtitleEl.style.transition =
+              "opacity 0.25s cubic-bezier(0.25, 0.1, 0.25, 1)";
+            subtitleEl.style.opacity = "0";
+          }
+
+          setTimeout(() => {
+            // Set new text and translate if helper exists
+            if (heroTitle1) {
+              heroTitle1.textContent = titleLine1;
+              if (titleLine1Key) {
+                heroTitle1.setAttribute("data-i18n", titleLine1Key);
+                // @ts-ignore
+                window.__translateElement?.(heroTitle1);
+              }
+            }
+            if (heroTitle2) {
+              heroTitle2.textContent = titleLine2;
+              if (titleLine2Key) {
+                heroTitle2.setAttribute("data-i18n", titleLine2Key);
+                // @ts-ignore
+                window.__translateElement?.(heroTitle2);
+              }
+            }
+            if (heroSubtitle) {
+              heroSubtitle.textContent = subtitle;
+              if (subtitleKey) {
+                heroSubtitle.setAttribute("data-i18n", subtitleKey);
+                // @ts-ignore
+                window.__translateElement?.(heroSubtitle);
+              }
+            }
+
+            // Fade in quickly
+            requestAnimationFrame(() => {
+              titleEls.forEach((el) => {
+                el.style.transition =
+                  "opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)";
+                el.style.opacity = "1";
+              });
+              if (subtitleEl) {
+                subtitleEl.style.transition =
+                  "opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)";
+                subtitleEl.style.opacity = "1";
+              }
+            });
+          }, 150);
+        } else {
+          // First update or no change — set directly and translate
+          if (heroTitle1) {
+            if (heroTitle1.textContent !== titleLine1)
+              heroTitle1.textContent = titleLine1;
+            if (titleLine1Key) {
+              heroTitle1.setAttribute("data-i18n", titleLine1Key);
+              // @ts-ignore
+              window.__translateElement?.(heroTitle1);
+            }
+          }
+          if (heroTitle2) {
+            if (heroTitle2.textContent !== titleLine2)
+              heroTitle2.textContent = titleLine2;
+            if (titleLine2Key) {
+              heroTitle2.setAttribute("data-i18n", titleLine2Key);
+              // @ts-ignore
+              window.__translateElement?.(heroTitle2);
+            }
+          }
+          if (heroSubtitle) {
+            if (heroSubtitle.textContent !== subtitle)
+              heroSubtitle.textContent = subtitle;
+            if (subtitleKey) {
+              heroSubtitle.setAttribute("data-i18n", subtitleKey);
+              // @ts-ignore
+              window.__translateElement?.(heroSubtitle);
+            }
+          }
+        }
+      }
+
+      // Update CTA Link and translate
+      if (heroCta) {
+        const link = LINKS[currentIndex];
+        if (link) {
+          heroCta.setAttribute("href", link);
+        } else {
+          heroCta.setAttribute("href", "#");
+        }
+
+        const ctaKeyValue = CONTENT[currentIndex]?.ctaKey;
+        if (ctaKeyValue) {
+          heroCta.setAttribute("data-i18n", ctaKeyValue);
+          // @ts-ignore
+          window.__translateElement?.(heroCta);
+        }
+      }
+
+      // Update Mobile Navbar Title
+      if (mobilePageTitle) {
+        const titleKey = CONTENT[currentIndex]?.titleLine1Key || "";
+        const fallbackTitle = CONTENT[currentIndex]?.titleLine1 || "";
+
+        if (mobilePageTitle.getAttribute("data-i18n") !== titleKey) {
+          // Cancel any pending title update to avoid double-updates
+          if (navbarTitleTimeout) {
+            clearTimeout(navbarTitleTimeout);
+            navbarTitleTimeout = null;
+          }
+
+          if (isFirstUpdate) {
+            // First load - set key, text and ensure visibility
+            mobilePageTitle.setAttribute("data-i18n", titleKey);
+            if (fallbackTitle)
+              mobilePageTitle.setAttribute("data-fallback", fallbackTitle);
+
+            // Call global translate helper
+            // @ts-ignore
+            window.__translateElement?.(mobilePageTitle);
+
+            // Ensure it's visible (overriding opacity-0 from Header)
+            mobilePageTitle.style.opacity = "1";
+          } else {
+            // Delay header title change until after slider transform transition
+            mobilePageTitle.style.transition =
+              "opacity 0.2s cubic-bezier(0.25, 0.1, 0.25, 1)";
+            mobilePageTitle.style.opacity = "0";
+
+            navbarTitleTimeout = setTimeout(() => {
+              navbarTitleTimeout = null;
+
+              // Update key and trigger translation
+              mobilePageTitle.setAttribute("data-i18n", titleKey);
+              if (fallbackTitle)
+                mobilePageTitle.setAttribute("data-fallback", fallbackTitle);
+
+              // @ts-ignore
+              window.__translateElement?.(mobilePageTitle);
+
+              requestAnimationFrame(() => {
+                mobilePageTitle.style.opacity = "1";
+              });
+            }, 520); // wait slightly more than slider transition (500ms)
+          }
+        } else if (isFirstUpdate) {
+          // Key matches, but we must ensure it's visible on first load
+          mobilePageTitle.style.opacity = "1";
+        }
+      }
+
+      isFirstUpdate = false;
+
+      // Preload next videos for smooth transitions
+      preloadNextVideos(currentIndex, totalItems);
+    };
+
+    // Navegación circular (loop infinito)
+    const nextSlide = (): void => {
+      currentIndex = (currentIndex + 1) % totalItems;
+      updateSlider();
+    };
+
+    const prevSlide = (): void => {
+      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+      updateSlider();
+    };
+
+    // Auto-slide cada 5 segundos (loop infinito)
+    let autoSlideInterval: ReturnType<typeof setInterval> | null = null;
+
+    const startAutoSlide = (): void => {
+      stopAutoSlide();
+      autoSlideInterval = setInterval(() => {
+        nextSlide();
+      }, 5000);
+    };
+
+    const stopAutoSlide = (): void => {
+      if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = null;
+      }
+    };
+
+    const resetAutoSlide = (): void => {
+      startAutoSlide();
+    };
+
+    // Event listeners for main buttons (if present)
+    prevBtn?.addEventListener("click", () => {
+      prevSlide();
+      resetAutoSlide();
+    });
+
+    nextBtn?.addEventListener("click", () => {
+      nextSlide();
+      resetAutoSlide();
+    });
+
+    // Also wire side arrows (explicit) so side buttons always work
+    const sidePrev =
+      container?.querySelector<HTMLButtonElement>(".nav-btn-left");
+    const sideNext =
+      container?.querySelector<HTMLButtonElement>(".nav-btn-right");
+
+    if (sidePrev && sidePrev !== prevBtn) {
+      sidePrev.addEventListener("click", (e) => {
+        e.stopPropagation();
+        prevSlide();
+        resetAutoSlide();
+      });
+    }
+
+    if (sideNext && sideNext !== nextBtn) {
+      sideNext.addEventListener("click", (e) => {
+        e.stopPropagation();
+        nextSlide();
+        resetAutoSlide();
+      });
+    }
+
+    // Soporte para gestos táctiles
+    let touchStartX = 0;
+    let touchStartedOnButton = false;
+
+    track.parentElement?.addEventListener(
+      "touchstart",
+      (e: TouchEvent) => {
+        // Track if touch started on a button to ignore it in touchend
+        const target = e.target as HTMLElement | null;
+        touchStartedOnButton = !!(
+          target &&
+          target.closest &&
+          target.closest("button, a")
+        );
+        if (touchStartedOnButton) return;
+
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoSlide();
+      },
+      { passive: true },
+    );
+
+    track.parentElement?.addEventListener(
+      "touchend",
+      (e: TouchEvent) => {
+        // Ignore if touch started on a button (let click handler deal with it)
+        if (touchStartedOnButton) {
+          touchStartedOnButton = false;
+          return;
+        }
+
+        const touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+        resetAutoSlide();
+      },
+      { passive: true },
+    );
+
+    // Soporte para teclado
+    document.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        prevSlide();
+        resetAutoSlide();
+      }
+      if (e.key === "ArrowRight") {
+        nextSlide();
+        resetAutoSlide();
+      }
+    });
+
+    // Click on slider to scroll (Right to Left / Next)
+    // Avoid double triggering if button clicked (buttons are outside, but check anyway)
+    // Check if dragging happened? Since touchStart/touchEnd are passive, click might fire.
+    // If we want simple click behavior:
+    track.parentElement?.addEventListener("click", (e) => {
+      // Ignore clicks that originate from buttons/links (arrows/CTAs)
+      const target = e.target as HTMLElement | null;
+      if (target && target.closest && target.closest("button, a")) return;
+
+      // Bounce animation: Move right first (wind up)
+      track.style.transition = "transform 0.15s ease-out";
+      track.style.transform = "translateX(20px)";
+
+      setTimeout(() => {
+        // Then trigger next slide (scroll left) and reset track
+        nextSlide();
+        resetAutoSlide();
+        track.style.transform = "translateX(0)";
+      }, 150);
+    });
+
+    // Pausar auto-slide cuando el usuario hace hover
+    track.parentElement?.addEventListener("mouseenter", stopAutoSlide);
+    track.parentElement?.addEventListener("mouseleave", startAutoSlide);
+
+    // Inicializar
+    updateSlider();
+    startAutoSlide();
+
+    // Re-calcular en resize
+    window.addEventListener("resize", updateSlider);
+
+    // Limpiar interval cuando se desmonta
+    window.addEventListener("beforeunload", stopAutoSlide);
+  }
+
+  function initAllSliders(): void {
+    // Inicializar todos los sliders en la página (incluso si están ocultos)
+    const sliders = document.querySelectorAll<HTMLElement>(
+      "[data-feature-slider]",
+    );
+    sliders.forEach((slider) => {
+      // Siempre inicializar - el auto-slide funcionará cuando el slider sea visible
+      initSliderInstance(slider);
+    });
+  }
+
+  function runInit(): void {
+    // Preload all assets immediately
+    preloadAllAssets();
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        initAllSliders();
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", runInit);
+  } else {
+    runInit();
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    // Preload assets on page navigation
+    preloadAllAssets();
+
+    document
+      .querySelectorAll("[data-feature-slider] .slider-track")
+      .forEach((el) => {
+        el.removeAttribute("data-initialized");
+      });
+    runInit();
+  });
+
+  // Re-inicializar cuando cambia el tamaño de pantalla (por si cambia de desktop a mobile)
+  let resizeTimeout: ReturnType<typeof setTimeout>;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      initAllSliders();
+    }, 250);
+  });
+
+  // Ensure phone is ready for transitions
+  document.addEventListener("astro:page-load", () => {
+    const p = document.getElementById("hero-phone-image");
+    if (p) {
+      p.style.transition =
+        "transform 0.5s cubic-bezier(0, 0, 0.2, 1), opacity 0.5s ease";
+    }
+  });
+</script>

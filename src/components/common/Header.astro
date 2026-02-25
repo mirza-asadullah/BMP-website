@@ -1,0 +1,121 @@
+---
+import Logo from "./Logo.astro";
+import Navigation from "./Navigation.astro";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+interface Props {
+  currentPath?: string;
+  backgroundImage?: string;
+  pageTitle?: string;
+  pageTitleKey?: string;
+}
+
+const {
+  currentPath,
+  backgroundImage = "/common/headerbg.png",
+  pageTitle,
+  pageTitleKey,
+} = Astro.props;
+---
+
+<header class="fixed left-0 right-0 top-6 z-40">
+  <!-- Decorative backdrop for header (subtle, used for scroll state) -->
+  <div
+    id="header-bg"
+    class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-300 bg-[#120068]/90 backdrop-blur-md md:hidden"
+  >
+  </div>
+
+  <div
+    class="relative w-full max-w-[1728px] mx-auto px-4 min-[900px]:px-[6.4%]"
+  >
+    <div class="flex items-center justify-center">
+      <div
+        class="w-full bg-none min-[900px]:bg-cover min-[900px]:bg-center min-[900px]:rounded-full px-0 min-[900px]:px-8 py-3 min-[900px]:border min-[900px]:border-white/10 min-[900px]:shadow-[0_8px_40px_rgba(18,12,40,0.6)] min-[900px]:backdrop-blur-md header-container"
+        style={`--bg-image: url('${backgroundImage}');`}
+      >
+        <div
+          class="relative flex items-center justify-between w-full max-w-[1400px] mx-auto"
+        >
+          <!-- Logo -->
+          <div
+            class="flex items-center min-[900px]:flex-1 justify-start min-[900px]:pr-0"
+          >
+            <a
+              href="/"
+              class="flex items-center gap-2.5 no-underline shrink-0"
+              aria-label="BeMind Power - Inicio"
+            >
+              <picture>
+                <source
+                  media="(max-width: 899px)"
+                  srcset="/common/logos/Logo_Be-Mind%20night.png"
+                />
+                <img
+                  src="/common/logos/Logo_Be-Mind%20night.svg"
+                  alt="BeMind Power"
+                  class="h-8 min-[900px]:h-10 w-auto"
+                />
+              </picture>
+            </a>
+          </div>
+
+          <!-- Mobile Page Title (centered) -->
+          <div class="absolute left-1/2 -translate-x-1/2 min-[900px]:hidden">
+            <span
+              id="mobile-page-title"
+              class="text-white font-semibold text-sm tracking-wide opacity-0 transition-opacity duration-150"
+              data-i18n={pageTitleKey}
+              data-fallback={pageTitle}></span>
+          </div>
+
+          <!-- Navigation -->
+          <div
+            class="min-[900px]:relative min-[900px]:flex-1 flex items-center justify-end min-[900px]:justify-center"
+          >
+            <Navigation currentPath={currentPath} />
+          </div>
+
+          <!-- Language switcher (replaces Registro/Login buttons) -->
+          <div
+            class="hidden min-[900px]:flex flex-1 items-center justify-end gap-3"
+          >
+            <LanguageSwitcher size="md" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Initialize header scroll behavior when the page is loaded on the client
+  const initHeaderScroll = () => {
+    const headerBg = document.getElementById("header-bg");
+    if (!headerBg) return;
+
+    const updateHeader = () => {
+      if (window.scrollY > 20) {
+        headerBg.classList.remove("opacity-0");
+        headerBg.classList.add("opacity-100");
+      } else {
+        headerBg.classList.add("opacity-0");
+        headerBg.classList.remove("opacity-100");
+      }
+    };
+
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    updateHeader(); // Initial check
+
+    // Remove listener on page swap to avoid duplicates
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        window.removeEventListener("scroll", updateHeader);
+      },
+      { once: true },
+    );
+  };
+
+  document.addEventListener("astro:page-load", initHeaderScroll);
+</script>

@@ -1,25 +1,33 @@
 ---
 // Página Communities: contenido específico de Communities con hero slider.
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import HomeHero from '../components/home/HomeHero.astro';
-import FeatureSlider from '../components/FeatureSlider.astro';
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/common/Header.astro";
+import HomeHero from "../components/home/HomeHero.astro";
+import FeatureSlider from "../components/sliders/FeatureSlider.astro";
 ---
 
-<Layout title="BeMind Power - Comunidad" description="BeMind Power: conecta con personas afines a ti." bodyClass="communities-page">
+<Layout
+  title="BeMind Power - Comunidad"
+  description="BeMind Power: conecta con personas afines a ti."
+  bodyClass="communities-page"
+>
   <div class="communities-page-wrap relative min-h-[100dvh] w-full">
-    <Header currentPath="/communities" />
+    <Header
+      currentPath="/communities"
+      pageTitle="Conecta"
+      pageTitleKey="communities.hero.titleLine1"
+    />
 
     <!-- Layout Desktop: usa HomeHero con video y phone de Communities, slider inicia en Communities (index 5) -->
     <div class="communities-desktop-layout">
       <HomeHero
-        videoSrc="/asad/an6.mp4"
-        phoneSrc="/asad/s6.png"
+        videoSrc="/vedioes/an6.mp4"
+        phoneSrc="/sliderImages/s6.png"
         titleLine1="Destácate"
         titleLine2="Crea tu comunidad"
         subtitle="Crea, únete y colabora con personas que comparten tus intereses y valores."
         ctaText="Ver Más"
-        ctaHref="/app/communitiesdetails"
+        ctaHref="/detailsPages/communitiesdetails"
         titleLine1Key="communities.hero.titleLine1"
         titleLine2Key="communities.hero.titleLine2"
         subtitleKey="communities.hero.subtitle"
@@ -34,44 +42,80 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       <!-- Video de fondo -->
       <div class="communities-mobile-bg">
         <video
+          id="home-hero-video"
           class="communities-mobile-video"
+          autoplay
           muted
           loop
           playsinline
           preload="auto"
         >
-          <source src="/asad/an6.mp4" type="video/mp4" />
+          <source src="/vedioes/an6.mp4" type="video/mp4" />
         </video>
         <div class="communities-mobile-overlay"></div>
         <div class="communities-mobile-glow"></div>
       </div>
 
-      <!-- Contenido superior: título + botones -->
+      <!-- Slider arriba, inicia en Communities (index 5) -->
+      <div class="communities-mobile-slider" id="slider">
+        <FeatureSlider initialIndex={5} />
+      </div>
+
+      <!-- Contenido inferior: título + botones -->
       <div class="communities-mobile-content">
-        <div class="communities-mobile-title">
+        <div class="communities-mobile-text">
           <h1 class="communities-title">
-            <span class="communities-title-line1" data-i18n="communities.hero.titleLine1">Destácate</span>
-            <span class="communities-title-line2" data-i18n="communities.hero.titleLine2">Crea tu comunidad</span>
+            <span
+              id="hero-title-line1"
+              class="communities-title-line1"
+              data-i18n="communities.hero.titleLine1">Destácate</span
+            >
+            <span
+              id="hero-title-line2"
+              class="communities-title-line2"
+              data-i18n="communities.hero.titleLine2">Crea tu comunidad</span
+            >
           </h1>
-          <p class="communities-subtitle" data-i18n="communities.hero.subtitle">Crea, únete y colabora con personas que comparten tus intereses y valores.</p>
+          <p
+            id="hero-subtitle"
+            class="communities-subtitle"
+            data-i18n="communities.hero.subtitle"
+          >
+            Crea, únete y colabora con personas que comparten tus intereses y
+            valores.
+          </p>
         </div>
 
         <div class="communities-mobile-buttons">
-          <a href="/app/communitiesdetails" class="communities-cta" data-i18n="communities.hero.cta">Ver Más</a>
+          <a
+            id="hero-cta-button"
+            href="/detailsPages/communitiesdetails"
+            class="communities-cta"
+            data-i18n="communities.hero.cta">Ver Más</a
+          >
           <div class="communities-badges">
-            <a href="#" class="communities-store-btn" aria-label="Download on the App Store">
-              <img src="/images/app-store-badge.svg" alt="Download on the App Store" />
+            <a
+              href="#"
+              class="communities-store-btn"
+              aria-label="Download on the App Store"
+            >
+              <img
+                src="/detailPageImages/app-store-badge.svg"
+                alt="Download on the App Store"
+              />
             </a>
-            <a href="#" class="communities-store-btn" aria-label="Get it on Google Play">
-              <img src="/images/google-play-badge.svg" alt="Get it on Google Play" />
+            <a
+              href="#"
+              class="communities-store-btn"
+              aria-label="Get it on Google Play"
+            >
+              <img
+                src="/detailPageImages/google-play-badge.svg"
+                alt="Get it on Google Play"
+              />
             </a>
           </div>
         </div>
-      </div>
-
-      <!-- Slider abajo, inicia en Communities (index 5) -->
-      <div class="communities-mobile-slider">
-        <FeatureSlider initialIndex={5} />
       </div>
     </div>
   </div>
@@ -94,7 +138,8 @@ import FeatureSlider from '../components/FeatureSlider.astro';
     display: none;
   }
 
-  @media (max-width: 768px), (hover: none) and (pointer: coarse) and (min-width: 769px) and (max-width: 1366px) {
+  @media (max-width: 768px),
+    (hover: none) and (pointer: coarse) and (min-width: 769px) and (max-width: 1366px) {
     body.communities-page {
       overflow-x: hidden;
       overscroll-behavior: none;
@@ -107,6 +152,7 @@ import FeatureSlider from '../components/FeatureSlider.astro';
     .communities-mobile-layout {
       display: flex;
       flex-direction: column;
+      justify-content: flex-end;
       position: relative;
       width: 100%;
       height: 100dvh;
@@ -114,12 +160,25 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       overflow: clip;
       box-sizing: border-box;
       padding-top: calc(70px + env(safe-area-inset-top));
-      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+      padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
     }
 
-    .communities-mobile-bg {
+    /* Full screen background color */
+    .communities-mobile-layout::before {
+      content: "";
       position: fixed;
       inset: 0;
+      background: #0b0245;
+      z-index: -1;
+    }
+
+    /* Video de fondo - solo en area media */
+    .communities-mobile-bg {
+      position: absolute;
+      top: calc(70px + env(safe-area-inset-top));
+      left: 0;
+      right: 0;
+      height: clamp(280px, 45vh, 400px);
       z-index: 0;
       overflow: hidden;
     }
@@ -128,71 +187,86 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       position: absolute;
       top: 50%;
       left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
+      width: 100%;
+      height: 100%;
       transform: translate(-50%, -50%);
       object-fit: cover;
-      object-position: center;
-      opacity: 0.85;
+      object-position: center top;
+      opacity: 0.9;
     }
 
     .communities-mobile-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.3);
+      background: linear-gradient(
+        to bottom,
+        rgba(11, 2, 69, 0.2) 0%,
+        rgba(11, 2, 69, 0.6) 80%,
+        rgba(11, 2, 69, 1) 100%
+      );
       z-index: 1;
     }
 
     .communities-mobile-glow {
       position: absolute;
-      top: 40%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 80vw;
       height: 80vw;
-      background: radial-gradient(circle, rgba(40, 54, 233, 0.89) 0%, rgba(40, 54, 233, 0.5) 40%, transparent 70%);
-      filter: blur(198px);
+      background: radial-gradient(
+        circle,
+        rgba(40, 54, 233, 0.7) 0%,
+        rgba(40, 54, 233, 0.4) 40%,
+        transparent 70%
+      );
+      filter: blur(150px);
       z-index: 2;
     }
 
+    /* CONTENIDO INFERIOR (textos + botones) — parte inferior */
     .communities-mobile-content {
       position: relative;
       z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      flex: 6;
+      justify-content: flex-start;
+      flex: 0 0 auto;
       min-height: 0;
       padding: 0 5%;
-      gap: clamp(1rem, 2.5vh, 1.5rem);
+      gap: clamp(0.8rem, 1.5vh, 1rem);
     }
 
-    .communities-mobile-title {
+    .communities-mobile-text {
       text-align: center;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .communities-title {
       color: #fff;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      text-align: center;
       gap: 0;
       margin: 0 0 clamp(0.3rem, 1vh, 0.6rem) 0;
       line-height: 1.1;
+      width: 100%;
     }
 
     .communities-title-line1 {
-      font-family: 'OPTIFutura-ExtraBlackCond', 'Inter', sans-serif;
+      font-family: "OPTIFutura-ExtraBlackCond", "Inter", sans-serif;
       font-size: clamp(24px, 7vw, 40px);
       font-weight: 900;
       letter-spacing: 0.01em;
     }
 
     .communities-title-line2 {
-      font-family: 'Neometric', 'Inter', sans-serif;
+      font-family: "Neometric", "Inter", sans-serif;
       font-size: clamp(14px, 4vw, 24px);
       font-weight: 700;
       letter-spacing: 0.01em;
@@ -200,7 +274,7 @@ import FeatureSlider from '../components/FeatureSlider.astro';
 
     .communities-subtitle {
       color: #fff;
-      font-family: 'Neometric', 'Inter', sans-serif;
+      font-family: "Neometric", "Inter", sans-serif;
       font-size: clamp(11px, 2.8vw, 14px);
       font-weight: 400;
       line-height: 1.3;
@@ -208,6 +282,7 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       max-width: 92%;
       margin-left: auto;
       margin-right: auto;
+      text-align: center;
     }
 
     .communities-mobile-buttons {
@@ -224,16 +299,18 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       justify-content: center;
       height: clamp(42px, 5.5vh, 50px);
       padding: 0 2rem;
-      width: min(280px, 72vw);
+      width: min(260px, 68vw);
       background: #1929ff;
       color: #fff;
-      font-family: 'OPTIFutura-ExtraBlackCond', 'Inter', sans-serif;
+      font-family: "OPTIFutura-ExtraBlackCond", "Inter", sans-serif;
       font-weight: 900;
       font-size: clamp(14px, 3.8vw, 16px);
       letter-spacing: 0.02em;
       border-radius: 999px;
       text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s;
     }
 
     .communities-cta:hover,
@@ -259,9 +336,13 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       background: rgba(0, 0, 0, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 50px;
-      box-shadow: 0 4px 14px rgba(55, 27, 190, 0.25), 0 -4px 14px rgba(25, 41, 255, 0.2);
+      box-shadow:
+        0 4px 14px rgba(55, 27, 190, 0.25),
+        0 -4px 14px rgba(25, 41, 255, 0.2);
       text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s;
     }
 
     .communities-store-btn:hover,
@@ -277,39 +358,38 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       object-fit: contain;
     }
 
+    /* SLIDER — encima del contenido */
     .communities-mobile-slider {
       position: relative;
       z-index: 5;
       width: 100%;
-      flex: 4;
-      min-height: 0;
+      flex: 0 0 auto;
+      min-height: 180px;
+      height: clamp(180px, 32vh, 280px);
+      padding-top: 0;
+      margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 2%;
+      padding-left: 2%;
+      padding-right: 2%;
       overflow: visible;
     }
 
     .communities-mobile-slider .feature-slider {
       width: 100%;
       height: 100%;
-      min-height: 0 !important;
-      flex: 1 1 0%;
       overflow: visible;
     }
 
     .communities-mobile-slider .slider-wrapper {
       padding: 0;
       height: 100%;
-      min-height: 0;
-      flex: 1 1 0%;
       overflow: visible;
     }
 
     .communities-mobile-slider .slider-container {
       height: 100%;
-      min-height: 0 !important;
-      flex: 1 1 0%;
       overflow: visible;
     }
 
@@ -327,7 +407,7 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       padding-top: calc(90px + env(safe-area-inset-top));
     }
 
-    .communities-mobile-title {
+    .communities-mobile-text {
       max-width: 720px;
     }
 
@@ -471,7 +551,7 @@ import FeatureSlider from '../components/FeatureSlider.astro';
       gap: 0.25rem;
     }
 
-    .communities-mobile-title {
+    .communities-mobile-text {
       padding: 0;
     }
 
@@ -530,26 +610,32 @@ import FeatureSlider from '../components/FeatureSlider.astro';
 
 <script>
   function initCommunitiesMobileVideo(): void {
-    const video = document.querySelector('.communities-mobile-video') as HTMLVideoElement;
+    const video = document.querySelector(
+      ".communities-mobile-video",
+    ) as HTMLVideoElement;
     if (!video) return;
 
     const playVideo = () => {
       video.play().catch(() => {
-        document.addEventListener('touchstart', () => {
-          video.play();
-        }, { once: true });
+        document.addEventListener(
+          "touchstart",
+          () => {
+            video.play();
+          },
+          { once: true },
+        );
       });
     };
 
     if (video.readyState >= 2) {
       playVideo();
     } else {
-      video.addEventListener('loadeddata', playVideo, { once: true });
+      video.addEventListener("loadeddata", playVideo, { once: true });
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCommunitiesMobileVideo);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCommunitiesMobileVideo);
   } else {
     initCommunitiesMobileVideo();
   }
